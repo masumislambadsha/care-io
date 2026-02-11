@@ -35,7 +35,7 @@ yarn-error.log*
 
 # vercel
 .vercel
-
+.vscode
 #markdown
 DESIGN.md
 REQUIREMENTS.md
