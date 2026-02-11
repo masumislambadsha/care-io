@@ -11,6 +11,7 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/pagination";
 import "aos/dist/aos.css";
+import Image from "next/image";
 
 export default function HomePage() {
   useEffect(() => {
@@ -391,9 +392,11 @@ export default function HomePage() {
               <div className="bg-linear-to-br from-amber-50 to-teal-50 rounded-3xl p-12 relative overflow-hidden">
                 <div className="relative z-10">
                   <div className="w-full rounded-2xl flex items-center justify-center">
-                    <img
+                    <Image
                       src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOKf1ULoqcdo3xqKfjQywgtj2iKxOF-TJaUSAfqjJDqKafnWY1bDt7G7XDHiYSgJllU0wE1VnzgufihVStE9OReI_QzXfFugn9eW3SFgwcQK9CPQQ5yUQFiG1Oioedh4SQl7VarruPjMD50dv8FaJxlST3G377IQcGIDcc8zp95XkzZ3tzxfpLh341GlvccHpXOyq3V5iCDb8V-8ffJ9Y3VVLfEmgxa7L8M2HORBkZ9YPUb3xcISMau7eqkj88RlveAbA-N8zVmVk"
-                      alt=""
+                      alt="family image"
+                      width={400}
+                      height={650}
                     />
                   </div>
                 </div>
