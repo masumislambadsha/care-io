@@ -38,6 +38,9 @@ export default function DashboardLayout({
   const clientMenuItems = [
     { icon: "dashboard", label: "Dashboard", href: "/dashboard" },
     { icon: "event_note", label: "My Bookings", href: "/my-bookings" },
+    { icon: "receipt_long", label: "Payments", href: "/payments" },
+    { icon: "family_restroom", label: "Family Members", href: "/family" },
+    { icon: "location_on", label: "Addresses", href: "/addresses" },
     { icon: "search", label: "Find Caregivers", href: "/caregivers" },
     { icon: "medical_services", label: "Services", href: "/services" },
     { icon: "person", label: "Profile", href: "/profile" },
@@ -46,6 +49,7 @@ export default function DashboardLayout({
 
   const caregiverMenuItems = [
     { icon: "dashboard", label: "Dashboard", href: "/dashboard" },
+    { icon: "work", label: "Assigned Jobs", href: "/caregiver/assigned-jobs" },
     { icon: "event_note", label: "My Bookings", href: "/my-bookings" },
     { icon: "calendar_month", label: "Schedule", href: "/caregiver/schedule" },
     { icon: "payments", label: "Earnings", href: "/caregiver/earnings" },
@@ -54,7 +58,26 @@ export default function DashboardLayout({
     { icon: "settings", label: "Settings", href: "/settings" },
   ];
 
-  const menuItems = isCaregiver ? caregiverMenuItems : clientMenuItems;
+  const adminMenuItems = [
+    { icon: "dashboard", label: "Dashboard", href: "/admin" },
+    { icon: "group", label: "Users", href: "/admin/users" },
+    { icon: "event_note", label: "Bookings", href: "/admin/bookings" },
+    {
+      icon: "verified_user",
+      label: "Verifications",
+      href: "/admin/verifications",
+    },
+    { icon: "medical_services", label: "Services", href: "/admin/services" },
+    { icon: "analytics", label: "Analytics", href: "/admin/analytics" },
+    { icon: "settings", label: "Settings", href: "/settings" },
+  ];
+
+  const isAdmin = session?.user?.role === "ADMIN";
+  const menuItems = isAdmin
+    ? adminMenuItems
+    : isCaregiver
+      ? caregiverMenuItems
+      : clientMenuItems;
 
   const handleSignOut = async () => {
     await signOut({ redirect: false });

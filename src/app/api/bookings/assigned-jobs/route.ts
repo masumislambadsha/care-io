@@ -7,53 +7,46 @@ export async function GET(req: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
 
-    console.log("=== MY BOOKINGS API ===");
-    console.log("Session:", JSON.stringify(session, null, 2));
-
     if (!session?.user) {
-      console.log("No session found - returning 401");
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    // Only caregivers can access this endpoint
+    if (session.user.role !== "CAREGIVER") {
+      return NextResponse.json(
+        { error: "Only caregivers can access assigned jobs" },
+        { status: 403 },
+      );
     }
 
     const userId = session.user.id;
 
-    console.log("User ID:", userId);
-    console.log("Querying bookings where user is CLIENT");
-
-    // ALWAYS fetch bookings where this user is the CLIENT
-    // This is "My Bookings" - services I booked for myself
+    // Fetch bookings where this user is the CAREGIVER (jobs assigned TO them)
     const { data: bookings, error } = await supabaseAdmin
       .from("bookings")
       .select(
         `
         *,
         client:users!bookings_client_id_fkey(id, name, email),
-        caregiver:users!bookings_caregiver_id_fkey(id, name, email),
         service:services(id, name)
       `,
       )
-      .eq("client_id", userId)
+      .eq("caregiver_id", userId)
       .order("created_at", { ascending: false });
 
-    console.log("Supabase query error:", error);
-    console.log("Bookings found:", bookings?.length || 0);
-    console.log("Bookings data:", JSON.stringify(bookings, null, 2));
-
     if (error) {
-      console.error("Error fetching bookings:", error);
+      console.error("Error fetching assigned jobs:", error);
       return NextResponse.json(
-        { error: "Failed to fetch bookings", details: error },
+        { error: "Failed to fetch assigned jobs", details: error },
         { status: 500 },
       );
     }
 
-    // Transform the data to match the frontend format
-    const transformedBookings = bookings.map((booking: any) => ({
+    // Transform the data
+    const transformedJobs = bookings.map((booking: any) => ({
       id: booking.id,
       booking_number: booking.booking_number,
       service_name: booking.service?.name || "Unknown Service",
-      caregiver_name: booking.caregiver?.name || "Unknown Caregiver",
-      caregiver_id: booking.caregiver?.id || booking.caregiver_id,
       client_name: booking.client?.name || "Unknown Client",
       start_date: booking.start_date,
       end_date: booking.end_date,
@@ -62,13 +55,11 @@ export async function GET(req: NextRequest) {
       total_amount: booking.total_amount,
       status: booking.status,
       payment_status: booking.payment_status,
-      // Address fields
       division: booking.division,
       district: booking.district,
       city: booking.city,
       area: booking.area,
       address: booking.address,
-      // Full address string
       full_address: [
         booking.address,
         booking.area,
@@ -80,14 +71,11 @@ export async function GET(req: NextRequest) {
         .join(", "),
     }));
 
-    console.log("Transformed bookings:", transformedBookings.length);
-    console.log("=== END MY BOOKINGS API ===");
-
-    return NextResponse.json({ bookings: transformedBookings });
+    return NextResponse.json({ jobs: transformedJobs });
   } catch (error: unknown) {
     const errorMessage =
       error instanceof Error ? error.message : "Internal server error";
-    console.error("Bookings API error:", error);
+    console.error("Assigned jobs API error:", error);
     return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }

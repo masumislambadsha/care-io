@@ -3,10 +3,12 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 export default function SettingsPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
+  const [isSaving, setIsSaving] = useState(false);
   const [settings, setSettings] = useState({
     emailNotifications: true,
     smsNotifications: false,
@@ -19,7 +21,23 @@ export default function SettingsPage() {
     if (status === "unauthenticated") {
       router.push("/login");
     }
+    if (status === "authenticated") {
+      fetchSettings();
+    }
   }, [status, router]);
+
+  const fetchSettings = async () => {
+    try {
+      const response = await fetch("/api/settings");
+      const data = await response.json();
+
+      if (response.ok) {
+        setSettings(data.settings);
+      }
+    } catch (error) {
+      console.error("Error fetching settings:", error);
+    }
+  };
 
   if (status === "loading") {
     return (
@@ -34,6 +52,30 @@ export default function SettingsPage() {
 
   const toggleSetting = (key: keyof typeof settings) => {
     setSettings({ ...settings, [key]: !settings[key] });
+  };
+
+  const handleSaveSettings = async () => {
+    try {
+      setIsSaving(true);
+      const response = await fetch("/api/settings", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ settings }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        toast.success("Settings saved successfully!");
+      } else {
+        toast.error(data.error || "Failed to save settings");
+      }
+    } catch (error) {
+      console.error("Error saving settings:", error);
+      toast.error("Failed to save settings");
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   return (
@@ -227,8 +269,12 @@ export default function SettingsPage() {
 
       {/* Save Button */}
       <div className="mt-6">
-        <button className="w-full px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-lg transition-all">
-          Save All Changes
+        <button
+          onClick={handleSaveSettings}
+          disabled={isSaving}
+          className="w-full px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {isSaving ? "Saving..." : "Save All Changes"}
         </button>
       </div>
     </>

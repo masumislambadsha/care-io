@@ -3,31 +3,47 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 export default function ProfilePage() {
-  const { data: session, status } = useSession();
+  const { data: session, status, update } = useSession();
   const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
-    bio: "",
+    image: "",
   });
 
   useEffect(() => {
     if (status === "unauthenticated") {
       router.push("/login");
     }
-    if (session?.user) {
-      setFormData({
-        name: session.user.name || "",
-        email: session.user.email || "",
-        phone: "",
-        bio: "",
-      });
+    if (status === "authenticated") {
+      fetchProfile();
     }
-  }, [status, router, session]);
+  }, [status, router]);
+
+  const fetchProfile = async () => {
+    try {
+      const response = await fetch("/api/profile");
+      const data = await response.json();
+
+      if (response.ok) {
+        setFormData({
+          name: data.user.name || "",
+          email: data.user.email || "",
+          phone: data.user.phone || "",
+          image: data.user.image || "",
+        });
+      }
+    } catch (error) {
+      console.error("Error fetching profile:", error);
+      toast.error("Failed to load profile");
+    }
+  };
 
   if (status === "loading") {
     return (
@@ -40,9 +56,42 @@ export default function ProfilePage() {
     );
   }
 
-  const handleSave = () => {
-    // TODO: API call to update profile
-    setIsEditing(false);
+  const handleSave = async () => {
+    try {
+      setIsSaving(true);
+      const response = await fetch("/api/profile", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          phone: formData.phone,
+          image: formData.image,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        toast.success("Profile updated successfully!");
+        setIsEditing(false);
+        // Update session with new data
+        await update({
+          ...session,
+          user: {
+            ...session?.user,
+            name: formData.name,
+            image: formData.image,
+          },
+        });
+      } else {
+        toast.error(data.error || "Failed to update profile");
+      }
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      toast.error("Failed to update profile");
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   return (
@@ -62,14 +111,24 @@ export default function ProfilePage() {
         <div className="px-8 pb-8">
           <div className="flex items-end justify-between -mt-16 mb-6">
             <div className="flex items-end gap-4">
-              <div className="w-32 h-32 bg-white rounded-full border-4 border-white shadow-lg flex items-center justify-center text-4xl font-bold text-teal-600">
-                {session?.user?.name?.charAt(0).toUpperCase()}
+              <div className="w-32 h-32 bg-white rounded-full border-4 border-white shadow-lg overflow-hidden">
+                {formData.image ? (
+                  <img
+                    src={formData.image}
+                    alt={formData.name}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-4xl font-bold text-teal-600 bg-teal-50">
+                    {formData.name?.charAt(0).toUpperCase()}
+                  </div>
+                )}
               </div>
               <div className="mb-4">
                 <h2 className="text-2xl font-bold text-slate-900">
-                  {session?.user?.name}
+                  {formData.name}
                 </h2>
-                <p className="text-slate-600">{session?.user?.email}</p>
+                <p className="text-slate-600">{formData.email}</p>
                 <span className="inline-block mt-2 px-3 py-1 bg-teal-100 text-teal-700 text-sm font-semibold rounded-full">
                   {session?.user?.role}
                 </span>
@@ -165,13 +224,18 @@ export default function ProfilePage() {
               <div className="flex gap-4">
                 <button
                   onClick={handleSave}
-                  className="flex-1 px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-lg transition-all"
+                  disabled={isSaving}
+                  className="flex-1 px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Save Changes
+                  {isSaving ? "Saving..." : "Save Changes"}
                 </button>
                 <button
-                  onClick={() => setIsEditing(false)}
-                  className="flex-1 px-6 py-3 border-2 border-slate-200 text-slate-700 font-semibold rounded-lg hover:border-teal-600 hover:text-teal-600 transition-all"
+                  onClick={() => {
+                    setIsEditing(false);
+                    fetchProfile();
+                  }}
+                  disabled={isSaving}
+                  className="flex-1 px-6 py-3 border-2 border-slate-200 text-slate-700 font-semibold rounded-lg hover:border-teal-600 hover:text-teal-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Cancel
                 </button>

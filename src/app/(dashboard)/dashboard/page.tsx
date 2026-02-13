@@ -27,11 +27,28 @@ export default function DashboardPage() {
       const fetchStats = async () => {
         try {
           setIsLoadingStats(true);
-          const response = await fetch("/api/bookings/my-bookings");
+          const isCaregiver = session?.user?.role === "CAREGIVER";
+
+          // Caregivers see their ASSIGNED JOBS stats, clients see their bookings
+          const endpoint = isCaregiver
+            ? "/api/bookings/assigned-jobs"
+            : "/api/bookings/my-bookings";
+
+          const response = await fetch(endpoint);
           const data = await response.json();
 
           if (response.ok) {
-            const bookings = data.bookings || [];
+            const bookings = isCaregiver
+              ? data.jobs || []
+              : data.bookings || [];
+
+            // Calculate total amount (for caregivers, show earnings at 85%)
+            const totalAmount = bookings.reduce(
+              (sum: number, b: { total_amount: string | number }) =>
+                sum + parseFloat(String(b.total_amount || 0)),
+              0,
+            );
+
             setStats({
               totalBookings: bookings.length,
               activeBookings: bookings.filter(
@@ -41,11 +58,7 @@ export default function DashboardPage() {
               completedBookings: bookings.filter(
                 (b: { status: string }) => b.status === "COMPLETED",
               ).length,
-              totalSpent: bookings.reduce(
-                (sum: number, b: { total_amount: string | number }) =>
-                  sum + parseFloat(String(b.total_amount || 0)),
-                0,
-              ),
+              totalSpent: isCaregiver ? totalAmount * 0.85 : totalAmount,
             });
             // Get the 3 most recent bookings
             setRecentBookings(bookings.slice(0, 3));
@@ -215,7 +228,9 @@ export default function DashboardPage() {
                           {booking.service_name}
                         </h4>
                         <p className="text-sm text-slate-600">
-                          Booking #{booking.id.slice(0, 8)}
+                          {booking.booking_number
+                            ? `Booking #${booking.booking_number}`
+                            : `Job #${booking.id.slice(0, 8)}`}
                         </p>
                       </div>
                       <span
@@ -235,7 +250,11 @@ export default function DashboardPage() {
                     <div className="flex items-center gap-4 text-sm text-slate-600">
                       <div className="flex items-center gap-1">
                         <span className="material-icons text-sm">person</span>
-                        <span>{booking.caregiver_name}</span>
+                        <span>
+                          {isCaregiver
+                            ? booking.client_name
+                            : booking.caregiver_name}
+                        </span>
                       </div>
                       <div className="flex items-center gap-1">
                         <span className="material-icons text-sm">
@@ -247,15 +266,25 @@ export default function DashboardPage() {
                       </div>
                       <div className="flex items-center gap-1">
                         <span className="material-icons text-sm">schedule</span>
-                        <span>{booking.duration}</span>
+                        <span>
+                          {booking.duration_value}{" "}
+                          {booking.duration_type?.toLowerCase()}
+                        </span>
                       </div>
                     </div>
                     <div className="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between">
                       <span className="text-lg font-bold text-teal-600">
-                        ${parseFloat(booking.total_amount).toFixed(2)}
+                        $
+                        {isCaregiver
+                          ? (parseFloat(booking.total_amount) * 0.85).toFixed(2)
+                          : parseFloat(booking.total_amount).toFixed(2)}
                       </span>
                       <Link
-                        href="/my-bookings"
+                        href={
+                          isCaregiver
+                            ? "/caregiver/assigned-jobs"
+                            : "/my-bookings"
+                        }
                         className="text-sm font-semibold text-teal-600 hover:text-teal-700"
                       >
                         View Details →

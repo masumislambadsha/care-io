@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import Navbar from "@/components/Navbar";
 import toast from "react-hot-toast";
+import Navbar from "@/components/Navbar";
 
 type Caregiver = {
   id: string;
@@ -18,22 +18,31 @@ type Caregiver = {
   certifications: string[];
   languages: string[];
   services_offered: string[];
-  verification_status: string;
   avg_rating: number;
   total_reviews: number;
   total_bookings: number;
 };
 
 export default function CaregiversPage() {
-  const [selectedService, setSelectedService] = useState("all");
-  const [searchQuery, setSearchQuery] = useState("");
   const [caregivers, setCaregivers] = useState<Caregiver[]>([]);
+  const [filteredCaregivers, setFilteredCaregivers] = useState<Caregiver[]>([]);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filters, setFilters] = useState({
+    service: "all",
+    minRating: 0,
+    maxRate: 1000,
+    experience: 0,
+  });
 
   useEffect(() => {
     AOS.init({ duration: 800, once: true, easing: "ease-out-cubic" });
     fetchCaregivers();
   }, []);
+
+  useEffect(() => {
+    applyFilters();
+  }, [searchQuery, filters, caregivers]);
 
   const fetchCaregivers = async () => {
     try {
@@ -42,7 +51,8 @@ export default function CaregiversPage() {
       const data = await response.json();
 
       if (response.ok) {
-        setCaregivers(data.caregivers || []);
+        setCaregivers(data.caregivers);
+        setFilteredCaregivers(data.caregivers);
       } else {
         toast.error("Failed to load caregivers");
       }
@@ -54,18 +64,52 @@ export default function CaregiversPage() {
     }
   };
 
-  const filteredCaregivers = caregivers.filter((caregiver) => {
-    const matchesService =
-      selectedService === "all" ||
-      caregiver.services_offered.some((service) =>
-        service.toLowerCase().includes(selectedService.toLowerCase()),
+  const applyFilters = () => {
+    let filtered = [...caregivers];
+
+    // Search filter
+    if (searchQuery) {
+      filtered = filtered.filter(
+        (c) =>
+          c.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          c.services_offered.some((s) =>
+            s.toLowerCase().includes(searchQuery.toLowerCase()),
+          ),
       );
-    const matchesSearch =
-      searchQuery === "" ||
-      caregiver.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      caregiver.bio.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesService && matchesSearch;
-  });
+    }
+
+    // Service filter
+    if (filters.service !== "all") {
+      filtered = filtered.filter((c) =>
+        c.services_offered.includes(filters.service),
+      );
+    }
+
+    // Rating filter
+    if (filters.minRating > 0) {
+      filtered = filtered.filter((c) => c.avg_rating >= filters.minRating);
+    }
+
+    // Rate filter
+    filtered = filtered.filter((c) => c.hourly_rate <= filters.maxRate);
+
+    // Experience filter
+    if (filters.experience > 0) {
+      filtered = filtered.filter((c) => c.experience >= filters.experience);
+    }
+
+    setFilteredCaregivers(filtered);
+  };
+
+  const resetFilters = () => {
+    setSearchQuery("");
+    setFilters({
+      service: "all",
+      minRating: 0,
+      maxRate: 1000,
+      experience: 0,
+    });
+  };
 
   if (loading) {
     return (
@@ -85,330 +129,273 @@ export default function CaregiversPage() {
     <div className="min-h-screen bg-slate-50">
       <Navbar />
 
-      {/* Breadcrumb */}
-      <div className="bg-white border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center gap-2 text-sm">
-            <Link href="/" className="text-slate-500 hover:text-teal-600">
-              Home
-            </Link>
-            <span className="material-icons text-slate-400 text-sm">
-              chevron_right
-            </span>
-            <span className="text-slate-900 font-medium">
-              Browse Caregivers
-            </span>
-          </div>
-        </div>
-      </div>
-
-      {/* Main section */}
-      <section className="py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          {/* Heading */}
+      {/* Hero Section */}
+      <section className="bg-gradient-to-r from-teal-600 to-blue-600 text-white py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-12"
+            className="text-center"
           >
-            <h1 className="text-5xl font-bold text-slate-900 mb-4">
-              Find Your Perfect Caregiver
-            </h1>
-            <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-              Browse verified, experienced caregivers ready to provide
-              exceptional care
+            <h1 className="text-5xl font-bold mb-4">Find Your Caregiver</h1>
+            <p className="text-xl text-white/90 mb-8">
+              Browse our verified and experienced caregivers
             </p>
-          </motion.div>
 
-          {/* Filters */}
-          <div className="mb-8">
-            <div className="bg-white rounded-2xl p-6 shadow-lg border border-slate-100">
-              <div className="flex flex-col md:flex-row gap-4">
-                <div className="flex-1">
-                  <div className="relative">
-                    <span className="material-icons absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
-                      search
-                    </span>
-                    <input
-                      type="text"
-                      placeholder="Search by name or specialty..."
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
-                    />
-                  </div>
-                </div>
-                <select
-                  value={selectedService}
-                  onChange={(e) => setSelectedService(e.target.value)}
-                  className="px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
-                >
-                  <option value="all">All Services</option>
-                  <option value="Baby & Child Care">Baby & Child Care</option>
-                  <option value="Senior Care">Senior Care</option>
-                  <option value="Special Needs Care">Special Needs Care</option>
-                  <option value="Pet Care">Pet Care</option>
-                  <option value="Housekeeping">Housekeeping</option>
-                  <option value="Tutoring">Tutoring</option>
-                </select>
+            {/* Search Bar */}
+            <div className="max-w-2xl mx-auto">
+              <div className="relative">
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search by name or service..."
+                  className="w-full px-6 py-4 rounded-full text-slate-900 text-lg focus:outline-none focus:ring-4 focus:ring-white/30"
+                />
+                <span className="material-icons absolute right-6 top-1/2 -translate-y-1/2 text-slate-400">
+                  search
+                </span>
               </div>
             </div>
-          </div>
-
-          {/* Result header */}
-          <div className="flex items-center justify-between mb-6">
-            <p className="text-slate-600">
-              <span className="font-bold text-slate-900">
-                {filteredCaregivers.length}
-              </span>{" "}
-              caregivers found
-            </p>
-            <div className="flex items-center gap-2">
-              <span className="text-sm text-slate-600">Sort by:</span>
-              <select className="px-4 py-2 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500">
-                <option>Highest Rated</option>
-                <option>Most Reviews</option>
-                <option>Lowest Price</option>
-                <option>Highest Price</option>
-              </select>
-            </div>
-          </div>
-
-          {/* Cards grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredCaregivers.map((caregiver, idx) => (
-              <motion.div
-                key={caregiver.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.1 }}
-                className="bg-white rounded-2xl overflow-hidden shadow-lg border border-slate-100 hover:shadow-xl transition-all"
-              >
-                <div className="relative h-64">
-                  <img
-                    src={caregiver.image}
-                    alt={caregiver.name}
-                    className="w-full h-full object-cover"
-                    width={400}
-                    height={256}
-                  />
-                  <div className="absolute top-4 right-4 bg-white px-3 py-1.5 rounded-full flex items-center gap-1 shadow-lg">
-                    <span className="material-icons text-amber-400 text-sm">
-                      star
-                    </span>
-                    <span className="font-bold text-slate-900 text-sm">
-                      {caregiver.rating}
-                    </span>
-                  </div>
-                  {caregiver.verified && (
-                    <div className="absolute top-4 left-4 bg-teal-600 px-3 py-1.5 rounded-full flex items-center gap-1 shadow-lg">
-                      <span className="material-icons text-white text-sm">
-                        verified
-                      </span>
-                      <span className="text-white text-xs font-semibold">
-                        Verified
-                      </span>
-                    </div>
-                  )}
-                  <div className="absolute bottom-4 left-4">
-                    <span
-                      className={`px-3 py-1.5 rounded-full text-xs font-semibold ${
-                        caregiver.availability === "Available"
-                          ? "bg-emerald-100 text-emerald-700"
-                          : "bg-slate-200 text-slate-700"
-                      }`}
-                    >
-                      {caregiver.availability}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-slate-900 mb-1">
-                    {caregiver.name}
-                  </h3>
-                  <p className="text-sm text-teal-600 font-semibold mb-2">
-                    {caregiver.services_offered.join(", ")}
-                  </p>
-                  <p className="text-sm text-slate-600 mb-4 line-clamp-2">
-                    {caregiver.bio}
-                  </p>
-
-                  <div className="flex items-center gap-4 text-sm text-slate-600 mb-4">
-                    <div className="flex items-center gap-1">
-                      <span className="material-icons text-slate-400 text-sm">
-                        verified
-                      </span>
-                      <span>{caregiver.verification_status}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <span className="material-icons text-slate-400 text-sm">
-                        work
-                      </span>
-                      <span>{caregiver.experience} years</span>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-2 text-sm text-slate-600 mb-4">
-                    <span className="material-icons text-amber-400 text-sm">
-                      star
-                    </span>
-                    <span className="font-semibold">
-                      {caregiver.avg_rating.toFixed(1)}
-                    </span>
-                    <span>({caregiver.total_reviews} reviews)</span>
-                  </div>
-
-                  <div className="flex items-center justify-between pt-4 border-t border-slate-100">
-                    <div>
-                      <span className="text-2xl font-bold text-slate-900">
-                        ${caregiver.hourly_rate}
-                      </span>
-                      <span className="text-slate-600 text-sm">/hr</span>
-                    </div>
-                    <Link
-                      href={`/caregivers/${caregiver.id}`}
-                      className="bg-teal-600 hover:bg-teal-700 text-white px-6 py-2.5 rounded-lg font-semibold text-sm transition-all"
-                    >
-                      View Profile
-                    </Link>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Empty state */}
-          {filteredCaregivers.length === 0 && (
-            <div className="text-center py-16">
-              <span className="material-icons text-slate-300 text-6xl mb-4">
-                search_off
-              </span>
-              <h3 className="text-2xl font-bold text-slate-900 mb-2">
-                No caregivers found
-              </h3>
-              <p className="text-slate-600">
-                Try adjusting your filters or search query
-              </p>
-            </div>
-          )}
+          </motion.div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-slate-900 py-16 px-4 sm:px-6 lg:px-8">
+      {/* Filters & Results */}
+      <section className="py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-8 h-8 bg-teal-600 rounded-lg flex items-center justify-center">
-                  <span className="material-icons text-white text-xl">
-                    health_and_safety
-                  </span>
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            {/* Filters Sidebar */}
+            <div className="lg:col-span-1">
+              <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 sticky top-24">
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-lg font-bold text-slate-900">Filters</h3>
+                  <button
+                    onClick={resetFilters}
+                    className="text-sm text-teal-600 hover:text-teal-700 font-semibold"
+                  >
+                    Reset
+                  </button>
                 </div>
-                <span className="text-xl font-bold text-white">Care.xyz</span>
+
+                <div className="space-y-6">
+                  {/* Service Filter */}
+                  <div>
+                    <label className="block text-sm font-semibold text-slate-700 mb-2">
+                      Service Type
+                    </label>
+                    <select
+                      value={filters.service}
+                      onChange={(e) =>
+                        setFilters({ ...filters, service: e.target.value })
+                      }
+                      className="w-full px-4 py-2 border-2 border-slate-200 rounded-lg focus:border-teal-600 focus:outline-none text-slate-900"
+                    >
+                      <option value="all">All Services</option>
+                      <option value="Baby Care">Baby Care</option>
+                      <option value="Elderly Care">Elderly Care</option>
+                      <option value="Disability Care">Disability Care</option>
+                      <option value="Pet Care">Pet Care</option>
+                      <option value="Companionship">Companionship</option>
+                    </select>
+                  </div>
+
+                  {/* Rating Filter */}
+                  <div>
+                    <label className="block text-sm font-semibold text-slate-700 mb-2">
+                      Minimum Rating
+                    </label>
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="range"
+                        min="0"
+                        max="5"
+                        step="0.5"
+                        value={filters.minRating}
+                        onChange={(e) =>
+                          setFilters({
+                            ...filters,
+                            minRating: parseFloat(e.target.value),
+                          })
+                        }
+                        className="flex-1"
+                      />
+                      <span className="text-sm font-semibold text-slate-900 w-12">
+                        {filters.minRating}+
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Rate Filter */}
+                  <div>
+                    <label className="block text-sm font-semibold text-slate-700 mb-2">
+                      Max Hourly Rate: ${filters.maxRate}
+                    </label>
+                    <input
+                      type="range"
+                      min="0"
+                      max="1000"
+                      step="10"
+                      value={filters.maxRate}
+                      onChange={(e) =>
+                        setFilters({
+                          ...filters,
+                          maxRate: parseInt(e.target.value),
+                        })
+                      }
+                      className="w-full"
+                    />
+                  </div>
+
+                  {/* Experience Filter */}
+                  <div>
+                    <label className="block text-sm font-semibold text-slate-700 mb-2">
+                      Min Experience: {filters.experience} years
+                    </label>
+                    <input
+                      type="range"
+                      min="0"
+                      max="20"
+                      step="1"
+                      value={filters.experience}
+                      onChange={(e) =>
+                        setFilters({
+                          ...filters,
+                          experience: parseInt(e.target.value),
+                        })
+                      }
+                      className="w-full"
+                    />
+                  </div>
+                </div>
               </div>
-              <p className="text-slate-400 text-sm leading-relaxed">
-                Transforming the way families find trusted, professional care
-                for their loved ones across the globe.
-              </p>
             </div>
-            <div>
-              <h4 className="font-bold text-white mb-4">Services</h4>
-              <ul className="space-y-3 text-sm text-slate-400">
-                <li>
-                  <Link
-                    href="#"
-                    className="hover:text-teal-400 transition-colors"
-                  >
-                    Senior Care
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="hover:text-teal-400 transition-colors"
-                  >
-                    Specialized Nursing
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="hover:text-teal-400 transition-colors"
-                  >
-                    Dementia Care
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="hover:text-teal-400 transition-colors"
-                  >
-                    Child Care
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold text-white mb-4">Company</h4>
-              <ul className="space-y-3 text-sm text-slate-400">
-                <li>
-                  <Link
-                    href="#"
-                    className="hover:text-teal-400 transition-colors"
-                  >
-                    About Us
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="hover:text-teal-400 transition-colors"
-                  >
-                    Careers
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="hover:text-teal-400 transition-colors"
-                  >
-                    Privacy Policy
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="hover:text-teal-400 transition-colors"
-                  >
-                    Contact
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold text-white mb-4">Newsletter</h4>
-              <div className="flex gap-2">
-                <input
-                  type="email"
-                  placeholder="Your email"
-                  className="flex-1 px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent text-sm"
-                />
-                <button className="px-6 py-2.5 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-lg transition-all text-sm">
-                  Join
-                </button>
+
+            {/* Caregivers Grid */}
+            <div className="lg:col-span-3">
+              <div className="mb-6">
+                <p className="text-slate-600">
+                  Showing {filteredCaregivers.length} of {caregivers.length}{" "}
+                  caregivers
+                </p>
               </div>
+
+              {filteredCaregivers.length === 0 ? (
+                <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-12 text-center">
+                  <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="material-icons text-slate-400 text-4xl">
+                      search_off
+                    </span>
+                  </div>
+                  <h3 className="text-xl font-bold text-slate-900 mb-2">
+                    No caregivers found
+                  </h3>
+                  <p className="text-slate-600 mb-4">
+                    Try adjusting your filters or search query
+                  </p>
+                  <button
+                    onClick={resetFilters}
+                    className="px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-lg transition-all"
+                  >
+                    Reset Filters
+                  </button>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {filteredCaregivers.map((caregiver, index) => (
+                    <motion.div
+                      key={caregiver.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-lg transition-all"
+                    >
+                      <div className="p-6">
+                        <div className="flex items-start gap-4 mb-4">
+                          <img
+                            src={
+                              caregiver.image ||
+                              `https://ui-avatars.com/api/?name=${encodeURIComponent(caregiver.name)}&size=80&background=0d9488&color=fff`
+                            }
+                            alt={caregiver.name}
+                            className="w-20 h-20 rounded-full object-cover border-2 border-teal-100"
+                          />
+                          <div className="flex-1">
+                            <h3 className="text-lg font-bold text-slate-900 mb-1">
+                              {caregiver.name}
+                            </h3>
+                            <div className="flex items-center gap-2 mb-2">
+                              <div className="flex items-center gap-1">
+                                {[...Array(5)].map((_, i) => (
+                                  <span
+                                    key={i}
+                                    className={`material-icons text-sm ${
+                                      i < Math.floor(caregiver.avg_rating)
+                                        ? "text-yellow-400"
+                                        : "text-slate-300"
+                                    }`}
+                                  >
+                                    star
+                                  </span>
+                                ))}
+                              </div>
+                              <span className="text-sm text-slate-600">
+                                {caregiver.avg_rating.toFixed(1)} (
+                                {caregiver.total_reviews})
+                              </span>
+                            </div>
+                            <p className="text-sm text-slate-600">
+                              {caregiver.experience} years experience •{" "}
+                              {caregiver.total_bookings} bookings
+                            </p>
+                          </div>
+                        </div>
+
+                        <p className="text-sm text-slate-600 mb-4 line-clamp-2">
+                          {caregiver.bio}
+                        </p>
+
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          {caregiver.services_offered
+                            .slice(0, 3)
+                            .map((service) => (
+                              <span
+                                key={service}
+                                className="px-3 py-1 bg-teal-100 text-teal-700 text-xs font-semibold rounded-full"
+                              >
+                                {service}
+                              </span>
+                            ))}
+                        </div>
+
+                        <div className="flex items-center justify-between pt-4 border-t border-slate-200">
+                          <div>
+                            <p className="text-sm text-slate-600">
+                              Starting from
+                            </p>
+                            <p className="text-2xl font-bold text-teal-600">
+                              ${caregiver.hourly_rate}
+                              <span className="text-sm text-slate-600">
+                                /hour
+                              </span>
+                            </p>
+                          </div>
+                          <Link
+                            href={`/caregivers/${caregiver.id}`}
+                            className="px-6 py-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-lg transition-all"
+                          >
+                            View Profile
+                          </Link>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              )}
             </div>
-          </div>
-          <div className="border-t border-slate-800 pt-8 text-center">
-            <p className="text-sm text-slate-500">
-              © 2026 Care.xyz Inc. All rights reserved. Providing compassionate
-              care nationwide.
-            </p>
           </div>
         </div>
-      </footer>
+      </section>
     </div>
   );
 }
