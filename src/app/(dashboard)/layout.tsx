@@ -5,6 +5,7 @@ import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import NotificationButton from "@/components/NotificationButton";
 
 export default function DashboardLayout({
   children,
@@ -52,6 +53,11 @@ export default function DashboardLayout({
     { icon: "work", label: "Assigned Jobs", href: "/caregiver/assigned-jobs" },
     { icon: "event_note", label: "My Bookings", href: "/my-bookings" },
     { icon: "calendar_month", label: "Schedule", href: "/caregiver/schedule" },
+    {
+      icon: "event_available",
+      label: "Availability",
+      href: "/caregiver/availability",
+    },
     { icon: "payments", label: "Earnings", href: "/caregiver/earnings" },
     { icon: "star", label: "Reviews", href: "/caregiver/reviews" },
     { icon: "person", label: "Profile", href: "/profile" },
@@ -185,12 +191,7 @@ export default function DashboardLayout({
           </button>
 
           <div className="flex items-center gap-4">
-            <button className="p-2 hover:bg-slate-100 rounded-lg transition-all relative">
-              <span className="material-icons text-slate-600">
-                notifications
-              </span>
-              <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-            </button>
+            <NotificationButton />
             <Link
               href="/"
               className="px-4 py-2 text-slate-600 hover:text-teal-600 font-medium transition-all"
