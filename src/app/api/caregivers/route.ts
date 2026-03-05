@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
 
+// Enable ISR with 60 second revalidation
+export const revalidate = 60;
+
 export async function GET() {
   try {
     const { data: caregivers, error } = await supabaseAdmin
@@ -43,7 +46,14 @@ export async function GET() {
       total_bookings: caregiver.caregiver_profile?.total_bookings || 0,
     }));
 
-    return NextResponse.json({ caregivers: transformedCaregivers });
+    return NextResponse.json(
+      { caregivers: transformedCaregivers },
+      {
+        headers: {
+          "Cache-Control": "public, s-maxage=60, stale-while-revalidate=120",
+        },
+      },
+    );
   } catch (error) {
     console.error("Caregivers API error:", error);
     return NextResponse.json(

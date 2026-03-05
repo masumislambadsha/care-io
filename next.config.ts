@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
   reactCompiler: true,
   compiler: {
     styledComponents: true,
+    removeConsole: process.env.NODE_ENV === "production",
   },
   images: {
     remotePatterns: [
@@ -19,8 +20,31 @@ const nextConfig: NextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "ui-avatars.com",
+        port: "",
+        pathname: "/**",
+      },
     ],
+    formats: ["image/avif", "image/webp"],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 60,
+    dangerouslyAllowSVG: true,
+    contentDispositionType: "attachment",
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
+  compress: true,
+  poweredByHeader: false,
+  experimental: {
+    optimizePackageImports: ["framer-motion", "swiper", "aos", "react-icons"],
+    webpackBuildWorker: true,
+  },
+  // Production optimizations
+  productionBrowserSourceMaps: false,
+  // Empty turbopack config to silence the webpack warning in Next.js 16
+  turbopack: {},
 };
 
 export default nextConfig;

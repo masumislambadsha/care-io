@@ -5,7 +5,10 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { setNotifications, setUnreadCount } from "@/store/slices/notificationSlice";
+import {
+  setNotifications,
+  setUnreadCount,
+} from "@/store/slices/notificationSlice";
 
 type Notification = {
   id: string;
@@ -19,17 +22,28 @@ type Notification = {
 
 export default function NotificationButton() {
   const [isOpen, setIsOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const notifRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
   // Redux state
   const dispatch = useAppDispatch();
-  const { notifications, unreadCount } = useAppSelector((state) => state.notification);
+  const { notifications, unreadCount } = useAppSelector(
+    (state) => state.notification,
+  );
+
+  // Handle mounting
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Close dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (notifRef.current && !notifRef.current.contains(event.target as Node)) {
+      if (
+        notifRef.current &&
+        !notifRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     }
@@ -40,12 +54,14 @@ export default function NotificationButton() {
 
   // Fetch notifications on mount
   useEffect(() => {
+    if (!mounted) return;
+
     fetchNotifications();
 
     // Poll for new notifications every 30 seconds
     const interval = setInterval(fetchNotifications, 30000);
     return () => clearInterval(interval);
-  }, []);
+  }, [mounted]);
 
   const fetchNotifications = async () => {
     try {
@@ -55,7 +71,9 @@ export default function NotificationButton() {
       if (response.ok) {
         const notifs = data.notifications || [];
         dispatch(setNotifications(notifs));
-        dispatch(setUnreadCount(notifs.filter((n: Notification) => !n.is_read).length));
+        dispatch(
+          setUnreadCount(notifs.filter((n: Notification) => !n.is_read).length),
+        );
       }
     } catch (error) {
       console.error("Error fetching notifications:", error);
@@ -104,6 +122,16 @@ export default function NotificationButton() {
     setIsOpen(false);
   };
 
+  if (!mounted) {
+    return (
+      <div className="relative">
+        <button className="relative p-2 hover:bg-slate-100 rounded-lg transition-colors">
+          <span className="material-icons text-slate-600">notifications</span>
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div className="relative" ref={notifRef}>
       <button
@@ -143,7 +171,9 @@ export default function NotificationButton() {
                     notifications_none
                   </span>
                 </div>
-                <p className="text-slate-600 font-medium">No notifications yet</p>
+                <p className="text-slate-600 font-medium">
+                  No notifications yet
+                </p>
                 <p className="text-sm text-slate-500 mt-1">
                   We'll notify you when something happens
                 </p>
@@ -171,7 +201,9 @@ export default function NotificationButton() {
                       >
                         {notif.title}
                       </p>
-                      <p className="text-sm text-slate-600 mt-1">{notif.message}</p>
+                      <p className="text-sm text-slate-600 mt-1">
+                        {notif.message}
+                      </p>
                       <p className="text-xs text-slate-500 mt-1">
                         {new Date(notif.created_at).toLocaleString()}
                       </p>
@@ -199,4 +231,3 @@ export default function NotificationButton() {
     </div>
   );
 }
-

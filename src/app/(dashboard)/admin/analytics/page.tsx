@@ -118,14 +118,19 @@ export default function AdminAnalyticsPage() {
         <div className="bg-gradient-to-br from-teal-500 to-teal-600 rounded-xl shadow-lg p-6 text-white">
           <div className="flex items-center justify-between mb-2">
             <span className="material-icons text-3xl">attach_money</span>
-            <span className={`text-sm font-semibold px-2 py-1 rounded-full ${
-              analytics.revenue.growth >= 0 ? "bg-green-500" : "bg-red-500"
-            }`}>
-              {analytics.revenue.growth >= 0 ? "+" : ""}{analytics.revenue.growth.toFixed(1)}%
+            <span
+              className={`text-sm font-semibold px-2 py-1 rounded-full ${
+                analytics.revenue.growth >= 0 ? "bg-green-500" : "bg-red-500"
+              }`}
+            >
+              {analytics.revenue.growth >= 0 ? "+" : ""}
+              {analytics.revenue.growth.toFixed(1)}%
             </span>
           </div>
           <p className="text-sm opacity-90 mb-1">Total Revenue</p>
-          <p className="text-3xl font-bold">${analytics.revenue.total.toFixed(0)}</p>
+          <p className="text-3xl font-bold">
+            ${analytics.revenue.total.toFixed(0)}
+          </p>
         </div>
 
         <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
@@ -135,14 +140,13 @@ export default function AdminAnalyticsPage() {
             </div>
           </div>
           <p className="text-sm text-slate-600 mb-1">Total Bookings</p>
-          <p className="text-3xl font-bold text-slate-900">{analytics.bookings.total}</p>
+          <p className="text-3xl font-bold text-slate-900">
+            {analytics.bookings.total}
+          </p>
           <p className="text-xs text-slate-500 mt-1">
             {analytics.bookings.thisMonth} this month
           </p>
         </div>
-
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-          <div className="flex items-center gap
 
         <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
           <div className="flex items-center gap-3 mb-2">
@@ -168,35 +172,37 @@ export default function AdminAnalyticsPage() {
             Bookings by Status
           </h3>
           <div className="space-y-3">
-            {Object.entries(analytics.bookings.byStatus).map(([status, count]) => {
-              const total = analytics.bookings.total;
-              const percentage = total > 0 ? (count / total) * 100 : 0;
-              const colors: Record<string, string> = {
-                CONFIRMED: "bg-blue-500",
-                ONGOING: "bg-purple-500",
-                COMPLETED: "bg-green-500",
-                CANCELLED: "bg-red-500",
-              };
+            {Object.entries(analytics.bookings.byStatus).map(
+              ([status, count]) => {
+                const total = analytics.bookings.total;
+                const percentage = total > 0 ? (count / total) * 100 : 0;
+                const colors: Record<string, string> = {
+                  CONFIRMED: "bg-blue-500",
+                  ONGOING: "bg-purple-500",
+                  COMPLETED: "bg-green-500",
+                  CANCELLED: "bg-red-500",
+                };
 
-              return (
-                <div key={status}>
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="text-sm font-semibold text-slate-700">
-                      {status}
-                    </span>
-                    <span className="text-sm text-slate-600">
-                      {count} ({percentage.toFixed(1)}%)
-                    </span>
+                return (
+                  <div key={status}>
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-sm font-semibold text-slate-700">
+                        {status}
+                      </span>
+                      <span className="text-sm text-slate-600">
+                        {count} ({percentage.toFixed(1)}%)
+                      </span>
+                    </div>
+                    <div className="w-full bg-slate-100 rounded-full h-2">
+                      <div
+                        className={`${colors[status] || "bg-slate-500"} h-2 rounded-full transition-all`}
+                        style={{ width: `${percentage}%` }}
+                      ></div>
+                    </div>
                   </div>
-                  <div className="w-full bg-slate-100 rounded-full h-2">
-                    <div
-                      className={`${colors[status] || "bg-slate-500"} h-2 rounded-full transition-all`}
-                      style={{ width: `${percentage}%` }}
-                    ></div>
-                  </div>
-                </div>
-              );
-            })}
+                );
+              },
+            )}
           </div>
         </div>
 
@@ -207,8 +213,11 @@ export default function AdminAnalyticsPage() {
           </h3>
           <div className="space-y-3">
             {analytics.revenueByMonth.slice(-6).map((item) => {
-              const maxRevenue = Math.max(...analytics.revenueByMonth.map(m => m.revenue));
-              const percentage = maxRevenue > 0 ? (item.revenue / maxRevenue) * 100 : 0;
+              const maxRevenue = Math.max(
+                ...analytics.revenueByMonth.map((m) => m.revenue),
+              );
+              const percentage =
+                maxRevenue > 0 ? (item.revenue / maxRevenue) * 100 : 0;
 
               return (
                 <div key={item.month}>
@@ -250,13 +259,18 @@ export default function AdminAnalyticsPage() {
                   #{index + 1}
                 </div>
                 <div className="flex-1">
-                  <p className="font-semibold text-slate-900">{caregiver.name}</p>
+                  <p className="font-semibold text-slate-900">
+                    {caregiver.name}
+                  </p>
                   <p className="text-xs text-slate-600">
-                    {caregiver.bookings} bookings • ${caregiver.revenue.toFixed(0)} revenue
+                    {caregiver.bookings} bookings • $
+                    {caregiver.revenue.toFixed(0)} revenue
                   </p>
                 </div>
                 <div className="flex items-center gap-1">
-                  <span className="material-icons text-yellow-500 text-sm">star</span>
+                  <span className="material-icons text-yellow-500 text-sm">
+                    star
+                  </span>
                   <span className="text-sm font-semibold text-slate-900">
                     {caregiver.rating.toFixed(1)}
                   </span>
@@ -283,7 +297,8 @@ export default function AdminAnalyticsPage() {
                 <div className="flex-1">
                   <p className="font-semibold text-slate-900">{service.name}</p>
                   <p className="text-xs text-slate-600">
-                    {service.bookings} bookings • ${service.revenue.toFixed(0)} revenue
+                    {service.bookings} bookings • ${service.revenue.toFixed(0)}{" "}
+                    revenue
                   </p>
                 </div>
               </div>
@@ -306,7 +321,11 @@ export default function AdminAnalyticsPage() {
             </div>
             <p className="font-semibold text-slate-900">Clients</p>
             <p className="text-sm text-slate-600">
-              {((analytics.users.clients / analytics.users.total) * 100).toFixed(1)}% of total
+              {(
+                (analytics.users.clients / analytics.users.total) *
+                100
+              ).toFixed(1)}
+              % of total
             </p>
           </div>
 
@@ -318,7 +337,11 @@ export default function AdminAnalyticsPage() {
             </div>
             <p className="font-semibold text-slate-900">Caregivers</p>
             <p className="text-sm text-slate-600">
-              {((analytics.users.caregivers / analytics.users.total) * 100).toFixed(1)}% of total
+              {(
+                (analytics.users.caregivers / analytics.users.total) *
+                100
+              ).toFixed(1)}
+              % of total
             </p>
           </div>
 

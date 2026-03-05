@@ -16,6 +16,11 @@ export default function DashboardLayout({
   const router = useRouter();
   const pathname = usePathname();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -23,7 +28,7 @@ export default function DashboardLayout({
     }
   }, [status, router]);
 
-  if (status === "loading") {
+  if (status === "loading" || !mounted) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -194,7 +199,7 @@ export default function DashboardLayout({
             <NotificationButton />
             <Link
               href="/"
-              className="px-4 py-2 text-slate-600 hover:text-teal-600 font-medium transition-all"
+              className="px-4 py-2 lg:-mt-1.5 text-slate-600 hover:text-teal-600 font-medium transition-all"
             >
               Back to Home
             </Link>
@@ -202,7 +207,7 @@ export default function DashboardLayout({
         </header>
 
         {/* Page Content */}
-        <main className="p-6">{children}</main>
+        <main className="p-6 mx-auto max-w-6xl">{children}</main>
       </div>
     </div>
   );

@@ -52,10 +52,11 @@ export async function POST(req: NextRequest) {
       updated_at: new Date().toISOString(),
     };
 
-    // If marking as completed, set completed_at
-    if (status === "COMPLETED") {
-      updateData.completed_at = new Date().toISOString();
-    }
+    // If marking as completed, set completed_at and payment_status
+if (status === "COMPLETED") {
+  updateData.completed_at = new Date().toISOString();
+  updateData.payment_status = "PAID";
+}
 
     const { error: updateError } = await supabaseAdmin
       .from("bookings")

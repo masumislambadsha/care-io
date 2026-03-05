@@ -38,11 +38,11 @@ export default function CaregiverEarningsPage() {
   const fetchEarnings = async () => {
     try {
       setLoading(true);
-      const response = await fetch("/api/bookings/my-bookings");
+      const response = await fetch("/api/bookings/assigned-jobs");
       const data = await response.json();
 
       if (response.ok) {
-        const earningsData = data.bookings
+        const earningsData = (data.jobs || [])
           .filter((b: any) => b.payment_status === "PAID")
           .map((b: any) => ({
             id: b.id,
@@ -50,7 +50,7 @@ export default function CaregiverEarningsPage() {
             service_name: b.service_name,
             client_name: b.client_name,
             amount: parseFloat(b.total_amount) * 0.85, // 85% after platform fee
-            date: b.created_at,
+            date: b.start_date,
             status: b.status,
           }));
         setEarnings(earningsData);

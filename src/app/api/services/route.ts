@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
 
+// Enable ISR with 60 second revalidation
+export const revalidate = 60;
+
 export async function GET() {
   try {
     const { data: services, error } = await supabaseAdmin
@@ -17,7 +20,14 @@ export async function GET() {
       );
     }
 
-    return NextResponse.json({ services });
+    return NextResponse.json(
+      { services },
+      {
+        headers: {
+          "Cache-Control": "public, s-maxage=60, stale-while-revalidate=120",
+        },
+      },
+    );
   } catch (error) {
     console.error("Services API error:", error);
     return NextResponse.json(
@@ -26,4 +36,3 @@ export async function GET() {
     );
   }
 }
-

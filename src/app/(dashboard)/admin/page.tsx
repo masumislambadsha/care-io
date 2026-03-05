@@ -75,8 +75,17 @@ export default function AdminDashboardPage() {
               Total
             </span>
           </div>
-          <p cl
-e
+          <p className="text-sm opacity-90 mb-1">Total Users</p>
+          <p className="text-4xl font-bold">{stats.totalUsers}</p>
+        </div>
+
+        <div className="bg-gradient-to-br from-teal-600 to-teal-700 rounded-xl shadow-lg p-6 text-white">
+          <div className="flex items-center justify-between mb-4">
+            <span className="material-icons text-4xl opacity-80">
+              medical_services
+            </span>
+            <span className="text-sm bg-white/20 px-3 py-1 rounded-full">
+              Active
             </span>
           </div>
           <p className="text-sm opacity-90 mb-1">Caregivers</p>

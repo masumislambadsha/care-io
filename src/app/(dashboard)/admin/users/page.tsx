@@ -183,9 +183,7 @@ export default function AdminUsersPage() {
         </div>
         <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
           <p className="text-sm text-slate-600 mb-1">Caregivers</p>
-          <p className="text-2xl font-bold text-blue-600">
-            {stats.caregivers}
-          </p>
+          <p className="text-2xl font-bold text-blue-600">{stats.caregivers}</p>
         </div>
         <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
           <p className="text-sm text-slate-600 mb-1">Admins</p>
@@ -196,8 +194,22 @@ export default function AdminUsersPage() {
           <p className="text-2xl font-bold text-green-600">{stats.active}</p>
         </div>
         <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
-          <p className="text-sm text-slate-60
-            value={searchQuery}
+          <p className="text-sm text-slate-600 mb-1">Inactive</p>
+          <p className="text-2xl font-bold text-slate-400">{stats.inactive}</p>
+        </div>
+      </div>
+
+      {/* Filters */}
+      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {/* Search */}
+          <div>
+            <label className="block text-sm font-semibold text-slate-700 mb-2">
+              Search
+            </label>
+            <input
+              type="text"
+              value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by name or email..."
               className="w-full px-4 py-2 border-2 border-slate-200 rounded-lg focus:border-teal-600 focus:outline-none transition-colors text-slate-900"
@@ -278,7 +290,10 @@ export default function AdminUsersPage() {
                 </tr>
               ) : (
                 filteredUsers.map((user) => (
-                  <tr key={user.id} className="hover:bg-slate-50 transition-colors">
+                  <tr
+                    key={user.id}
+                    className="hover:bg-slate-50 transition-colors"
+                  >
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 bg-teal-100 rounded-full flex items-center justify-center">
@@ -331,7 +346,9 @@ export default function AdminUsersPage() {
                         </button>
                         {user.status === "ACTIVE" ? (
                           <button
-                            onClick={() => updateUserStatus(user.id, "SUSPENDED")}
+                            onClick={() =>
+                              updateUserStatus(user.id, "SUSPENDED")
+                            }
                             className="p-2 hover:bg-red-50 rounded-lg transition-colors"
                             title="Suspend User"
                           >

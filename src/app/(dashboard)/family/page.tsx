@@ -31,9 +31,7 @@ export default function FamilyMembersPage() {
   const [members, setMembers] = useState<FamilyMember[]>([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
-  const [editingMember, setEditingMember] = useState<FamilyMember | null>(
-    null,
-  );
+  const [editingMember, setEditingMember] = useState<FamilyMember | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
@@ -218,14 +216,16 @@ export default function FamilyMembersPage() {
                 <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center">
                   <span className="material-icons text-teal-600 text-3xl">
                     person
-                  </span
-          className="p-2 hover:bg-red-50 rounded-lg transition-colors"
-                  >
-                    <span className="material-icons text-red-600 text-xl">
-                      delete
-                    </span>
-                  </button>
+                  </span>
                 </div>
+                <button
+                  onClick={() => handleDeleteMember(member.id)}
+                  className="p-2 hover:bg-red-50 rounded-lg transition-colors"
+                >
+                  <span className="material-icons text-red-600 text-xl">
+                    delete
+                  </span>
+                </button>
               </div>
 
               <h3 className="text-xl font-bold text-slate-900 mb-2">
