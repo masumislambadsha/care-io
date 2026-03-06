@@ -13,6 +13,15 @@
   --animate-move-up-alternate: move-up-alternate 0.3s forwards;
 }
 
+/* Dark mode support */
+:root {
+  color-scheme: light;
+}
+
+.dark {
+  color-scheme: dark;
+}
+
 @keyframes blob-bounce {
   0% {
     transform: translate(-100%, -100%) translate3d(0, 0, 0);

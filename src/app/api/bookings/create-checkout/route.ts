@@ -1,11 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import Stripe from "stripe";
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2024-12-18.acacia",
-});
+import { stripe, formatAmountForStripe } from "@/lib/stripe";
 
 export async function POST(req: NextRequest) {
   try {
@@ -45,7 +41,7 @@ export async function POST(req: NextRequest) {
               name: "Caregiver Service Booking",
               description: `${durationType} service for ${durationValue} ${durationType.toLowerCase()}`,
             },
-            unit_amount: Math.round(totalAmount * 100), // Convert to cents
+            unit_amount: formatAmountForStripe(totalAmount),
           },
           quantity: 1,
         },

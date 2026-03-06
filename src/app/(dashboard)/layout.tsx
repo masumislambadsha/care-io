@@ -6,6 +6,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import NotificationButton from "@/components/NotificationButton";
+import { ThemeToggle } from "@/components/shared/ThemeToggle";
+import { ThemeDebug } from "@/components/shared/ThemeDebug";
 
 export default function DashboardLayout({
   children,
@@ -97,15 +99,15 @@ export default function DashboardLayout({
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex">
       {/* Sidebar */}
       <aside
-        className={`fixed left-0 top-0 h-full bg-white border-r border-slate-200 transition-all duration-300 z-40 ${
+        className={`fixed left-0 top-0 h-full bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 transition-all duration-300 z-40 ${
           isSidebarOpen ? "w-64" : "w-20"
         }`}
       >
         {/* Logo */}
-        <div className="h-16 border-b border-slate-200 flex items-center justify-between px-4">
+        <div className="h-16 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-4">
           {isSidebarOpen ? (
             <Link href="/" className="flex items-center gap-2">
               <div className="w-8 h-8 bg-teal-600 rounded-lg flex items-center justify-center">
@@ -113,7 +115,9 @@ export default function DashboardLayout({
                   health_and_safety
                 </span>
               </div>
-              <span className="text-lg font-bold text-slate-900">Care.xyz</span>
+              <span className="text-lg font-bold text-slate-900 dark:text-white">
+                Care.xyz
+              </span>
             </Link>
           ) : (
             <div className="w-8 h-8 bg-teal-600 rounded-lg flex items-center justify-center mx-auto">
@@ -135,7 +139,7 @@ export default function DashboardLayout({
                 className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
                   isActive
                     ? "bg-teal-600 text-white"
-                    : "text-slate-700 hover:bg-slate-100"
+                    : "text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
                 }`}
                 title={!isSidebarOpen ? item.label : ""}
               >
@@ -149,7 +153,7 @@ export default function DashboardLayout({
         </nav>
 
         {/* User Section */}
-        <div className="absolute bottom-0 left-0 right-0 border-t border-slate-200 p-4">
+        <div className="absolute bottom-0 left-0 right-0 border-t border-slate-200 dark:border-slate-800 p-4">
           <div
             className={`flex items-center gap-3 mb-3 ${
               !isSidebarOpen && "justify-center"
@@ -160,7 +164,7 @@ export default function DashboardLayout({
             </div>
             {isSidebarOpen && (
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-semibold text-slate-900 truncate">
+                <p className="text-sm font-semibold text-slate-900 dark:text-white truncate">
                   {session?.user?.name}
                 </p>
                 <p className="text-xs text-slate-500">{session?.user?.role}</p>
@@ -187,19 +191,22 @@ export default function DashboardLayout({
         }`}
       >
         {/* Top Bar */}
-        <header className="h-16 bg-white border-b border-slate-200 sticky top-0 z-30 flex items-center justify-between px-6">
+        <header className="h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-30 flex items-center justify-between px-6">
           <button
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="p-2 hover:bg-slate-100 rounded-lg transition-all"
+            className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all"
           >
-            <span className="material-icons text-slate-600">menu</span>
+            <span className="material-icons text-slate-600 dark:text-slate-400">
+              menu
+            </span>
           </button>
 
           <div className="flex items-center gap-4">
+            <ThemeToggle />
             <NotificationButton />
             <Link
               href="/"
-              className="px-4 py-2 lg:-mt-1.5 text-slate-600 hover:text-teal-600 font-medium transition-all"
+              className="px-4 py-2 lg:-mt-1.5 text-slate-600 dark:text-slate-400 hover:text-teal-600 dark:hover:text-teal-400 font-medium transition-all"
             >
               Back to Home
             </Link>
@@ -207,8 +214,13 @@ export default function DashboardLayout({
         </header>
 
         {/* Page Content */}
-        <main className="p-6 mx-auto max-w-6xl">{children}</main>
+        <main className="p-6 mx-auto max-w-6xl bg-slate-50 dark:bg-slate-950 min-h-screen">
+          {children}
+        </main>
       </div>
+
+      {/* Theme Debug - Remove in production */}
+      <ThemeDebug />
     </div>
   );
 }

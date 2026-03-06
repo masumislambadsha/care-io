@@ -58,10 +58,10 @@ export default function AdminDashboardPage() {
     <>
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-slate-900 mb-2">
+        <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
           Admin Dashboard
         </h1>
-        <p className="text-slate-600">
+        <p className="text-slate-600 dark:text-slate-400">
           Manage your platform and monitor performance
         </p>
       </div>
@@ -123,58 +123,72 @@ export default function AdminDashboardPage() {
 
       {/* Quick Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+        <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
-              <span className="material-icons text-orange-600">schedule</span>
+            <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900/20 rounded-lg flex items-center justify-center">
+              <span className="material-icons text-orange-600 dark:text-orange-400">
+                schedule
+              </span>
             </div>
             <div>
-              <p className="text-sm text-slate-600">Active Bookings</p>
-              <p className="text-2xl font-bold text-slate-900">
+              <p className="text-sm text-slate-600 dark:text-slate-400">
+                Active Bookings
+              </p>
+              <p className="text-2xl font-bold text-slate-900 dark:text-white">
                 {stats.activeBookings}
               </p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+        <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
-              <span className="material-icons text-yellow-600">
+            <div className="w-12 h-12 bg-yellow-100 dark:bg-yellow-900/20 rounded-lg flex items-center justify-center">
+              <span className="material-icons text-yellow-600 dark:text-yellow-400">
                 pending_actions
               </span>
             </div>
             <div>
-              <p className="text-sm text-slate-600">Pending Verifications</p>
-              <p className="text-2xl font-bold text-slate-900">
+              <p className="text-sm text-slate-600 dark:text-slate-400">
+                Pending Verifications
+              </p>
+              <p className="text-2xl font-bold text-slate-900 dark:text-white">
                 {stats.pendingVerifications}
               </p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+        <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-              <span className="material-icons text-blue-600">person</span>
+            <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/20 rounded-lg flex items-center justify-center">
+              <span className="material-icons text-blue-600 dark:text-blue-400">
+                person
+              </span>
             </div>
             <div>
-              <p className="text-sm text-slate-600">Clients</p>
-              <p className="text-2xl font-bold text-slate-900">
+              <p className="text-sm text-slate-600 dark:text-slate-400">
+                Clients
+              </p>
+              <p className="text-2xl font-bold text-slate-900 dark:text-white">
                 {stats.totalClients}
               </p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+        <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
-              <span className="material-icons text-purple-600">star</span>
+            <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/20 rounded-lg flex items-center justify-center">
+              <span className="material-icons text-purple-600 dark:text-purple-400">
+                star
+              </span>
             </div>
             <div>
-              <p className="text-sm text-slate-600">Total Reviews</p>
-              <p className="text-2xl font-bold text-slate-900">
+              <p className="text-sm text-slate-600 dark:text-slate-400">
+                Total Reviews
+              </p>
+              <p className="text-2xl font-bold text-slate-900 dark:text-white">
                 {stats.totalReviews}
               </p>
             </div>
@@ -184,139 +198,147 @@ export default function AdminDashboardPage() {
 
       {/* Quick Actions */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-          <h2 className="text-xl font-bold text-slate-900 mb-6">
+        <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
+          <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6">
             Quick Actions
           </h2>
           <div className="space-y-3">
             <Link
               href="/admin/users"
-              className="flex items-center justify-between p-4 border-2 border-slate-200 rounded-lg hover:border-teal-600 hover:bg-teal-50 transition-all group"
+              className="flex items-center justify-between p-4 border-2 border-slate-200 dark:border-slate-700 rounded-lg hover:border-teal-600 dark:hover:border-teal-500 hover:bg-teal-50 dark:hover:bg-teal-900/20 transition-all group"
             >
               <div className="flex items-center gap-3">
-                <span className="material-icons text-slate-600 group-hover:text-teal-600">
+                <span className="material-icons text-slate-600 dark:text-slate-400 group-hover:text-teal-600 dark:group-hover:text-teal-400">
                   group
                 </span>
-                <span className="font-semibold text-slate-900 group-hover:text-teal-700">
+                <span className="font-semibold text-slate-900 dark:text-white group-hover:text-teal-700 dark:group-hover:text-teal-400">
                   Manage Users
                 </span>
               </div>
-              <span className="material-icons text-slate-400 group-hover:text-teal-600">
+              <span className="material-icons text-slate-400 dark:text-slate-500 group-hover:text-teal-600 dark:group-hover:text-teal-400">
                 arrow_forward
               </span>
             </Link>
 
             <Link
               href="/admin/bookings"
-              className="flex items-center justify-between p-4 border-2 border-slate-200 rounded-lg hover:border-teal-600 hover:bg-teal-50 transition-all group"
+              className="flex items-center justify-between p-4 border-2 border-slate-200 dark:border-slate-700 rounded-lg hover:border-teal-600 dark:hover:border-teal-500 hover:bg-teal-50 dark:hover:bg-teal-900/20 transition-all group"
             >
               <div className="flex items-center gap-3">
-                <span className="material-icons text-slate-600 group-hover:text-teal-600">
+                <span className="material-icons text-slate-600 dark:text-slate-400 group-hover:text-teal-600 dark:group-hover:text-teal-400">
                   event_note
                 </span>
-                <span className="font-semibold text-slate-900 group-hover:text-teal-700">
+                <span className="font-semibold text-slate-900 dark:text-white group-hover:text-teal-700 dark:group-hover:text-teal-400">
                   Manage Bookings
                 </span>
               </div>
-              <span className="material-icons text-slate-400 group-hover:text-teal-600">
+              <span className="material-icons text-slate-400 dark:text-slate-500 group-hover:text-teal-600 dark:group-hover:text-teal-400">
                 arrow_forward
               </span>
             </Link>
 
             <Link
               href="/admin/verifications"
-              className="flex items-center justify-between p-4 border-2 border-slate-200 rounded-lg hover:border-teal-600 hover:bg-teal-50 transition-all group"
+              className="flex items-center justify-between p-4 border-2 border-slate-200 dark:border-slate-700 rounded-lg hover:border-teal-600 dark:hover:border-teal-500 hover:bg-teal-50 dark:hover:bg-teal-900/20 transition-all group"
             >
               <div className="flex items-center gap-3">
-                <span className="material-icons text-slate-600 group-hover:text-teal-600">
+                <span className="material-icons text-slate-600 dark:text-slate-400 group-hover:text-teal-600 dark:group-hover:text-teal-400">
                   verified_user
                 </span>
-                <span className="font-semibold text-slate-900 group-hover:text-teal-700">
+                <span className="font-semibold text-slate-900 dark:text-white group-hover:text-teal-700 dark:group-hover:text-teal-400">
                   Caregiver Verifications
                 </span>
               </div>
-              <span className="material-icons text-slate-400 group-hover:text-teal-600">
+              <span className="material-icons text-slate-400 dark:text-slate-500 group-hover:text-teal-600 dark:group-hover:text-teal-400">
                 arrow_forward
               </span>
             </Link>
 
             <Link
               href="/admin/services"
-              className="flex items-center justify-between p-4 border-2 border-slate-200 rounded-lg hover:border-teal-600 hover:bg-teal-50 transition-all group"
+              className="flex items-center justify-between p-4 border-2 border-slate-200 dark:border-slate-700 rounded-lg hover:border-teal-600 dark:hover:border-teal-500 hover:bg-teal-50 dark:hover:bg-teal-900/20 transition-all group"
             >
               <div className="flex items-center gap-3">
-                <span className="material-icons text-slate-600 group-hover:text-teal-600">
+                <span className="material-icons text-slate-600 dark:text-slate-400 group-hover:text-teal-600 dark:group-hover:text-teal-400">
                   medical_services
                 </span>
-                <span className="font-semibold text-slate-900 group-hover:text-teal-700">
+                <span className="font-semibold text-slate-900 dark:text-white group-hover:text-teal-700 dark:group-hover:text-teal-400">
                   Manage Services
                 </span>
               </div>
-              <span className="material-icons text-slate-400 group-hover:text-teal-600">
+              <span className="material-icons text-slate-400 dark:text-slate-500 group-hover:text-teal-600 dark:group-hover:text-teal-400">
                 arrow_forward
               </span>
             </Link>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-          <h2 className="text-xl font-bold text-slate-900 mb-6">
+        <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
+          <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6">
             Recent Activity
           </h2>
           <div className="space-y-4">
-            <div className="flex items-start gap-3 pb-4 border-b border-slate-100">
-              <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                <span className="material-icons text-green-600 text-sm">
+            <div className="flex items-start gap-3 pb-4 border-b border-slate-100 dark:border-slate-700">
+              <div className="w-10 h-10 bg-green-100 dark:bg-green-900/20 rounded-full flex items-center justify-center flex-shrink-0">
+                <span className="material-icons text-green-600 dark:text-green-400 text-sm">
                   check_circle
                 </span>
               </div>
               <div className="flex-1">
-                <p className="text-sm font-semibold text-slate-900">
+                <p className="text-sm font-semibold text-slate-900 dark:text-white">
                   New booking completed
                 </p>
-                <p className="text-xs text-slate-600">2 minutes ago</p>
+                <p className="text-xs text-slate-600 dark:text-slate-400">
+                  2 minutes ago
+                </p>
               </div>
             </div>
 
-            <div className="flex items-start gap-3 pb-4 border-b border-slate-100">
-              <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                <span className="material-icons text-blue-600 text-sm">
+            <div className="flex items-start gap-3 pb-4 border-b border-slate-100 dark:border-slate-700">
+              <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/20 rounded-full flex items-center justify-center flex-shrink-0">
+                <span className="material-icons text-blue-600 dark:text-blue-400 text-sm">
                   person_add
                 </span>
               </div>
               <div className="flex-1">
-                <p className="text-sm font-semibold text-slate-900">
+                <p className="text-sm font-semibold text-slate-900 dark:text-white">
                   New caregiver registered
                 </p>
-                <p className="text-xs text-slate-600">15 minutes ago</p>
+                <p className="text-xs text-slate-600 dark:text-slate-400">
+                  15 minutes ago
+                </p>
               </div>
             </div>
 
-            <div className="flex items-start gap-3 pb-4 border-b border-slate-100">
-              <div className="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0">
-                <span className="material-icons text-yellow-600 text-sm">
+            <div className="flex items-start gap-3 pb-4 border-b border-slate-100 dark:border-slate-700">
+              <div className="w-10 h-10 bg-yellow-100 dark:bg-yellow-900/20 rounded-full flex items-center justify-center flex-shrink-0">
+                <span className="material-icons text-yellow-600 dark:text-yellow-400 text-sm">
                   pending
                 </span>
               </div>
               <div className="flex-1">
-                <p className="text-sm font-semibold text-slate-900">
+                <p className="text-sm font-semibold text-slate-900 dark:text-white">
                   Verification pending review
                 </p>
-                <p className="text-xs text-slate-600">1 hour ago</p>
+                <p className="text-xs text-slate-600 dark:text-slate-400">
+                  1 hour ago
+                </p>
               </div>
             </div>
 
             <div className="flex items-start gap-3">
-              <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
-                <span className="material-icons text-purple-600 text-sm">
+              <div className="w-10 h-10 bg-purple-100 dark:bg-purple-900/20 rounded-full flex items-center justify-center flex-shrink-0">
+                <span className="material-icons text-purple-600 dark:text-purple-400 text-sm">
                   star
                 </span>
               </div>
               <div className="flex-1">
-                <p className="text-sm font-semibold text-slate-900">
+                <p className="text-sm font-semibold text-slate-900 dark:text-white">
                   New 5-star review received
                 </p>
-                <p className="text-xs text-slate-600">3 hours ago</p>
+                <p className="text-xs text-slate-600 dark:text-slate-400">
+                  3 hours ago
+                </p>
               </div>
             </div>
           </div>
