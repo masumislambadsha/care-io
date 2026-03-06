@@ -15,7 +15,7 @@ export async function GET() {
       .from("family_members")
       .select("*")
       .eq("user_id", session.user.id)
-      .order("created_at", { ascending: false });
+      .order("name", { ascending: true });
 
     if (error) {
       console.error("Family members fetch error:", error);

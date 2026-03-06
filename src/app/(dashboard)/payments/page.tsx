@@ -48,7 +48,7 @@ export default function PaymentsPage() {
           payment_method: "Stripe",
           payment_status: booking.payment_status,
           transaction_id: booking.booking_number,
-          created_at: booking.created_at,
+          created_at: booking.created_at || booking.start_date,
           service_name: booking.service_name,
           caregiver_name: booking.caregiver_name,
         }));
@@ -229,14 +229,16 @@ export default function PaymentsPage() {
                       className="hover:bg-slate-50 transition-colors"
                     >
                       <td className="px-6 py-4 text-sm text-slate-900">
-                        {new Date(payment.created_at).toLocaleDateString(
-                          "en-US",
-                          {
-                            year: "numeric",
-                            month: "short",
-                            day: "numeric",
-                          },
-                        )}
+                        {payment.created_at
+                          ? new Date(payment.created_at).toLocaleDateString(
+                              "en-US",
+                              {
+                                year: "numeric",
+                                month: "short",
+                                day: "numeric",
+                              },
+                            )
+                          : "N/A"}
                       </td>
                       <td className="px-6 py-4 text-sm font-semibold text-slate-900">
                         {payment.service_name}
