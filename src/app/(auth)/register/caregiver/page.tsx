@@ -266,7 +266,7 @@ export default function RegisterCaregiverPage() {
                       onChange={(e) =>
                         setFormData({ ...formData, name: e.target.value })
                       }
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none text-slate-900"
+                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none text-slate-900 [color-scheme:light]"
                       required
                     />
                   </div>
@@ -281,7 +281,7 @@ export default function RegisterCaregiverPage() {
                       onChange={(e) =>
                         setFormData({ ...formData, email: e.target.value })
                       }
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none text-slate-900"
+                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none text-slate-900 [color-scheme:light]"
                       required
                     />
                   </div>
@@ -296,7 +296,7 @@ export default function RegisterCaregiverPage() {
                       onChange={(e) =>
                         setFormData({ ...formData, phone: e.target.value })
                       }
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none text-slate-900"
+                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none text-slate-900 [color-scheme:light]"
                       required
                     />
                   </div>
@@ -311,7 +311,7 @@ export default function RegisterCaregiverPage() {
                       onChange={(e) =>
                         setFormData({ ...formData, nid_number: e.target.value })
                       }
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none text-slate-900"
+                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none text-slate-900 [color-scheme:light]"
                       required
                     />
                   </div>
@@ -360,7 +360,7 @@ export default function RegisterCaregiverPage() {
                             : 0,
                         })
                       }
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none text-slate-900"
+                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none text-slate-900 [color-scheme:light]"
                     />
                   </div>
                   <div>
@@ -379,7 +379,7 @@ export default function RegisterCaregiverPage() {
                             : 15,
                         })
                       }
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none text-slate-900"
+                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none text-slate-900 [color-scheme:light]"
                     />
                   </div>
                   <div>
@@ -607,3 +607,4 @@ export default function RegisterCaregiverPage() {
     </div>
   );
 }
+

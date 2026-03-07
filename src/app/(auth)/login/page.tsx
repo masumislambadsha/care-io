@@ -118,7 +118,7 @@ export default function LoginPage() {
                 <input
                   {...register("email")}
                   type="email"
-                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
+                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all text-slate-900"
                   placeholder="you@example.com"
                 />
                 {errors.email && (
@@ -136,7 +136,7 @@ export default function LoginPage() {
                   <input
                     {...register("password")}
                     type={showPassword ? "text" : "password"}
-                    className="w-full px-4 py-3 pr-12 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
+                    className="w-full px-4 py-3 pr-12 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all text-slate-900"
                     placeholder="••••••••"
                   />
                   <button
