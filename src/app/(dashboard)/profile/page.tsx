@@ -140,9 +140,13 @@ export default function ProfilePage() {
   return (
     <>
       {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-slate-900 mb-2">Profile</h1>
-        <p className="text-slate-600">Manage your account information</p>
+      <div className="mb-4 sm:mb-8">
+        <h1 className="text-lg sm:text-3xl font-bold text-slate-900 mb-1 sm:mb-2">
+          Profile
+        </h1>
+        <p className="text-xs sm:text-sm text-slate-600">
+          Manage your account information
+        </p>
       </div>
 
       {/* Profile Card */}
@@ -151,11 +155,11 @@ export default function ProfilePage() {
         <div className="h-32 bg-linear-to-r from-teal-500 to-blue-500"></div>
 
         {/* Profile Info */}
-        <div className="px-8 pb-8">
-          <div className="flex items-end justify-between -mt-16 mb-6">
-            <div className="flex items-end gap-4">
+        <div className="px-4 sm:px-8 pb-4 sm:pb-8">
+          <div className="flex items-end justify-between flex-col sm:flex-row -mt-10 sm:-mt-16 mb-4 sm:mb-6">
+            <div className="flex items-end gap-2 sm:gap-4">
               <div className="relative group">
-                <div className="w-32 h-32 bg-white rounded-full border-4 border-white shadow-lg overflow-hidden">
+                <div className="w-20 h-20 sm:w-32 sm:h-32 bg-white rounded-full border-4 border-white shadow-lg overflow-hidden">
                   {formData.image ? (
                     <img
                       src={formData.image}
@@ -163,7 +167,7 @@ export default function ProfilePage() {
                       className="w-full h-full object-cover"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center text-4xl font-bold text-teal-600 bg-teal-50">
+                    <div className="w-full h-full flex items-center justify-center text-2xl sm:text-4xl font-bold text-teal-600 bg-teal-50">
                       {formData.name?.charAt(0).toUpperCase()}
                     </div>
                   )}
@@ -179,13 +183,13 @@ export default function ProfilePage() {
                     />
                     <div className="text-center">
                       {uploadingImage ? (
-                        <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin mx-auto"></div>
+                        <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin mx-auto"></div>
                       ) : (
                         <>
-                          <span className="material-icons text-white text-3xl">
+                          <span className="material-icons text-white text-xl sm:text-3xl">
                             camera_alt
                           </span>
-                          <p className="text-white text-xs mt-1">
+                          <p className="text-white text-xs mt-1 hidden sm:block">
                             Change Photo
                           </p>
                         </>
@@ -194,19 +198,21 @@ export default function ProfilePage() {
                   </label>
                 )}
               </div>
-              <div className="mb-4">
-                <h2 className="text-2xl font-bold text-slate-900">
+              <div className="mb-2 sm:mb-4">
+                <h2 className="text-base sm:text-2xl font-bold text-slate-900">
                   {formData.name}
                 </h2>
-                <p className="text-slate-600">{formData.email}</p>
-                <span className="inline-block mt-2 px-3 py-1 bg-teal-100 text-teal-700 text-sm font-semibold rounded-full">
+                <p className="text-xs sm:text-sm text-slate-600 truncate max-w-[140px] sm:max-w-none">
+                  {formData.email}
+                </p>
+                <span className="inline-block mt-1 px-2 py-0.5 bg-teal-100 text-teal-700 text-xs font-semibold rounded-full">
                   {session?.user?.role}
                 </span>
               </div>
             </div>
             <button
               onClick={() => setIsEditing(!isEditing)}
-              className="px-6 py-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-lg transition-all"
+              className="px-3 sm:px-6 py-1.5 sm:py-2 text-xs sm:text-sm bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-lg transition-all"
             >
               {isEditing ? "Cancel" : "Edit Profile"}
             </button>

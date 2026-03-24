@@ -61,7 +61,7 @@ export function PromoCodeInput({
       <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300">
         Promo Code (Optional)
       </label>
-      <div className="flex gap-2">
+      <div className="flex flex-col sm:flex-row gap-2">
         <input
           type="text"
           value={code}
@@ -92,7 +92,7 @@ export function PromoCodeInput({
       {appliedCode && (
         <div className="flex items-center gap-2 text-sm text-green-600 dark:text-green-400">
           <span className="material-icons text-base">check_circle</span>
-          <span>Promo code "{appliedCode}" applied successfully</span>
+          <span>Promo code &quot{appliedCode}&ldquo applied successfully</span>
         </div>
       )}
     </div>

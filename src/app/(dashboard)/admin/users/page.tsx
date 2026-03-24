@@ -164,47 +164,61 @@ export default function AdminUsersPage() {
   return (
     <>
       {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-slate-900 mb-2">
+      <div className="mb-4 sm:mb-8">
+        <h1 className="text-lg sm:text-3xl font-bold text-slate-900 mb-2">
           User Management
         </h1>
-        <p className="text-slate-600">Manage all platform users</p>
+        <p className="text-xs sm:text-sm text-slate-600">
+          Manage all platform users
+        </p>
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
-          <p className="text-sm text-slate-600 mb-1">Total Users</p>
-          <p className="text-2xl font-bold text-slate-900">{stats.total}</p>
+      <div className="grid grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-4 mb-4 sm:mb-8">
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-3 sm:p-4">
+          <p className="text-xs sm:text-sm text-slate-600 mb-1">Total Users</p>
+          <p className="text-lg sm:text-2xl font-bold text-slate-900">
+            {stats.total}
+          </p>
         </div>
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
-          <p className="text-sm text-slate-600 mb-1">Clients</p>
-          <p className="text-2xl font-bold text-green-600">{stats.clients}</p>
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-3 sm:p-4">
+          <p className="text-xs sm:text-sm text-slate-600 mb-1">Clients</p>
+          <p className="text-lg sm:text-2xl font-bold text-green-600">
+            {stats.clients}
+          </p>
         </div>
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
-          <p className="text-sm text-slate-600 mb-1">Caregivers</p>
-          <p className="text-2xl font-bold text-blue-600">{stats.caregivers}</p>
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-3 sm:p-4">
+          <p className="text-xs sm:text-sm text-slate-600 mb-1">Caregivers</p>
+          <p className="text-lg sm:text-2xl font-bold text-blue-600">
+            {stats.caregivers}
+          </p>
         </div>
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
-          <p className="text-sm text-slate-600 mb-1">Admins</p>
-          <p className="text-2xl font-bold text-purple-600">{stats.admins}</p>
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-3 sm:p-4">
+          <p className="text-xs sm:text-sm text-slate-600 mb-1">Admins</p>
+          <p className="text-lg sm:text-2xl font-bold text-purple-600">
+            {stats.admins}
+          </p>
         </div>
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
-          <p className="text-sm text-slate-600 mb-1">Active</p>
-          <p className="text-2xl font-bold text-green-600">{stats.active}</p>
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-3 sm:p-4">
+          <p className="text-xs sm:text-sm text-slate-600 mb-1">Active</p>
+          <p className="text-lg sm:text-2xl font-bold text-green-600">
+            {stats.active}
+          </p>
         </div>
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
-          <p className="text-sm text-slate-600 mb-1">Suspended</p>
-          <p className="text-2xl font-bold text-slate-400">{stats.suspended}</p>
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-3 sm:p-4">
+          <p className="text-xs sm:text-sm text-slate-600 mb-1">Suspended</p>
+          <p className="text-lg sm:text-2xl font-bold text-slate-400">
+            {stats.suspended}
+          </p>
         </div>
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-3 sm:p-6 mb-4 sm:mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
           {/* Search */}
           <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-2">
+            <label className="block text-xs sm:text-sm font-semibold text-slate-700 mb-1 sm:mb-2">
               Search
             </label>
             <input
@@ -212,19 +226,19 @@ export default function AdminUsersPage() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by name or email..."
-              className="w-full px-4 py-2 border-2 border-slate-200 rounded-lg focus:border-teal-600 focus:outline-none transition-colors text-slate-900"
+              className="w-full px-3 sm:px-4 py-2 border-2 border-slate-200 rounded-lg focus:border-teal-600 focus:outline-none transition-colors text-xs sm:text-sm text-slate-900"
             />
           </div>
 
           {/* Role Filter */}
           <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-2">
+            <label className="block text-xs sm:text-sm font-semibold text-slate-700 mb-1 sm:mb-2">
               Role
             </label>
             <select
               value={roleFilter}
               onChange={(e) => setRoleFilter(e.target.value)}
-              className="w-full px-4 py-2 border-2 border-slate-200 rounded-lg focus:border-teal-600 focus:outline-none transition-colors text-slate-900"
+              className="w-full px-3 sm:px-4 py-2 border-2 border-slate-200 rounded-lg focus:border-teal-600 focus:outline-none transition-colors text-xs sm:text-sm text-slate-900"
             >
               <option value="all">All Roles</option>
               <option value="CLIENT">Client</option>
@@ -235,13 +249,13 @@ export default function AdminUsersPage() {
 
           {/* Status Filter */}
           <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-2">
+            <label className="block text-xs sm:text-sm font-semibold text-slate-700 mb-1 sm:mb-2">
               Status
             </label>
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="w-full px-4 py-2 border-2 border-slate-200 rounded-lg focus:border-teal-600 focus:outline-none transition-colors text-slate-900"
+              className="w-full px-3 sm:px-4 py-2 border-2 border-slate-200 rounded-lg focus:border-teal-600 focus:outline-none transition-colors text-xs sm:text-sm text-slate-900"
             >
               <option value="all">All Status</option>
               <option value="ACTIVE">Active</option>
@@ -251,25 +265,109 @@ export default function AdminUsersPage() {
         </div>
       </div>
 
-      {/* Users Table */}
-      <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+      {/* Users — mobile cards */}
+      <div className="sm:hidden space-y-3">
+        {filteredUsers.length === 0 ? (
+          <div className="bg-white rounded-xl border border-slate-200 p-8 text-center">
+            <span className="material-icons text-slate-400 text-5xl mb-3 block">
+              person_off
+            </span>
+            <p className="text-slate-600 font-medium">No users found</p>
+          </div>
+        ) : (
+          filteredUsers.map((user) => (
+            <div
+              key={user.id}
+              className="bg-white rounded-xl border border-slate-200 p-3"
+            >
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center gap-2 min-w-0">
+                  <div className="w-9 h-9 bg-teal-100 rounded-full flex items-center justify-center shrink-0">
+                    <span className="text-teal-600 font-bold text-sm">
+                      {user.name.charAt(0).toUpperCase()}
+                    </span>
+                  </div>
+                  <div className="min-w-0">
+                    <p className="font-semibold text-sm text-slate-900 truncate">
+                      {user.name}
+                    </p>
+                    <p className="text-xs text-slate-500 truncate">
+                      {user.email}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-1 shrink-0 ml-2">
+                  <button
+                    onClick={() => {
+                      setSelectedUser(user);
+                      setShowDetailsModal(true);
+                    }}
+                    className="p-1.5 hover:bg-slate-100 rounded-lg transition-colors"
+                  >
+                    <span className="material-icons text-slate-600 text-lg">
+                      visibility
+                    </span>
+                  </button>
+                  {user.status === "ACTIVE" ? (
+                    <button
+                      onClick={() => updateUserStatus(user.id, "SUSPENDED")}
+                      className="p-1.5 hover:bg-red-50 rounded-lg transition-colors"
+                    >
+                      <span className="material-icons text-red-600 text-lg">
+                        block
+                      </span>
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => updateUserStatus(user.id, "ACTIVE")}
+                      className="p-1.5 hover:bg-green-50 rounded-lg transition-colors"
+                    >
+                      <span className="material-icons text-green-600 text-lg">
+                        check_circle
+                      </span>
+                    </button>
+                  )}
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <span
+                  className={`px-2 py-0.5 rounded-full text-xs font-semibold ${getRoleBadgeColor(user.role)}`}
+                >
+                  {user.role}
+                </span>
+                <span
+                  className={`px-2 py-0.5 rounded-full text-xs font-semibold ${getStatusBadgeColor(user.status)}`}
+                >
+                  {user.status}
+                </span>
+                <span className="text-xs text-slate-400 ml-auto">
+                  {new Date(user.created_at).toLocaleDateString()}
+                </span>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+
+      {/* Users Table — sm and up */}
+      <div className="hidden sm:block bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead className="bg-slate-50 border-b border-slate-200">
               <tr>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-slate-700">
+                <th className="px-6 py-4 text-left text-xs font-semibold text-slate-700">
                   User
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-slate-700">
+                <th className="px-6 py-4 text-left text-xs font-semibold text-slate-700">
                   Role
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-slate-700">
+                <th className="px-6 py-4 text-left text-xs font-semibold text-slate-700">
                   Status
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-slate-700">
+                <th className="px-6 py-4 text-left text-xs font-semibold text-slate-700">
                   Joined
                 </th>
-                <th className="px-6 py-4 text-right text-sm font-semibold text-slate-700">
+                <th className="px-6 py-4 text-right text-xs font-semibold text-slate-700">
                   Actions
                 </th>
               </tr>
@@ -297,32 +395,28 @@ export default function AdminUsersPage() {
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 bg-teal-100 rounded-full flex items-center justify-center">
-                          <span className="text-teal-600 font-bold">
+                          <span className="text-teal-600 font-bold text-sm">
                             {user.name.charAt(0).toUpperCase()}
                           </span>
                         </div>
                         <div>
-                          <p className="font-semibold text-slate-900">
+                          <p className="font-semibold text-sm text-slate-900">
                             {user.name}
                           </p>
-                          <p className="text-sm text-slate-600">{user.email}</p>
+                          <p className="text-xs text-slate-600">{user.email}</p>
                         </div>
                       </div>
                     </td>
                     <td className="px-6 py-4">
                       <span
-                        className={`px-3 py-1 rounded-full text-xs font-semibold ${getRoleBadgeColor(
-                          user.role,
-                        )}`}
+                        className={`px-3 py-1 rounded-full text-xs font-semibold ${getRoleBadgeColor(user.role)}`}
                       >
                         {user.role}
                       </span>
                     </td>
                     <td className="px-6 py-4">
                       <span
-                        className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusBadgeColor(
-                          user.status,
-                        )}`}
+                        className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusBadgeColor(user.status)}`}
                       >
                         {user.status}
                       </span>
@@ -379,84 +473,82 @@ export default function AdminUsersPage() {
 
       {/* User Details Modal */}
       {showDetailsModal && selectedUser && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="sticky top-0 bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between">
-              <h2 className="text-2xl font-bold text-slate-900">
+        <div className="fixed inset-0 bg-black/50 flex items-end sm:items-center justify-center z-50 p-0 sm:p-4">
+          <div className="bg-white rounded-t-2xl sm:rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="sticky top-0 bg-white border-b border-slate-200 px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
+              <h2 className="text-lg sm:text-2xl font-bold text-slate-900">
                 User Details
               </h2>
               <button
                 onClick={() => setShowDetailsModal(false)}
-                className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 transition-all"
+                className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-slate-100 transition-all"
               >
                 <span className="material-icons text-slate-600">close</span>
               </button>
             </div>
 
-            <div className="p-6 space-y-6">
-              {/* User Info */}
-              <div className="flex items-center gap-4">
-                <div className="w-20 h-20 bg-teal-100 rounded-full flex items-center justify-center">
-                  <span className="text-teal-600 font-bold text-3xl">
+            <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
+              <div className="flex items-center gap-3 sm:gap-4">
+                <div className="w-14 h-14 sm:w-20 sm:h-20 bg-teal-100 rounded-full flex items-center justify-center shrink-0">
+                  <span className="text-teal-600 font-bold text-2xl sm:text-3xl">
                     {selectedUser.name.charAt(0).toUpperCase()}
                   </span>
                 </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-slate-900">
+                <div className="min-w-0">
+                  <h3 className="text-base sm:text-2xl font-bold text-slate-900 truncate">
                     {selectedUser.name}
                   </h3>
-                  <p className="text-slate-600">{selectedUser.email}</p>
+                  <p className="text-xs sm:text-sm text-slate-600 truncate">
+                    {selectedUser.email}
+                  </p>
                 </div>
               </div>
 
-              {/* Details Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="bg-slate-50 rounded-lg p-4">
-                  <p className="text-sm text-slate-600 mb-1">Role</p>
+              <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                <div className="bg-slate-50 rounded-lg p-3 sm:p-4">
+                  <p className="text-xs sm:text-sm text-slate-600 mb-1">Role</p>
                   <span
-                    className={`px-3 py-1 rounded-full text-xs font-semibold ${getRoleBadgeColor(
-                      selectedUser.role,
-                    )}`}
+                    className={`px-2 py-0.5 rounded-full text-xs font-semibold ${getRoleBadgeColor(selectedUser.role)}`}
                   >
                     {selectedUser.role}
                   </span>
                 </div>
-
-                <div className="bg-slate-50 rounded-lg p-4">
-                  <p className="text-sm text-slate-600 mb-1">Status</p>
+                <div className="bg-slate-50 rounded-lg p-3 sm:p-4">
+                  <p className="text-xs sm:text-sm text-slate-600 mb-1">
+                    Status
+                  </p>
                   <span
-                    className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusBadgeColor(
-                      selectedUser.status,
-                    )}`}
+                    className={`px-2 py-0.5 rounded-full text-xs font-semibold ${getStatusBadgeColor(selectedUser.status)}`}
                   >
                     {selectedUser.status}
                   </span>
                 </div>
-
-                <div className="bg-slate-50 rounded-lg p-4">
-                  <p className="text-sm text-slate-600 mb-1">Phone</p>
-                  <p className="font-semibold text-slate-900">
+                <div className="bg-slate-50 rounded-lg p-3 sm:p-4">
+                  <p className="text-xs sm:text-sm text-slate-600 mb-1">
+                    Phone
+                  </p>
+                  <p className="text-sm font-semibold text-slate-900">
                     {selectedUser.phone || "Not provided"}
                   </p>
                 </div>
-
-                <div className="bg-slate-50 rounded-lg p-4">
-                  <p className="text-sm text-slate-600 mb-1">Joined</p>
-                  <p className="font-semibold text-slate-900">
+                <div className="bg-slate-50 rounded-lg p-3 sm:p-4">
+                  <p className="text-xs sm:text-sm text-slate-600 mb-1">
+                    Joined
+                  </p>
+                  <p className="text-sm font-semibold text-slate-900">
                     {new Date(selectedUser.created_at).toLocaleDateString()}
                   </p>
                 </div>
               </div>
 
-              {/* Actions */}
-              <div className="flex gap-3 pt-4 border-t border-slate-200">
+              <div className="flex gap-2 sm:gap-3 pt-3 sm:pt-4 border-t border-slate-200">
                 {selectedUser.status === "ACTIVE" ? (
                   <button
                     onClick={() => {
                       updateUserStatus(selectedUser.id, "SUSPENDED");
                       setShowDetailsModal(false);
                     }}
-                    className="flex-1 px-4 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-all"
+                    className="flex-1 px-3 sm:px-4 py-2.5 sm:py-3 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold rounded-lg transition-all"
                   >
                     Suspend User
                   </button>
@@ -466,14 +558,14 @@ export default function AdminUsersPage() {
                       updateUserStatus(selectedUser.id, "ACTIVE");
                       setShowDetailsModal(false);
                     }}
-                    className="flex-1 px-4 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-all"
+                    className="flex-1 px-3 sm:px-4 py-2.5 sm:py-3 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold rounded-lg transition-all"
                   >
                     Activate User
                   </button>
                 )}
                 <button
                   onClick={() => deleteUser(selectedUser.id)}
-                  className="flex-1 px-4 py-3 border-2 border-red-600 text-red-600 font-semibold rounded-lg hover:bg-red-50 transition-all"
+                  className="flex-1 px-3 sm:px-4 py-2.5 sm:py-3 border-2 border-red-600 text-red-600 text-sm font-semibold rounded-lg hover:bg-red-50 transition-all"
                 >
                   Delete User
                 </button>

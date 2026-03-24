@@ -122,83 +122,91 @@ export default function AssignedJobsPage() {
   return (
     <>
       {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-slate-900 mb-2">
+      <div className="mb-4 sm:mb-8">
+        <h1 className="text-lg sm:text-3xl font-bold text-slate-900 mb-2">
           Assigned Jobs
         </h1>
-        <p className="text-slate-600">Manage jobs assigned to you by clients</p>
+        <p className="text-xs sm:text-sm text-slate-600">
+          Manage jobs assigned to you by clients
+        </p>
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-              <span className="material-icons text-blue-600">pending</span>
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-6 mb-4 sm:mb-8">
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-3 sm:p-6">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="w-8 h-8 sm:w-12 sm:h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+              <span className="material-icons text-base sm:text-2xl text-blue-600">
+                pending
+              </span>
             </div>
             <div>
-              <p className="text-sm text-slate-600">Pending</p>
-              <p className="text-2xl font-bold text-slate-900">
+              <p className="text-xs sm:text-sm text-slate-600">Pending</p>
+              <p className="text-lg sm:text-2xl font-bold text-slate-900">
                 {jobs.filter((j) => j.status === "CONFIRMED").length}
               </p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
-              <span className="material-icons text-purple-600">
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-3 sm:p-6">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="w-8 h-8 sm:w-12 sm:h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+              <span className="material-icons text-base sm:text-2xl text-purple-600">
                 play_circle
               </span>
             </div>
             <div>
-              <p className="text-sm text-slate-600">Ongoing</p>
-              <p className="text-2xl font-bold text-slate-900">
+              <p className="text-xs sm:text-sm text-slate-600">Ongoing</p>
+              <p className="text-lg sm:text-2xl font-bold text-slate-900">
                 {jobs.filter((j) => j.status === "ONGOING").length}
               </p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-              <span className="material-icons text-green-600">
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-3 sm:p-6">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="w-8 h-8 sm:w-12 sm:h-12 bg-green-100 rounded-lg flex items-center justify-center">
+              <span className="material-icons text-base sm:text-2xl text-green-600">
                 check_circle
               </span>
             </div>
             <div>
-              <p className="text-sm text-slate-600">Completed</p>
-              <p className="text-2xl font-bold text-slate-900">
+              <p className="text-xs sm:text-sm text-slate-600">Completed</p>
+              <p className="text-lg sm:text-2xl font-bold text-slate-900">
                 {jobs.filter((j) => j.status === "COMPLETED").length}
               </p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center">
-              <span className="material-icons text-teal-600">work</span>
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-3 sm:p-6">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="w-8 h-8 sm:w-12 sm:h-12 bg-teal-100 rounded-lg flex items-center justify-center">
+              <span className="material-icons text-base sm:text-2xl text-teal-600">
+                work
+              </span>
             </div>
             <div>
-              <p className="text-sm text-slate-600">Total Jobs</p>
-              <p className="text-2xl font-bold text-slate-900">{jobs.length}</p>
+              <p className="text-xs sm:text-sm text-slate-600">Total Jobs</p>
+              <p className="text-lg sm:text-2xl font-bold text-slate-900">
+                {jobs.length}
+              </p>
             </div>
           </div>
         </div>
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4 mb-6">
-        <div className="flex flex-wrap gap-3">
+      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-3 sm:p-4 mb-4 sm:mb-6">
+        <div className="flex flex-wrap gap-2 sm:gap-3">
           {["all", "confirmed", "ongoing", "completed", "cancelled"].map(
             (filterOption) => (
               <button
                 key={filterOption}
                 onClick={() => setFilter(filterOption)}
-                className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all ${
                   filter === filterOption
                     ? "bg-teal-600 text-white"
                     : "bg-slate-100 text-slate-700 hover:bg-slate-200"
@@ -237,28 +245,28 @@ export default function AssignedJobsPage() {
             .map((job) => (
               <div
                 key={job.id}
-                className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-md transition-all"
+                className="bg-white rounded-xl shadow-sm border border-slate-200 p-3 sm:p-6 hover:shadow-md transition-all"
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <div className="flex items-center gap-3 mb-2">
-                      <h3 className="text-lg font-bold text-slate-900">
+                <div className="flex items-start justify-between mb-3 sm:mb-4 gap-2">
+                  <div className="min-w-0">
+                    <div className="flex flex-wrap items-center gap-2 mb-1">
+                      <h3 className="text-sm sm:text-lg font-bold text-slate-900">
                         {job.service_name}
                       </h3>
                       <span
-                        className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusColor(
+                        className={`px-2 py-0.5 rounded-full text-xs font-semibold shrink-0 ${getStatusColor(
                           job.status,
                         )}`}
                       >
                         {job.status}
                       </span>
                     </div>
-                    <p className="text-sm text-slate-600">
+                    <p className="text-xs sm:text-sm text-slate-600 truncate">
                       Job #{job.booking_number}
                     </p>
                   </div>
-                  <div className="text-right">
-                    <p className="text-2xl font-bold text-teal-600">
+                  <div className="text-right shrink-0">
+                    <p className="text-base sm:text-2xl font-bold text-teal-600">
                       $
                       {(parseFloat(job.total_amount.toString()) * 0.85).toFixed(
                         2,
@@ -268,7 +276,7 @@ export default function AssignedJobsPage() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-2 sm:gap-4 mb-3 sm:mb-4">
                   <div className="flex items-center gap-2">
                     <span className="material-icons text-slate-400 text-sm">
                       person
@@ -306,13 +314,13 @@ export default function AssignedJobsPage() {
                   </div>
                 </div>
 
-                <div className="flex gap-3">
+                <div className="flex gap-2 sm:gap-3">
                   <button
                     onClick={() => {
                       setSelectedJob(job);
                       setShowDetailsModal(true);
                     }}
-                    className="flex-1 px-4 py-2 border-2 border-slate-200 text-slate-700 font-semibold rounded-lg hover:border-teal-600 hover:text-teal-600 transition-all"
+                    className="flex-1 px-3 sm:px-4 py-1.5 sm:py-2 border-2 border-slate-200 text-slate-700 text-xs sm:text-sm font-semibold rounded-lg hover:border-teal-600 hover:text-teal-600 transition-all"
                   >
                     View Details
                   </button>
@@ -321,7 +329,7 @@ export default function AssignedJobsPage() {
                     <button
                       onClick={() => handleUpdateStatus(job.id, "ONGOING")}
                       disabled={isSubmitting}
-                      className="flex-1 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all disabled:opacity-50"
+                      className="flex-1 px-3 sm:px-4 py-1.5 sm:py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold rounded-lg transition-all disabled:opacity-50"
                     >
                       Start Service
                     </button>
@@ -331,7 +339,7 @@ export default function AssignedJobsPage() {
                     <button
                       onClick={() => handleUpdateStatus(job.id, "COMPLETED")}
                       disabled={isSubmitting}
-                      className="flex-1 px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-all disabled:opacity-50"
+                      className="flex-1 px-3 sm:px-4 py-1.5 sm:py-2 bg-green-600 hover:bg-green-700 text-white text-xs sm:text-sm font-semibold rounded-lg transition-all disabled:opacity-50"
                     >
                       Complete Service
                     </button>

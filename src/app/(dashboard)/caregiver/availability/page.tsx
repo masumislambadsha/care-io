@@ -142,27 +142,27 @@ export default function CaregiverAvailabilityPage() {
   return (
     <>
       {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-slate-900 mb-2">
+      <div className="mb-4 sm:mb-8">
+        <h1 className="text-lg sm:text-3xl font-bold text-slate-900 mb-2">
           Manage Availability
         </h1>
-        <p className="text-slate-600">
+        <p className="text-xs sm:text-sm text-slate-600">
           Set your available hours for each day of the week
         </p>
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
-        <div className="flex flex-wrap items-center gap-4">
+      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-3 sm:p-6 mb-4 sm:mb-6">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-4">
           <button
             onClick={() => toggleAllDays(true)}
-            className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-all"
+            className="px-3 sm:px-4 py-1.5 sm:py-2 bg-green-600 hover:bg-green-700 text-white text-xs sm:text-sm font-semibold rounded-lg transition-all"
           >
             Mark All Available
           </button>
           <button
             onClick={() => toggleAllDays(false)}
-            className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-all"
+            className="px-3 sm:px-4 py-1.5 sm:py-2 bg-red-600 hover:bg-red-700 text-white text-xs sm:text-sm font-semibold rounded-lg transition-all"
           >
             Mark All Unavailable
           </button>
@@ -188,20 +188,20 @@ export default function CaregiverAvailabilityPage() {
             key={daySchedule.day}
             className="bg-white rounded-xl shadow-sm border border-slate-200 p-6"
           >
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-bold text-slate-900">
+            <div className="flex gap-3 items-center justify-between mb-4">
+              <h3 className="text-sm  sm:text-lg font-bold text-slate-900">
                 {daySchedule.day}
               </h3>
               <div className="flex gap-2">
                 <button
                   onClick={() => toggleDay(dayIndex, true)}
-                  className="px-3 py-1 text-sm bg-green-100 hover:bg-green-200 text-green-700 font-semibold rounded-lg transition-all"
+                  className="px-1 sm:px-3 py-1 sm:text-sm bg-green-100 hover:bg-green-200 text-green-700 font-semibold rounded-lg transition-all text-[10px]"
                 >
                   All Available
                 </button>
                 <button
                   onClick={() => toggleDay(dayIndex, false)}
-                  className="px-3 py-1 text-sm bg-red-100 hover:bg-red-200 text-red-700 font-semibold rounded-lg transition-all"
+                  className="px-1 sm:px-3 py-1 text-[10px] sm:text-sm bg-red-100 hover:bg-red-200 text-red-700 font-semibold rounded-lg transition-all"
                 >
                   All Unavailable
                 </button>

@@ -92,19 +92,21 @@ export default function AdminAnalyticsPage() {
   return (
     <>
       {/* Header */}
-      <div className="mb-8 flex items-center justify-between">
+      <div className="mb-4 sm:mb-8 flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-slate-900 mb-2">
+          <h1 className="text-lg sm:text-3xl font-bold text-slate-900 mb-2">
             Analytics Dashboard
           </h1>
-          <p className="text-slate-600">Platform performance and insights</p>
+          <p className="text-xs sm:text-sm text-slate-600">
+            Platform performance and insights
+          </p>
         </div>
 
         {/* Date Range Filter */}
         <select
           value={dateRange}
           onChange={(e) => setDateRange(e.target.value)}
-          className="px-4 py-2 border-2 border-slate-200 rounded-lg focus:border-teal-600 focus:outline-none transition-colors text-slate-900"
+          className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm border-2 border-slate-200 rounded-lg focus:border-teal-600 focus:outline-none transition-colors text-slate-900"
         >
           <option value="7">Last 7 days</option>
           <option value="30">Last 30 days</option>
@@ -114,12 +116,14 @@ export default function AdminAnalyticsPage() {
       </div>
 
       {/* Revenue Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-        <div className="bg-gradient-to-br from-teal-500 to-teal-600 rounded-xl shadow-lg p-6 text-white">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-6 mb-4 sm:mb-8">
+        <div className="bg-gradient-to-br from-teal-500 to-teal-600 rounded-xl shadow-lg p-3 sm:p-6 text-white">
           <div className="flex items-center justify-between mb-2">
-            <span className="material-icons text-3xl">attach_money</span>
+            <span className="material-icons text-xl sm:text-3xl">
+              attach_money
+            </span>
             <span
-              className={`text-sm font-semibold px-2 py-1 rounded-full ${
+              className={`text-xs sm:text-sm font-semibold px-2 py-1 rounded-full ${
                 analytics.revenue.growth >= 0 ? "bg-green-500" : "bg-red-500"
               }`}
             >
@@ -127,20 +131,24 @@ export default function AdminAnalyticsPage() {
               {analytics.revenue.growth.toFixed(1)}%
             </span>
           </div>
-          <p className="text-sm opacity-90 mb-1">Total Revenue</p>
-          <p className="text-3xl font-bold">
+          <p className="text-xs sm:text-sm opacity-90 mb-1">Total Revenue</p>
+          <p className="text-xl sm:text-3xl font-bold">
             ${analytics.revenue.total.toFixed(0)}
           </p>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-          <div className="flex items-center gap-3 mb-2">
-            <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-              <span className="material-icons text-blue-600">event_note</span>
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-3 sm:p-6">
+          <div className="flex items-center gap-2 sm:gap-3 mb-2">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+              <span className="material-icons text-base sm:text-xl text-blue-600">
+                event_note
+              </span>
             </div>
           </div>
-          <p className="text-sm text-slate-600 mb-1">Total Bookings</p>
-          <p className="text-3xl font-bold text-slate-900">
+          <p className="text-xs sm:text-sm text-slate-600 mb-1">
+            Total Bookings
+          </p>
+          <p className="text-xl sm:text-3xl font-bold text-slate-900">
             {analytics.bookings.total}
           </p>
           <p className="text-xs text-slate-500 mt-1">
@@ -148,14 +156,16 @@ export default function AdminAnalyticsPage() {
           </p>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-          <div className="flex items-center gap-3 mb-2">
-            <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-              <span className="material-icons text-green-600">trending_up</span>
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-3 sm:p-6">
+          <div className="flex items-center gap-2 sm:gap-3 mb-2">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-green-100 rounded-lg flex items-center justify-center">
+              <span className="material-icons text-base sm:text-xl text-green-600">
+                trending_up
+              </span>
             </div>
           </div>
-          <p className="text-sm text-slate-600 mb-1">This Month</p>
-          <p className="text-3xl font-bold text-slate-900">
+          <p className="text-xs sm:text-sm text-slate-600 mb-1">This Month</p>
+          <p className="text-xl sm:text-3xl font-bold text-slate-900">
             ${analytics.revenue.thisMonth.toFixed(0)}
           </p>
           <p className="text-xs text-slate-500 mt-1">
@@ -165,10 +175,10 @@ export default function AdminAnalyticsPage() {
       </div>
 
       {/* Charts Row */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-6 mb-4 sm:mb-8">
         {/* Bookings by Status */}
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-          <h3 className="text-lg font-bold text-slate-900 mb-4">
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-3 sm:p-6">
+          <h3 className="text-sm sm:text-lg font-bold text-slate-900 mb-3 sm:mb-4">
             Bookings by Status
           </h3>
           <div className="space-y-3">
@@ -186,10 +196,10 @@ export default function AdminAnalyticsPage() {
                 return (
                   <div key={status}>
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-sm font-semibold text-slate-700">
+                      <span className="text-xs sm:text-sm font-semibold text-slate-700">
                         {status}
                       </span>
-                      <span className="text-sm text-slate-600">
+                      <span className="text-xs sm:text-sm text-slate-600">
                         {count} ({percentage.toFixed(1)}%)
                       </span>
                     </div>
@@ -207,8 +217,8 @@ export default function AdminAnalyticsPage() {
         </div>
 
         {/* Revenue by Month */}
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-          <h3 className="text-lg font-bold text-slate-900 mb-4">
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-3 sm:p-6">
+          <h3 className="text-sm sm:text-lg font-bold text-slate-900 mb-3 sm:mb-4">
             Revenue Trend
           </h3>
           <div className="space-y-3">
@@ -222,10 +232,10 @@ export default function AdminAnalyticsPage() {
               return (
                 <div key={item.month}>
                   <div className="flex items-center justify-between mb-1">
-                    <span className="text-sm font-semibold text-slate-700">
+                    <span className="text-xs sm:text-sm font-semibold text-slate-700">
                       {item.month}
                     </span>
-                    <span className="text-sm text-slate-600">
+                    <span className="text-xs sm:text-sm text-slate-600">
                       ${item.revenue.toFixed(0)}
                     </span>
                   </div>
@@ -243,23 +253,23 @@ export default function AdminAnalyticsPage() {
       </div>
 
       {/* Top Performers */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-6 mb-4 sm:mb-8">
         {/* Top Caregivers */}
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-          <h3 className="text-lg font-bold text-slate-900 mb-4">
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-3 sm:p-6">
+          <h3 className="text-sm sm:text-lg font-bold text-slate-900 mb-3 sm:mb-4">
             Top Caregivers
           </h3>
           <div className="space-y-3">
             {analytics.topCaregivers.slice(0, 5).map((caregiver, index) => (
               <div
                 key={caregiver.id}
-                className="flex items-center gap-3 p-3 bg-slate-50 rounded-lg"
+                className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-slate-50 rounded-lg"
               >
-                <div className="w-10 h-10 bg-teal-100 rounded-full flex items-center justify-center font-bold text-teal-600">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-teal-100 rounded-full flex items-center justify-center font-bold text-teal-600 text-xs sm:text-sm shrink-0">
                   #{index + 1}
                 </div>
-                <div className="flex-1">
-                  <p className="font-semibold text-slate-900">
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs sm:text-sm font-semibold text-slate-900 truncate">
                     {caregiver.name}
                   </p>
                   <p className="text-xs text-slate-600">
@@ -267,11 +277,11 @@ export default function AdminAnalyticsPage() {
                     {caregiver.revenue.toFixed(0)} revenue
                   </p>
                 </div>
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1 shrink-0">
                   <span className="material-icons text-yellow-500 text-sm">
                     star
                   </span>
-                  <span className="text-sm font-semibold text-slate-900">
+                  <span className="text-xs sm:text-sm font-semibold text-slate-900">
                     {caregiver.rating.toFixed(1)}
                   </span>
                 </div>
@@ -281,21 +291,23 @@ export default function AdminAnalyticsPage() {
         </div>
 
         {/* Top Services */}
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-          <h3 className="text-lg font-bold text-slate-900 mb-4">
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-3 sm:p-6">
+          <h3 className="text-sm sm:text-lg font-bold text-slate-900 mb-3 sm:mb-4">
             Top Services
           </h3>
           <div className="space-y-3">
             {analytics.topServices.slice(0, 5).map((service, index) => (
               <div
                 key={service.id}
-                className="flex items-center gap-3 p-3 bg-slate-50 rounded-lg"
+                className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-slate-50 rounded-lg"
               >
-                <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center font-bold text-blue-600">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-100 rounded-full flex items-center justify-center font-bold text-blue-600 text-xs sm:text-sm shrink-0">
                   #{index + 1}
                 </div>
-                <div className="flex-1">
-                  <p className="font-semibold text-slate-900">{service.name}</p>
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs sm:text-sm font-semibold text-slate-900 truncate">
+                    {service.name}
+                  </p>
                   <p className="text-xs text-slate-600">
                     {service.bookings} bookings • ${service.revenue.toFixed(0)}{" "}
                     revenue
@@ -308,35 +320,38 @@ export default function AdminAnalyticsPage() {
       </div>
 
       {/* User Distribution */}
-      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-        <h3 className="text-lg font-bold text-slate-900 mb-4">
+      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-3 sm:p-6">
+        <h3 className="text-sm sm:text-lg font-bold text-slate-900 mb-3 sm:mb-4">
           User Distribution
         </h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-3 gap-3 sm:gap-6">
           <div className="text-center">
-            <div className="w-24 h-24 mx-auto mb-3 rounded-full bg-green-100 flex items-center justify-center">
-              <span className="text-3xl font-bold text-green-600">
+            <div className="w-16 h-16 sm:w-24 sm:h-24 mx-auto mb-2 sm:mb-3 rounded-full bg-green-100 flex items-center justify-center">
+              <span className="text-xl sm:text-3xl font-bold text-green-600">
                 {analytics.users.clients}
               </span>
             </div>
-            <p className="font-semibold text-slate-900">Clients</p>
-            <p className="text-sm text-slate-600">
+            <p className="text-xs sm:text-sm font-semibold text-slate-900">
+              Clients
+            </p>
+            <p className="text-xs text-slate-600">
               {(
                 (analytics.users.clients / analytics.users.total) *
                 100
               ).toFixed(1)}
               % of total
             </p>
-          </div>
-
+          </div>{" "}
           <div className="text-center">
-            <div className="w-24 h-24 mx-auto mb-3 rounded-full bg-blue-100 flex items-center justify-center">
-              <span className="text-3xl font-bold text-blue-600">
+            <div className="w-16 h-16 sm:w-24 sm:h-24 mx-auto mb-2 sm:mb-3 rounded-full bg-blue-100 flex items-center justify-center">
+              <span className="text-xl sm:text-3xl font-bold text-blue-600">
                 {analytics.users.caregivers}
               </span>
             </div>
-            <p className="font-semibold text-slate-900">Caregivers</p>
-            <p className="text-sm text-slate-600">
+            <p className="text-xs sm:text-sm font-semibold text-slate-900">
+              Caregivers
+            </p>
+            <p className="text-xs text-slate-600">
               {(
                 (analytics.users.caregivers / analytics.users.total) *
                 100
@@ -344,15 +359,16 @@ export default function AdminAnalyticsPage() {
               % of total
             </p>
           </div>
-
           <div className="text-center">
-            <div className="w-24 h-24 mx-auto mb-3 rounded-full bg-purple-100 flex items-center justify-center">
-              <span className="text-3xl font-bold text-purple-600">
+            <div className="w-16 h-16 sm:w-24 sm:h-24 mx-auto mb-2 sm:mb-3 rounded-full bg-purple-100 flex items-center justify-center">
+              <span className="text-xl sm:text-3xl font-bold text-purple-600">
                 {analytics.users.total}
               </span>
             </div>
-            <p className="font-semibold text-slate-900">Total Users</p>
-            <p className="text-sm text-slate-600">
+            <p className="text-xs sm:text-sm font-semibold text-slate-900">
+              Total Users
+            </p>
+            <p className="text-xs text-slate-600">
               {analytics.users.newThisMonth} new this month
             </p>
           </div>

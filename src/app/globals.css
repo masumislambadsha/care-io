@@ -21,6 +21,10 @@
   color-scheme: light;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 .dark {
   color-scheme: dark;
 }

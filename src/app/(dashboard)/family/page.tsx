@@ -165,21 +165,22 @@ export default function FamilyMembersPage() {
   return (
     <>
       {/* Header */}
-      <div className="mb-8 flex items-center justify-between">
+      <div className="mb-4 sm:mb-8 flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-slate-900 mb-2">
+          <h1 className="text-lg sm:text-3xl font-bold text-slate-900 mb-1 sm:mb-2">
             Family Members
           </h1>
-          <p className="text-slate-600">
+          <p className="text-xs sm:text-sm text-slate-600">
             Manage your family members for easier booking
           </p>
         </div>
         <button
           onClick={openAddModal}
-          className="px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-lg transition-all flex items-center gap-2"
+          className="px-3 sm:px-6 py-2 sm:py-3 bg-teal-600 hover:bg-teal-700 text-white text-xs sm:text-sm font-semibold rounded-lg transition-all flex items-center gap-1 sm:gap-2"
         >
-          <span className="material-icons">add</span>
-          Add Member
+          <span className="material-icons text-sm sm:text-base " style={{fontSize:"15px"}}> add</span>
+          <span className="hidden sm:inline">Add Member</span>
+          <span className="sm:hidden">Add</span>
         </button>
       </div>
 
@@ -187,7 +188,8 @@ export default function FamilyMembersPage() {
       {members.length === 0 ? (
         <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-12 text-center">
           <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <span className="material-icons text-slate-400 text-4xl">
+            <span className="material-icons text-slate-400 text-4xl"
+            style={{fontSize:"25px"}}>
               family_restroom
             </span>
           </div>
@@ -199,9 +201,10 @@ export default function FamilyMembersPage() {
           </p>
           <button
             onClick={openAddModal}
-            className="px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-lg transition-all inline-flex items-center gap-2"
+            className="px-3 text-sm sm:px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-lg transition-all inline-flex items-center gap-2"
           >
-            <span className="material-icons">add</span>
+            <span className="material-icons"
+            style={{fontSize:"15px"}}>add</span>
             Add First Member
           </button>
         </div>

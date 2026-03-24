@@ -142,43 +142,48 @@ export default function AdminBookingsPage() {
   return (
     <>
       {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-slate-900 mb-2">
+      <div className="mb-4 sm:mb-8">
+        <h1 className="text-lg sm:text-3xl font-bold text-slate-900 mb-2">
           Booking Management
         </h1>
-        <p className="text-slate-600">Manage all platform bookings</p>
+        <p className="text-xs sm:text-sm text-slate-600">
+          Manage all platform bookings
+        </p>
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
-          <p className="text-sm text-slate-600 mb-1">Total</p>
-          <p className="text-2xl font-bold text-slate-900">{stats.total}</p>
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-4 mb-4 sm:mb-8">
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-3 sm:p-4">
+          <p className="text-xs sm:text-sm text-slate-600 mb-1">Total</p>
+          <p className="text-lg sm:text-2xl font-bold text-slate-900">
+            {stats.total}
+          </p>
         </div>
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
-          <p className="text-sm text-slate-600 mb-1">Confirmed</p>
-          <p className="text-2xl font-bold text-blue-600">{stats.confirmed}</p>
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-3 sm:p-4">
+          <p className="text-xs sm:text-sm text-slate-600 mb-1">Confirmed</p>
+          <p className="text-lg sm:text-2xl font-bold text-blue-600">
+            {stats.confirmed}
+          </p>
         </div>
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
-          <p className="text-sm text-slate-600 mb-1">Ongoing</p>
-          <p className="text-2xl font-bold text-purple-600">{stats.ongoing}</p>
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-3 sm:p-4">
+          <p className="text-xs sm:text-sm text-slate-600 mb-1">Ongoing</p>
+          <p className="text-lg sm:text-2xl font-bold text-purple-600">
+            {stats.ongoing}
+          </p>
         </div>
-        <div
-          className="bg-white rounded-xl shadow-s
--200 p-4"
-        >
-          <p className="text-sm text-slate-600 mb-1">Revenue</p>
-          <p className="text-2xl font-bold text-teal-600">
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-3 sm:p-4">
+          <p className="text-xs sm:text-sm text-slate-600 mb-1">Revenue</p>
+          <p className="text-lg sm:text-2xl font-bold text-teal-600">
             ${stats.totalRevenue.toFixed(0)}
           </p>
         </div>
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-3 sm:p-6 mb-4 sm:mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
           <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-2">
+            <label className="block text-xs sm:text-sm font-semibold text-slate-700 mb-1 sm:mb-2">
               Search
             </label>
             <input
@@ -186,18 +191,18 @@ export default function AdminBookingsPage() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by booking #, client, caregiver..."
-              className="w-full px-4 py-2 border-2 border-slate-200 rounded-lg focus:border-teal-600 focus:outline-none transition-colors text-slate-900"
+              className="w-full px-3 sm:px-4 py-2 border-2 border-slate-200 rounded-lg focus:border-teal-600 focus:outline-none transition-colors text-xs sm:text-sm text-slate-900"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-2">
+            <label className="block text-xs sm:text-sm font-semibold text-slate-700 mb-1 sm:mb-2">
               Status
             </label>
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="w-full px-4 py-2 border-2 border-slate-200 rounded-lg focus:border-teal-600 focus:outline-none transition-colors text-slate-900"
+              className="w-full px-3 sm:px-4 py-2 border-2 border-slate-200 rounded-lg focus:border-teal-600 focus:outline-none transition-colors text-xs sm:text-sm text-slate-900"
             >
               <option value="all">All Status</option>
               <option value="CONFIRMED">Confirmed</option>
@@ -208,13 +213,13 @@ export default function AdminBookingsPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-2">
+            <label className="block text-xs sm:text-sm font-semibold text-slate-700 mb-1 sm:mb-2">
               Payment
             </label>
             <select
               value={paymentFilter}
               onChange={(e) => setPaymentFilter(e.target.value)}
-              className="w-full px-4 py-2 border-2 border-slate-200 rounded-lg focus:border-teal-600 focus:outline-none transition-colors text-slate-900"
+              className="w-full px-3 sm:px-4 py-2 border-2 border-slate-200 rounded-lg focus:border-teal-600 focus:outline-none transition-colors text-xs sm:text-sm text-slate-900"
             >
               <option value="all">All Payments</option>
               <option value="PAID">Paid</option>
@@ -232,28 +237,28 @@ export default function AdminBookingsPage() {
           <table className="w-full">
             <thead className="bg-slate-50 border-b border-slate-200">
               <tr>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-slate-700">
+                <th className="px-3 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-slate-700">
                   Booking #
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-slate-700">
+                <th className="hidden sm:table-cell px-3 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-slate-700">
                   Client
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-slate-700">
+                <th className="hidden sm:table-cell px-3 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-slate-700">
                   Caregiver
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-slate-700">
+                <th className="px-3 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-slate-700">
                   Service
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-slate-700">
+                <th className="hidden sm:table-cell px-3 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-slate-700">
                   Date
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-slate-700">
+                <th className="px-3 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-slate-700">
                   Amount
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-slate-700">
+                <th className="px-3 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-slate-700">
                   Status
                 </th>
-                <th className="px-6 py-4 text-right text-sm font-semibold text-slate-700">
+                <th className="px-3 sm:px-6 py-3 sm:py-4 text-right text-xs font-semibold text-slate-700">
                   Actions
                 </th>
               </tr>
@@ -278,30 +283,36 @@ export default function AdminBookingsPage() {
                     key={booking.id}
                     className="hover:bg-slate-50 transition-colors"
                   >
-                    <td className="px-6 py-4">
-                      <p className="font-semibold text-slate-900">
+                    <td className="px-3 sm:px-6 py-3 sm:py-4">
+                      <p className="font-semibold text-xs sm:text-sm text-slate-900">
                         {booking.booking_number}
                       </p>
                     </td>
-                    <td className="px-6 py-4">
-                      <p className="text-slate-900">{booking.client_name}</p>
+                    <td className="hidden sm:table-cell px-3 sm:px-6 py-3 sm:py-4">
+                      <p className="text-xs sm:text-sm text-slate-900">
+                        {booking.client_name}
+                      </p>
                     </td>
-                    <td className="px-6 py-4">
-                      <p className="text-slate-900">{booking.caregiver_name}</p>
+                    <td className="hidden sm:table-cell px-3 sm:px-6 py-3 sm:py-4">
+                      <p className="text-xs sm:text-sm text-slate-900">
+                        {booking.caregiver_name}
+                      </p>
                     </td>
-                    <td className="px-6 py-4">
-                      <p className="text-slate-900">{booking.service_name}</p>
+                    <td className="px-3 sm:px-6 py-3 sm:py-4">
+                      <p className="text-xs sm:text-sm text-slate-900">
+                        {booking.service_name}
+                      </p>
                     </td>
-                    <td className="px-6 py-4 text-sm text-slate-600">
+                    <td className="hidden sm:table-cell px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm text-slate-600">
                       {new Date(booking.start_date).toLocaleDateString()}
                     </td>
-                    <td className="px-6 py-4">
-                      <p className="font-semibold text-slate-900">
+                    <td className="px-3 sm:px-6 py-3 sm:py-4">
+                      <p className="font-semibold text-xs sm:text-sm text-slate-900">
                         $
                         {parseFloat(booking.total_amount.toString()).toFixed(2)}
                       </p>
                     </td>
-                    <td className="px-6 py-4">
+                    <td className="px-3 sm:px-6 py-3 sm:py-4">
                       <div className="flex flex-col gap-1">
                         <span
                           className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusColor(

@@ -5,6 +5,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 import StyledComponentsRegistry from "@/lib/registry";
 import { Providers } from "./providers";
 import { Toaster } from "react-hot-toast";
+import Navbar from "@/components/Navbar";
 
 const inter = Inter({
   subsets: ["latin"],

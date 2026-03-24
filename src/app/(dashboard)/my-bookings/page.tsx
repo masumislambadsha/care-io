@@ -200,9 +200,11 @@ export default function MyBookingsPage() {
   return (
     <>
       {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-slate-900 mb-2">My Bookings</h1>
-        <p className="text-slate-600">
+      <div className="mb-4 sm:mb-8">
+        <h1 className="text-lg sm:text-3xl font-bold text-slate-900 mb-1 sm:mb-2">
+          My Bookings
+        </h1>
+        <p className="text-xs sm:text-sm text-slate-600">
           {isCaregiver
             ? "Manage your service bookings"
             : "Track and manage your care bookings"}
@@ -210,14 +212,14 @@ export default function MyBookingsPage() {
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4 mb-6">
-        <div className="flex flex-wrap gap-3">
+      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-3 sm:p-4 mb-4 sm:mb-6">
+        <div className="flex flex-wrap gap-2">
           {["all", "confirmed", "ongoing", "completed", "cancelled"].map(
             (filterOption) => (
               <button
                 key={filterOption}
                 onClick={() => setFilter(filterOption)}
-                className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                className={`px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm rounded-lg font-semibold transition-all ${
                   filter === filterOption
                     ? "bg-teal-600 text-white"
                     : "bg-slate-100 text-slate-700 hover:bg-slate-200"
@@ -234,16 +236,16 @@ export default function MyBookingsPage() {
       {bookings.filter((b) =>
         filter === "all" ? true : b.status.toLowerCase() === filter,
       ).length === 0 ? (
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-12 text-center">
-          <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <span className="material-icons text-slate-400 text-4xl">
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 sm:p-8 text-center">
+          <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-3">
+            <span className="material-icons text-slate-400 text-3xl">
               event_busy
             </span>
           </div>
-          <h3 className="text-xl font-bold text-slate-900 mb-2">
+          <h3 className="text-base sm:text-xl font-bold text-slate-900 mb-2">
             No bookings found
           </h3>
-          <p className="text-slate-600 mb-6">
+          <p className="text-xs sm:text-sm text-slate-600 mb-4">
             {isCaregiver
               ? "You don't have any bookings yet. Keep your profile updated!"
               : "You haven't made any bookings yet. Start by finding a caregiver."}
@@ -267,28 +269,26 @@ export default function MyBookingsPage() {
             .map((booking) => (
               <div
                 key={booking.id}
-                className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-md transition-all"
+                className="bg-white rounded-xl shadow-sm border border-slate-200 p-3 sm:p-6 hover:shadow-md transition-all"
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <div className="flex items-center gap-3 mb-2">
-                      <h3 className="text-lg font-bold text-slate-900">
+                <div className="flex items-start justify-between mb-3">
+                  <div className="min-w-0 flex-1 mr-2">
+                    <div className="flex items-center gap-2 mb-1 flex-wrap">
+                      <h3 className="text-sm sm:text-lg font-bold text-slate-900 truncate">
                         {booking.service_name}
                       </h3>
                       <span
-                        className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusColor(
-                          booking.status,
-                        )}`}
+                        className={`shrink-0 px-2 py-0.5 rounded-full text-xs font-semibold ${getStatusColor(booking.status)}`}
                       >
                         {booking.status}
                       </span>
                     </div>
-                    <p className="text-sm text-slate-600">
-                      Booking #{booking.booking_number}
+                    <p className="text-xs text-slate-500">
+                      #{booking.booking_number}
                     </p>
                   </div>
-                  <div className="text-right">
-                    <p className="text-2xl font-bold text-teal-600">
+                  <div className="text-right shrink-0">
+                    <p className="text-base sm:text-2xl font-bold text-teal-600">
                       ${booking.total_amount}
                     </p>
                     <p className="text-xs text-slate-500">
@@ -297,7 +297,7 @@ export default function MyBookingsPage() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 mb-3">
                   <div className="flex items-center gap-2">
                     <span className="material-icons text-slate-400 text-sm">
                       person
@@ -340,13 +340,13 @@ export default function MyBookingsPage() {
                   </div>
                 </div>
 
-                <div className="flex gap-3">
+                <div className="flex gap-2 sm:gap-3">
                   <button
                     onClick={() => {
                       setSelectedBooking(booking);
                       setShowDetailsModal(true);
                     }}
-                    className="flex-1 px-4 py-2 border-2 border-slate-200 text-slate-700 font-semibold rounded-lg hover:border-teal-600 hover:text-teal-600 transition-all"
+                    className="flex-1 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm border-2 border-slate-200 text-slate-700 font-semibold rounded-lg hover:border-teal-600 hover:text-teal-600 transition-all"
                   >
                     View Details
                   </button>

@@ -100,53 +100,65 @@ export default function CaregiverSchedulePage() {
   return (
     <>
       {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-slate-900 mb-2">My Schedule</h1>
-        <p className="text-slate-600">Manage your upcoming appointments</p>
+      <div className="mb-4 sm:mb-8">
+        <h1 className="text-lg sm:text-3xl font-bold text-slate-900 mb-2">
+          My Schedule
+        </h1>
+        <p className="text-xs sm:text-sm text-slate-600">
+          Manage your upcoming appointments
+        </p>
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-              <span className="material-icons text-blue-600">today</span>
+      <div className="grid grid-cols-3 gap-2 sm:gap-6 mb-4 sm:mb-8">
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-2 sm:p-6">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-3">
+            <div className="w-7 h-7 sm:w-12 sm:h-12 bg-blue-100 rounded-lg flex items-center justify-center shrink-0">
+              <span className="material-icons text-sm sm:text-2xl text-blue-600">
+                today
+              </span>
             </div>
             <div>
-              <p className="text-sm text-slate-600">Today's Bookings</p>
-              <p className="text-2xl font-bold text-slate-900">
+              <p className="text-[10px] sm:text-sm text-slate-600 leading-tight">
+                Today's
+              </p>
+              <p className="text-xs sm:text-2xl font-bold text-slate-900 leading-tight">
                 {todayBookings.length}
               </p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
-              <span className="material-icons text-purple-600">
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-2 sm:p-6">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-3">
+            <div className="w-7 h-7 sm:w-12 sm:h-12 bg-purple-100 rounded-lg flex items-center justify-center shrink-0">
+              <span className="material-icons text-sm sm:text-2xl text-purple-600">
                 event_available
               </span>
             </div>
             <div>
-              <p className="text-sm text-slate-600">Upcoming</p>
-              <p className="text-2xl font-bold text-slate-900">
+              <p className="text-[10px] sm:text-sm text-slate-600 leading-tight">
+                Upcoming
+              </p>
+              <p className="text-xs sm:text-2xl font-bold text-slate-900 leading-tight">
                 {upcomingBookings.length}
               </p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-              <span className="material-icons text-green-600">
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-2 sm:p-6">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-3">
+            <div className="w-7 h-7 sm:w-12 sm:h-12 bg-green-100 rounded-lg flex items-center justify-center shrink-0">
+              <span className="material-icons text-sm sm:text-2xl text-green-600">
                 check_circle
               </span>
             </div>
             <div>
-              <p className="text-sm text-slate-600">Completed</p>
-              <p className="text-2xl font-bold text-slate-900">
+              <p className="text-[10px] sm:text-sm text-slate-600 leading-tight">
+                Completed
+              </p>
+              <p className="text-xs sm:text-2xl font-bold text-slate-900 leading-tight">
                 {bookings.filter((b) => b.status === "COMPLETED").length}
               </p>
             </div>
@@ -155,67 +167,70 @@ export default function CaregiverSchedulePage() {
       </div>
 
       {/* Today's Schedule */}
-      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-8">
-        <h2 className="text-xl font-bold text-slate-900 mb-6">
+      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-3 sm:p-6 mb-4 sm:mb-8">
+        <h2 className="text-base sm:text-xl font-bold text-slate-900 mb-3 sm:mb-6">
           Today's Schedule
         </h2>
         {todayBookings.length === 0 ? (
-          <div className="text-center py-12">
-            <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <span className="material-icons text-slate-400 text-4xl">
+          <div className="text-center py-8 sm:py-12">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span className="material-icons text-slate-400 text-3xl sm:text-4xl">
                 event_available
               </span>
             </div>
-            <h3 className="text-lg font-semibold text-slate-900 mb-2">
+            <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-2">
               No bookings today
             </h3>
-            <p className="text-slate-600">Enjoy your day off!</p>
+            <p className="text-sm text-slate-600">Enjoy your day off!</p>
           </div>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {todayBookings.map((booking) => (
               <div
                 key={booking.id}
-                className="border-l-4 border-teal-600 bg-teal-50 rounded-lg p-4"
+                className="border-l-4 border-teal-600 bg-teal-50 rounded-lg p-3 sm:p-4"
               >
-                <div className="flex items-start justify-between mb-2">
-                  <div>
-                    <h4 className="font-bold text-slate-900">
+                <div className="flex items-start justify-between mb-2 gap-2">
+                  <div className="min-w-0">
+                    <h4 className="text-sm sm:text-base font-bold text-slate-900 truncate">
                       {booking.service_name}
                     </h4>
-                    <p className="text-sm text-slate-600">
+                    <p className="text-xs sm:text-sm text-slate-600">
                       Client: {booking.client_name}
                     </p>
                   </div>
                   <span
-                    className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusColor(
+                    className={`px-2 py-0.5 rounded-full text-xs font-semibold shrink-0 ${getStatusColor(
                       booking.status,
                     )}`}
                   >
                     {booking.status}
                   </span>
                 </div>
-                <div className="flex items-center gap-4 text-sm text-slate-600">
+                <div className="grid grid-cols-3 gap-2 text-xs sm:text-sm text-slate-600">
                   <div className="flex items-center gap-1">
-                    <span className="material-icons text-sm">schedule</span>
-                    <span>
+                    <span className="material-icons text-xs sm:text-sm shrink-0">
+                      schedule
+                    </span>
+                    <span className="truncate">
                       {new Date(booking.start_date).toLocaleTimeString(
                         "en-US",
-                        {
-                          hour: "2-digit",
-                          minute: "2-digit",
-                        },
+                        { hour: "2-digit", minute: "2-digit" },
                       )}
                     </span>
                   </div>
                   <div className="flex items-center gap-1">
-                    <span className="material-icons text-sm">location_on</span>
-                    <span>
-                      {booking.full_address || "Address not provided"}
+                    <span className="material-icons text-xs sm:text-sm shrink-0">
+                      location_on
+                    </span>
+                    <span className="truncate">
+                      {booking.full_address || "N/A"}
                     </span>
                   </div>
                   <div className="flex items-center gap-1">
-                    <span className="material-icons text-sm">attach_money</span>
+                    <span className="material-icons text-xs sm:text-sm shrink-0">
+                      attach_money
+                    </span>
                     <span>${booking.total_amount}</span>
                   </div>
                 </div>
@@ -226,8 +241,8 @@ export default function CaregiverSchedulePage() {
       </div>
 
       {/* Upcoming Bookings */}
-      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-        <h2 className="text-xl font-bold text-slate-900 mb-6">
+      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-3 sm:p-6">
+        <h2 className="text-base sm:text-xl font-bold text-slate-900 mb-3 sm:mb-6">
           Upcoming Bookings
         </h2>
         {upcomingBookings.length === 0 ? (

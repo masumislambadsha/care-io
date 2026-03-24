@@ -176,61 +176,65 @@ export default function BookingDetailPage() {
   return (
     <>
       {/* Header */}
-      <div className="mb-8">
+      <div className="mb-4 sm:mb-8">
         <Link
           href="/my-bookings"
-          className="inline-flex items-center gap-2 text-teal-600 hover:text-teal-700 font-semibold mb-4"
+          className="inline-flex items-center gap-2 text-teal-600 hover:text-teal-700 font-semibold mb-4 text-xs sm:text-sm"
         >
           <span className="material-icons text-sm">arrow_back</span>
           Back to Bookings
         </Link>
-        <h1 className="text-3xl font-bold text-slate-900 mb-2">
+        <h1 className="text-lg sm:text-3xl font-bold text-slate-900 mb-2">
           Booking Details
         </h1>
-        <p className="text-slate-600">Booking #{booking.booking_number}</p>
+        <p className="text-xs sm:text-sm text-slate-600">
+          Booking #{booking.booking_number}
+        </p>
       </div>
 
       {/* Main Content */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 sm:gap-6">
         {/* Left Column - Main Details */}
-        <div className="lg:col-span-2 space-y-6">
+        <div className="lg:col-span-2 space-y-3 sm:space-y-6">
           {/* Status Card */}
-          <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-            <div className="flex items-center justify-between mb-6">
+          <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-3 sm:p-6">
+            <div className="flex items-center justify-between mb-4 sm:mb-6">
               <span
-                className={`px-4 py-2 rounded-full text-sm font-semibold ${getStatusColor(
+                className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold ${getStatusColor(
                   booking.status,
                 )}`}
               >
                 {booking.status}
               </span>
-              <span className="text-sm text-slate-600">
+              <span className="text-xs sm:text-sm text-slate-600">
                 Booked on {new Date(booking.created_at).toLocaleDateString()}
               </span>
             </div>
 
-            <h2 className="text-2xl font-bold text-slate-900 mb-4">
+            <h2 className="text-base sm:text-2xl font-bold text-slate-900 mb-3 sm:mb-4">
               {booking.service_name}
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="flex items-start gap-3">
-                <div className="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center shrink-0">
-                  <span className="material-icons text-teal-600">person</span>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+              <div className="flex items-start gap-2 sm:gap-3">
+                <div className="w-8 h-8 sm:w-12 sm:h-12 bg-teal-100 rounded-lg flex items-center justify-center shrink-0">
+                  <span className="material-icons text-sm sm:text-base text-teal-600">
+                    person
+                  </span>
                 </div>
                 <div>
                   <p className="text-xs text-slate-500 font-semibold mb-1">
                     {isCaregiver ? "CLIENT" : "CAREGIVER"}
                   </p>
-                  <p className="font-bold text-slate-900">
+                  <p className="text-xs sm:text-sm font-bold text-slate-900">
                     {isCaregiver ? booking.client_name : booking.caregiver_name}
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-start gap-3">
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center shrink-0">
-                  <span className="material-icons text-blue-600">
+              <div className="flex items-start gap-2 sm:gap-3">
+                <div className="w-8 h-8 sm:w-12 sm:h-12 bg-blue-100 rounded-lg flex items-center justify-center shrink-0">
+                  <span className="material-icons text-sm sm:text-base text-blue-600">
                     calendar_today
                   </span>
                 </div>
@@ -238,7 +242,7 @@ export default function BookingDetailPage() {
                   <p className="text-xs text-slate-500 font-semibold mb-1">
                     START DATE
                   </p>
-                  <p className="font-bold text-slate-900">
+                  <p className="text-xs sm:text-sm font-bold text-slate-900">
                     {new Date(booking.start_date).toLocaleDateString("en-US", {
                       weekday: "short",
                       year: "numeric",
@@ -249,9 +253,9 @@ export default function BookingDetailPage() {
                 </div>
               </div>
 
-              <div className="flex items-start gap-3">
-                <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center shrink-0">
-                  <span className="material-icons text-purple-600">
+              <div className="flex items-start gap-2 sm:gap-3">
+                <div className="w-8 h-8 sm:w-12 sm:h-12 bg-purple-100 rounded-lg flex items-center justify-center shrink-0">
+                  <span className="material-icons text-sm sm:text-base text-purple-600">
                     schedule
                   </span>
                 </div>
@@ -259,22 +263,24 @@ export default function BookingDetailPage() {
                   <p className="text-xs text-slate-500 font-semibold mb-1">
                     DURATION
                   </p>
-                  <p className="font-bold text-slate-900">
+                  <p className="text-xs sm:text-sm font-bold text-slate-900">
                     {booking.duration_value}{" "}
                     {booking.duration_type.toLowerCase()}
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-start gap-3">
-                <div className="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center shrink-0">
-                  <span className="material-icons text-amber-600">payment</span>
+              <div className="flex items-start gap-2 sm:gap-3">
+                <div className="w-8 h-8 sm:w-12 sm:h-12 bg-amber-100 rounded-lg flex items-center justify-center shrink-0">
+                  <span className="material-icons text-sm sm:text-base text-amber-600">
+                    payment
+                  </span>
                 </div>
                 <div>
                   <p className="text-xs text-slate-500 font-semibold mb-1">
                     PAYMENT STATUS
                   </p>
-                  <p className="font-bold text-slate-900">
+                  <p className="text-xs sm:text-sm font-bold text-slate-900">
                     {booking.payment_status}
                   </p>
                 </div>

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -83,19 +83,19 @@ export default function AdminPromoCodesPage() {
   }
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
-      <div className="flex justify-between items-center mb-8">
+    <div className="p-3 sm:p-6 max-w-7xl mx-auto">
+      <div className="flex flex-wrap justify-between items-center gap-3 mb-4 sm:mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
+          <h1 className="text-lg sm:text-3xl font-bold text-slate-900 dark:text-white mb-1 sm:mb-2">
             Promo Codes
           </h1>
-          <p className="text-slate-600 dark:text-slate-400">
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
             Manage discount codes for your platform
           </p>
         </div>
         <button
           onClick={() => setShowCreateModal(true)}
-          className="px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-lg transition-colors flex items-center gap-2"
+          className="px-4 sm:px-6 py-2 sm:py-3 bg-teal-600 hover:bg-teal-700 text-white text-xs sm:text-sm font-semibold rounded-lg transition-colors flex items-center gap-2"
         >
           <span className="material-icons">add</span>
           Create Promo Code
@@ -107,22 +107,22 @@ export default function AdminPromoCodesPage() {
           <table className="w-full">
             <thead className="bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700">
               <tr>
-                <th className="px-6 py-4 text-left text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider">
+                <th className="px-3 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider">
                   Code
                 </th>
-                <th className="px-6 py-4 text-left text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider">
+                <th className="px-3 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider">
                   Discount
                 </th>
-                <th className="px-6 py-4 text-left text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider">
+                <th className="hidden sm:table-cell px-3 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider">
                   Usage
                 </th>
-                <th className="px-6 py-4 text-left text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider">
+                <th className="hidden sm:table-cell px-3 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider">
                   Expires
                 </th>
-                <th className="px-6 py-4 text-left text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider">
+                <th className="px-3 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider">
                   Status
                 </th>
-                <th className="px-6 py-4 text-left text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider">
+                <th className="px-3 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider">
                   Actions
                 </th>
               </tr>
@@ -148,34 +148,34 @@ export default function AdminPromoCodesPage() {
                     key={promo.id}
                     className="hover:bg-slate-50 dark:hover:bg-slate-700/50"
                   >
-                    <td className="px-6 py-4">
-                      <span className="font-mono font-bold text-teal-600 dark:text-teal-400">
+                    <td className="px-3 sm:px-6 py-3 sm:py-4">
+                      <span className="font-mono font-bold text-xs sm:text-sm text-teal-600 dark:text-teal-400">
                         {promo.code}
                       </span>
                     </td>
-                    <td className="px-6 py-4">
-                      <span className="text-slate-900 dark:text-white font-semibold">
+                    <td className="px-3 sm:px-6 py-3 sm:py-4">
+                      <span className="text-xs sm:text-sm text-slate-900 dark:text-white font-semibold">
                         {promo.discount_type === "PERCENTAGE"
                           ? `${promo.discount_value}%`
                           : `$${promo.discount_value}`}
                       </span>
                     </td>
-                    <td className="px-6 py-4">
-                      <span className="text-slate-600 dark:text-slate-400">
+                    <td className="hidden sm:table-cell px-3 sm:px-6 py-3 sm:py-4">
+                      <span className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
                         {promo.current_uses}
                         {promo.max_uses ? ` / ${promo.max_uses}` : " / ∞"}
                       </span>
                     </td>
-                    <td className="px-6 py-4">
-                      <span className="text-slate-600 dark:text-slate-400">
+                    <td className="hidden sm:table-cell px-3 sm:px-6 py-3 sm:py-4">
+                      <span className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
                         {promo.expires_at
                           ? new Date(promo.expires_at).toLocaleDateString()
                           : "Never"}
                       </span>
                     </td>
-                    <td className="px-6 py-4">
+                    <td className="px-3 sm:px-6 py-3 sm:py-4">
                       <span
-                        className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                        className={`px-2 sm:px-3 py-1 rounded-full text-xs font-semibold ${
                           promo.is_active
                             ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
                             : "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200"
@@ -184,10 +184,10 @@ export default function AdminPromoCodesPage() {
                         {promo.is_active ? "Active" : "Inactive"}
                       </span>
                     </td>
-                    <td className="px-6 py-4">
+                    <td className="px-3 sm:px-6 py-3 sm:py-4">
                       <button
                         onClick={() => toggleStatus(promo.id, promo.is_active)}
-                        className="text-teal-600 hover:text-teal-700 dark:text-teal-400 dark:hover:text-teal-300 font-medium text-sm"
+                        className="text-teal-600 hover:text-teal-700 dark:text-teal-400 dark:hover:text-teal-300 font-medium text-xs sm:text-sm"
                       >
                         {promo.is_active ? "Deactivate" : "Activate"}
                       </button>

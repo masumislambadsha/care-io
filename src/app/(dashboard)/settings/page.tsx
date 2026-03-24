@@ -80,24 +80,31 @@ export default function SettingsPage() {
 
   return (
     <>
-      {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-slate-900 mb-2">Settings</h1>
-        <p className="text-slate-600">Manage your account preferences</p>
+      <div className="mb-4 sm:mb-8">
+        <h1 className="text-lg sm:text-3xl font-bold text-slate-900 mb-1 sm:mb-2">
+          Settings
+        </h1>
+        <p className="text-xs sm:text-sm text-slate-600">
+          Manage your account preferences
+        </p>
       </div>
 
       {/* Notifications */}
-      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
-        <h2 className="text-xl font-bold text-slate-900 mb-6">Notifications</h2>
-        <div className="space-y-4">
-          <div className="flex items-center justify-between p-4 border-2 border-slate-200 rounded-lg">
-            <div className="flex items-center gap-3">
-              <span className="material-icons text-teal-600">email</span>
+      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6 mb-4 sm:mb-6">
+        <h2 className="text-base sm:text-xl font-bold text-slate-900 mb-4 sm:mb-6">
+          Notifications
+        </h2>
+        <div className="space-y-3">
+          <div className="flex items-center justify-between p-3 sm:p-4 border-2 border-slate-200 rounded-lg">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <span className="material-icons text-teal-600 text-base sm:text-2xl">
+                email
+              </span>
               <div>
-                <p className="font-semibold text-slate-900">
+                <p className="text-xs sm:text-sm font-semibold text-slate-900">
                   Email Notifications
                 </p>
-                <p className="text-sm text-slate-600">
+                <p className="text-xs text-slate-600 hidden sm:block">
                   Receive booking updates via email
                 </p>
               </div>
@@ -116,14 +123,16 @@ export default function SettingsPage() {
             </button>
           </div>
 
-          <div className="flex items-center justify-between p-4 border-2 border-slate-200 rounded-lg">
-            <div className="flex items-center gap-3">
-              <span className="material-icons text-teal-600">sms</span>
+          <div className="flex items-center justify-between p-3 sm:p-4 border-2 border-slate-200 rounded-lg">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <span className="material-icons text-teal-600 text-base sm:text-2xl">
+                sms
+              </span>
               <div>
-                <p className="font-semibold text-slate-900">
+                <p className="text-xs sm:text-sm font-semibold text-slate-900">
                   SMS Notifications
                 </p>
-                <p className="text-sm text-slate-600">
+                <p className="text-xs text-slate-600 hidden sm:block">
                   Get text messages for important updates
                 </p>
               </div>
@@ -142,16 +151,16 @@ export default function SettingsPage() {
             </button>
           </div>
 
-          <div className="flex items-center justify-between p-4 border-2 border-slate-200 rounded-lg">
-            <div className="flex items-center gap-3">
-              <span className="material-icons text-teal-600">
+          <div className="flex items-center justify-between p-3 sm:p-4 border-2 border-slate-200 rounded-lg">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <span className="material-icons text-teal-600 text-base sm:text-2xl">
                 notifications_active
               </span>
               <div>
-                <p className="font-semibold text-slate-900">
+                <p className="text-xs sm:text-sm font-semibold text-slate-900">
                   Booking Reminders
                 </p>
-                <p className="text-sm text-slate-600">
+                <p className="text-xs text-slate-600 hidden sm:block">
                   Reminders before scheduled bookings
                 </p>
               </div>
@@ -170,12 +179,16 @@ export default function SettingsPage() {
             </button>
           </div>
 
-          <div className="flex items-center justify-between p-4 border-2 border-slate-200 rounded-lg">
-            <div className="flex items-center gap-3">
-              <span className="material-icons text-teal-600">campaign</span>
+          <div className="flex items-center justify-between p-3 sm:p-4 border-2 border-slate-200 rounded-lg">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <span className="material-icons text-teal-600 text-base sm:text-2xl">
+                campaign
+              </span>
               <div>
-                <p className="font-semibold text-slate-900">Marketing Emails</p>
-                <p className="text-sm text-slate-600">
+                <p className="text-xs sm:text-sm font-semibold text-slate-900">
+                  Marketing Emails
+                </p>
+                <p className="text-xs text-slate-600 hidden sm:block">
                   Receive news and promotional offers
                 </p>
               </div>
@@ -196,18 +209,21 @@ export default function SettingsPage() {
         </div>
       </div>
 
-      {/* Security */}
-      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
-        <h2 className="text-xl font-bold text-slate-900 mb-6">Security</h2>
-        <div className="space-y-4">
-          <div className="flex items-center justify-between p-4 border-2 border-slate-200 rounded-lg">
-            <div className="flex items-center gap-3">
-              <span className="material-icons text-teal-600">security</span>
+      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6 mb-4 sm:mb-6">
+        <h2 className="text-base sm:text-xl font-bold text-slate-900 mb-4 sm:mb-6">
+          Security
+        </h2>
+        <div className="space-y-3">
+          <div className="flex items-center justify-between p-3 sm:p-4 border-2 border-slate-200 rounded-lg">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <span className="material-icons text-teal-600 text-base sm:text-2xl">
+                security
+              </span>
               <div>
-                <p className="font-semibold text-slate-900">
+                <p className="text-xs sm:text-sm font-semibold text-slate-900">
                   Two-Factor Authentication
                 </p>
-                <p className="text-sm text-slate-600">
+                <p className="text-xs text-slate-600 hidden sm:block">
                   Add an extra layer of security
                 </p>
               </div>
@@ -242,9 +258,10 @@ export default function SettingsPage() {
         </div>
       </div>
 
-      {/* Danger Zone */}
-      <div className="bg-white rounded-xl shadow-sm border border-red-200 p-6">
-        <h2 className="text-xl font-bold text-red-600 mb-6">Danger Zone</h2>
+      <div className="bg-white rounded-xl shadow-sm border border-red-200 p-4 sm:p-6">
+        <h2 className="text-base sm:text-xl font-bold text-red-600 mb-4 sm:mb-6">
+          Danger Zone
+        </h2>
         <div className="space-y-4">
           <button className="w-full flex items-center justify-between p-4 border-2 border-red-200 rounded-lg hover:border-red-600 hover:bg-red-50 transition-all group">
             <div className="flex items-center gap-3">

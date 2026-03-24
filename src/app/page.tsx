@@ -10,7 +10,6 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/pagination";
 import "aos/dist/aos.css";
-import CustomButton from "@/components/CustomButtons";
 import Navbar from "@/components/Navbar";
 
 type Service = {
@@ -46,23 +45,11 @@ export default function HomePage() {
   const [services, setServices] = useState<Service[]>([]);
   const [caregivers, setCaregivers] = useState<Caregiver[]>([]);
 
-  useEffect(() => {
-    AOS.init({
-      duration: 800,
-      once: true,
-      easing: "ease-out-cubic",
-    });
-    fetchServices();
-    fetchCaregivers();
-  }, []);
-
   const fetchServices = async () => {
     try {
       const response = await fetch("/api/services");
       const data = await response.json();
-      if (response.ok) {
-        setServices(data.services || []);
-      }
+      if (response.ok) setServices(data.services || []);
     } catch (error) {
       console.error("Error fetching services:", error);
     }
@@ -72,13 +59,17 @@ export default function HomePage() {
     try {
       const response = await fetch("/api/caregivers");
       const data = await response.json();
-      if (response.ok) {
-        setCaregivers(data.caregivers || []);
-      }
+      if (response.ok) setCaregivers(data.caregivers || []);
     } catch (error) {
       console.error("Error fetching caregivers:", error);
     }
   };
+
+  useEffect(() => {
+    AOS.init({ duration: 800, once: true, easing: "ease-out-cubic" });
+    fetchServices();
+    fetchCaregivers();
+  }, []);
 
   const getServiceIcon = (serviceName: string) => {
     const name = serviceName.toLowerCase();
@@ -110,36 +101,32 @@ export default function HomePage() {
       subtitle: "Trusted babysitters, senior care, and special needs support",
       image:
         "https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=1200&h=600&fit=crop",
-      color: "from-teal-600/90 to-teal-700/90",
     },
     {
       title: "Professional childcare you can trust",
       subtitle: "Background-checked caregivers for your peace of mind",
       image:
         "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=1200&h=600&fit=crop",
-      color: "from-blue-600/90 to-blue-700/90",
     },
     {
       title: "Compassionate senior care services",
       subtitle: "Dedicated support for your aging loved ones",
       image:
         "https://images.unsplash.com/photo-1581579438747-1dc8d17bbce4?w=1200&h=600&fit=crop",
-      color: "from-purple-600/90 to-purple-700/90",
     },
     {
       title: "Specialized care for every need",
       subtitle: "Expert caregivers for individuals with special requirements",
       image:
         "https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=1200&h=600&fit=crop",
-      color: "from-pink-600/90 to-pink-700/90",
     },
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-slate-50 overflow-x-hidden">
       <Navbar />
-
-      <section className="relative h-[500px] sm:h-[600px] md:h-[700px] overflow-hidden">
+      {/* Hero */}
+      <section className="relative h-[480px] sm:h-[560px] md:h-[680px] overflow-hidden">
         <Swiper
           modules={[Autoplay, EffectFade, Pagination]}
           effect="fade"
@@ -154,43 +141,43 @@ export default function HomePage() {
                 <div
                   className="absolute inset-0 bg-cover bg-center"
                   style={{ backgroundImage: `url(${slide.image})` }}
-                ></div>
-
+                />
+                <div className="absolute inset-0 bg-slate-900/50" />
                 <div className="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center">
                   <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="text-white max-w-2xl"
+                    className="text-white max-w-xl w-full"
                   >
-                    <p className="text-white/90 font-semibold text-xs sm:text-sm uppercase tracking-wider mb-2 sm:mb-4">
+                    <p className="text-white/80 font-semibold text-xs sm:text-sm uppercase tracking-widest mb-3">
                       TRUSTED BY 2M+ FAMILIES
                     </p>
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight">
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-5 leading-tight">
                       {slide.title}
                     </h1>
-                    <p className="text-base sm:text-lg md:text-xl text-white/90 mb-4 sm:mb-8">
+                    <p className="text-sm sm:text-base md:text-lg text-white/85 mb-5 sm:mb-7">
                       {slide.subtitle}
                     </p>
-                    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                    <div className="flex flex-col xs:flex-row gap-3">
                       <motion.div
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
+                        whileHover={{ scale: 1.04 }}
+                        whileTap={{ scale: 0.96 }}
                       >
                         <Link
                           href="/caregivers"
-                          className="inline-block bg-white text-teal-600 font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-slate-100 transition-all shadow-lg text-center"
+                          className="inline-block bg-white text-teal-600 font-bold px-5 sm:px-7 py-2.5 sm:py-3.5 rounded-full hover:bg-slate-100 transition-all shadow-lg text-center text-sm sm:text-base"
                         >
                           Find a Caregiver
                         </Link>
                       </motion.div>
                       <motion.div
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
+                        whileHover={{ scale: 1.04 }}
+                        whileTap={{ scale: 0.96 }}
                       >
                         <Link
                           href="/register?role=caregiver"
-                          className="inline-block bg-transparent border-2 border-white text-white font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-white/10 transition-all text-center"
+                          className="inline-block bg-transparent border-2 border-white text-white font-bold px-5 sm:px-7 py-2.5 sm:py-3.5 rounded-full hover:bg-white/10 transition-all text-center text-sm sm:text-base"
                         >
                           Become a Caregiver
                         </Link>
@@ -203,88 +190,82 @@ export default function HomePage() {
           ))}
         </Swiper>
 
-        <div className="absolute bottom-0 left-0 right-0 z-20 pb-6 sm:pb-12">
+        {/* Search bar */}
+        <div className="absolute bottom-0 left-0 right-0 z-20 pb-4 sm:pb-8">
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.8 }}
-            className="max-w-4xl mx-auto px-4"
+            className="max-w-3xl mx-auto px-3 sm:px-4"
           >
-            <div className="bg-white rounded-2xl shadow-2xl p-4 sm:p-6">
-              <div className="flex flex-col gap-3 sm:gap-4">
-                <div className="flex-1 flex items-center gap-3 px-4 py-3 bg-slate-50 rounded-xl">
-                  <span className="material-icons text-slate-400 text-xl">
+            <div className="bg-white rounded-2xl shadow-2xl p-2.5 sm:p-4 md:p-5">
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+                <div className="flex items-center gap-2 px-3 py-2 sm:py-2.5 bg-slate-50 rounded-xl flex-1">
+                  <span className="material-icons text-slate-400 text-lg shrink-0">
                     search
                   </span>
                   <input
                     type="text"
                     placeholder="What care are you looking for?"
-                    className="flex-1 bg-transparent border-none outline-none text-slate-900 placeholder-slate-400 text-sm sm:text-base"
+                    className="flex-1 bg-transparent border-none outline-none text-slate-900 placeholder-slate-400 text-xs sm:text-sm min-w-0"
                   />
                 </div>
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                  <div className="flex-1 flex items-center gap-3 px-4 py-3 bg-slate-50 rounded-xl">
-                    <span className="material-icons text-slate-400 text-xl">
-                      location_on
-                    </span>
-                    <input
-                      type="text"
-                      placeholder="Zip code or City"
-                      className="flex-1 bg-transparent border-none outline-none text-slate-900 placeholder-slate-400 text-sm sm:text-base"
-                    />
-                  </div>
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="w-full sm:w-auto"
-                  >
-                    <CustomButton className="bg-teal-600 hover:text-black text-white font-semibold text-xs sm:text-sm transition-all hover:border-teal-600 border-teal-600 btn-active rounded-xl w-full sm:w-auto px-6 py-3">
-                      Find Care
-                    </CustomButton>
-                  </motion.button>
+                <div className="flex items-center gap-2 px-3 py-2 sm:py-2.5 bg-slate-50 rounded-xl sm:flex-shrink-0">
+                  <span className="material-icons text-slate-400 text-lg shrink-0">
+                    location_on
+                  </span>
+                  <input
+                    type="text"
+                    placeholder="City or Zip"
+                    className="flex-1 sm:w-32 md:w-44 bg-transparent border-none outline-none text-slate-900 placeholder-slate-400 text-xs sm:text-sm min-w-0"
+                  />
                 </div>
+                <button className="bg-teal-600 text-white font-semibold text-xs sm:text-sm rounded-xl px-4 sm:px-5 py-2 sm:py-2.5 hover:bg-teal-700 transition-colors shrink-0">
+                  Find Care
+                </button>
               </div>
             </div>
           </motion.div>
         </div>
       </section>
 
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+      {/* Services */}
+      <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between mb-12">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-0 mb-8 sm:mb-12">
             <div>
-              <h2 className="text-3xl font-bold text-slate-900 mb-2">
+              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-1">
                 Our Services
               </h2>
-              <p className="text-slate-600">
+              <p className="text-sm sm:text-base text-slate-600">
                 Professional care for every stage of life.
               </p>
             </div>
             <Link
               href="/services"
-              className="text-teal-600 font-semibold hover:text-teal-700 flex items-center gap-1"
+              className="text-teal-600 font-semibold hover:text-teal-700 flex items-center gap-1 text-sm sm:text-base whitespace-nowrap"
             >
               View All{" "}
               <span className="material-icons text-sm">arrow_forward</span>
             </Link>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4 md:gap-5">
             {services.slice(0, 6).map((service, i) => (
               <Link key={service.id} href={`/services/${service.slug}`}>
                 <motion.div
-                  whileHover={{ y: -5 }}
+                  whileHover={{ y: -4 }}
                   data-aos="fade-up"
                   data-aos-delay={i * 50}
-                  className="bg-white border border-slate-200 rounded-2xl p-6 text-center hover:shadow-lg transition-all cursor-pointer"
+                  className="bg-white border border-slate-200 rounded-2xl p-3 sm:p-4 md:p-6 text-center hover:shadow-lg transition-all cursor-pointer h-full flex flex-col items-center justify-center"
                 >
                   <div
-                    className={`w-16 h-16 ${getServiceColor(i)} rounded-2xl flex items-center justify-center mx-auto mb-4`}
+                    className={`w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 ${getServiceColor(i)} rounded-2xl flex items-center justify-center mx-auto mb-2 sm:mb-3`}
                   >
-                    <span className="material-icons text-3xl">
+                    <span className="material-icons text-xl sm:text-2xl md:text-3xl">
                       {getServiceIcon(service.name)}
                     </span>
                   </div>
-                  <h3 className="font-semibold text-slate-900">
+                  <h3 className="font-semibold text-slate-900 text-xs sm:text-sm leading-tight">
                     {service.name}
                   </h3>
                 </motion.div>
@@ -295,33 +276,34 @@ export default function HomePage() {
       </section>
 
       {/* Featured Caregivers */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+      <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-slate-50">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
+          <div className="text-center mb-8 sm:mb-12">
             <h2
-              className="text-4xl font-bold text-slate-900 mb-4"
+              className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 mb-3"
               data-aos="fade-up"
             >
               Meet Our Top-Rated Caregivers
             </h2>
             <p
-              className="text-xl text-slate-600"
+              className="text-sm sm:text-base lg:text-lg text-slate-600"
               data-aos="fade-up"
               data-aos-delay="100"
             >
               Verified professionals ready to provide exceptional care
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
             {caregivers.slice(0, 4).map((caregiver, i) => (
               <motion.div
                 key={caregiver.id}
-                whileHover={{ y: -10 }}
+                whileHover={{ y: -8 }}
                 data-aos="fade-up"
                 data-aos-delay={i * 100}
-                className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all border border-slate-100"
+                className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all border border-slate-100"
               >
-                <div className="relative h-64 bg-gradient-to-br from-teal-100 to-blue-100">
+                <div className="relative h-48 sm:h-52 md:h-60 bg-linear-to-br from-teal-100 to-blue-100">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={
                       caregiver.image ||
@@ -329,52 +311,49 @@ export default function HomePage() {
                     }
                     alt={caregiver.name}
                     className="w-full h-full object-cover"
-                    width={400}
-                    height={600}
                   />
-                  <div className="absolute top-4 right-4 bg-white px-3 py-1.5 rounded-full flex items-center gap-1 shadow-lg">
-                    <span className="material-icons text-amber-400 text-sm">
+                  <div className="absolute top-2 sm:top-3 right-2 sm:right-3 bg-white px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full flex items-center gap-0.5 sm:gap-1 shadow-md">
+                    <span className="material-icons text-amber-400 text-xs sm:text-sm">
                       star
                     </span>
-                    <span className="font-bold text-slate-900 text-sm">
+                    <span className="font-bold text-slate-900 text-xs sm:text-sm">
                       {caregiver.avg_rating.toFixed(1)}
                     </span>
                   </div>
                   {caregiver.verification_status === "APPROVED" && (
-                    <div className="absolute top-4 left-4 bg-teal-600 text-white px-3 py-1 rounded-full text-xs font-bold">
+                    <div className="absolute top-2 sm:top-3 left-2 sm:left-3 bg-teal-600 text-white px-2 sm:px-2.5 py-0.5 rounded-full text-xs font-bold">
                       ✓ Verified
                     </div>
                   )}
                 </div>
-                <div className="p-6">
-                  <h3 className="font-bold text-lg text-slate-900 mb-1">
+                <div className="p-3 sm:p-4 md:p-5">
+                  <h3 className="font-bold text-sm sm:text-base md:text-lg text-slate-900 mb-0.5 truncate">
                     {caregiver.name}
                   </h3>
-                  <p className="text-sm text-teal-600 font-semibold mb-3">
+                  <p className="text-xs sm:text-sm text-teal-600 font-semibold mb-2 line-clamp-1">
                     {caregiver.services_offered[0] || "Caregiver"}
                   </p>
-                  <div className="flex items-center justify-between text-sm text-slate-600 mb-4">
-                    <span className="flex items-center gap-1">
-                      <span className="material-icons text-sm">work</span>
-                      {caregiver.experience} years
+                  <div className="flex items-center justify-between text-xs text-slate-600 mb-3 gap-1">
+                    <span className="flex items-center gap-0.5 sm:gap-1 min-w-0">
+                      <span className="material-icons text-xs">work</span>
+                      <span className="truncate">
+                        {caregiver.experience} yrs
+                      </span>
                     </span>
-                    <span className="flex items-center gap-1">
-                      <span className="material-icons text-sm">reviews</span>
-                      {caregiver.total_reviews} reviews
+                    <span className="flex items-center gap-0.5 sm:gap-1 min-w-0">
+                      <span className="material-icons text-xs">reviews</span>
+                      <span className="truncate">
+                        {caregiver.total_reviews}
+                      </span>
                     </span>
                   </div>
-                  <div className="flex items-center justify-between pt-4 border-t border-slate-100">
-                    <span className="text-2xl font-bold text-slate-900">
+                  <div className="flex items-center justify-between pt-3 border-t border-slate-100 gap-2">
+                    <span className="text-base sm:text-lg md:text-xl font-bold text-slate-900 shrink-0">
                       ${caregiver.hourly_rate}/hr
                     </span>
                     <Link href={`/caregivers/${caregiver.id}`}>
-                      <button className="bg-teal-600 hover:bg-teal-700 text-white rounded-lg font-semibold text-sm transition-all">
-                        <CustomButton
-                          className="bg-teal-600 hover:text-black text-white px-3 py-2 font-semibold text-[12px] transition-all hover:border-teal-600
-                        border-teal-600 rounded-xl"
-                        >
-                          View Profile
-                        </CustomButton>
+                      <button className="bg-teal-600 text-white px-2 sm:px-3 py-1 sm:py-1.5 font-semibold text-xs rounded-xl hover:bg-teal-700 transition-colors">
+                        View
                       </button>
                     </Link>
                   </div>
@@ -382,40 +361,36 @@ export default function HomePage() {
               </motion.div>
             ))}
           </div>
-          <div className="text-center mt-12">
-            <Link
-              href="/caregivers"
-              className="flex items-center justify-center mx-auto hover:text-black"
-            >
-              <CustomButton className="hover:text-black rounded-2xl px-5 py-4">
-                <span className="flex items-center gap-2">
-                  <span>Browse All Caregivers</span>
-                  <span className="material-icons text-base leading-none">
-                    arrow_forward
-                  </span>
+          <div className="text-center mt-10">
+            <Link href="/caregivers">
+              <button className="bg-teal-600 text-white rounded-2xl px-5 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base font-semibold hover:bg-teal-700 transition-colors inline-flex items-center gap-2">
+                Browse All Caregivers
+                <span className="material-icons text-base leading-none">
+                  arrow_forward
                 </span>
-              </CustomButton>
+              </button>
             </Link>
           </div>
         </div>
       </section>
 
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-50">
+      {/* How it Works */}
+      <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto text-center">
           <h2
-            className="text-4xl font-bold text-slate-900 mb-4"
+            className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 mb-3"
             data-aos="fade-up"
           >
             How it Works
           </h2>
           <p
-            className="text-xl text-slate-600 mb-16"
+            className="text-sm sm:text-base lg:text-lg text-slate-600 mb-10 sm:mb-14"
             data-aos="fade-up"
             data-aos-delay="100"
           >
             Finding the right care has never been easier
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5 md:gap-8 lg:gap-10 w-full">
             {[
               {
                 icon: "person_search",
@@ -438,24 +413,26 @@ export default function HomePage() {
             ].map((step, i) => (
               <motion.div
                 key={i}
-                whileHover={{ y: -10 }}
+                whileHover={{ y: -8 }}
                 data-aos="fade-up"
                 data-aos-delay={i * 100}
-                className="relative"
+                className="relative w-full min-w-0"
               >
-                <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all">
-                  <div className="absolute -top-4 -right-4 w-12 h-12 bg-amber-400 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                <div className="bg-white rounded-2xl p-4 sm:p-6 md:p-8 shadow-md hover:shadow-xl transition-all border border-slate-100 overflow-hidden">
+                  <div className="absolute top-3 right-3 sm:top-4 sm:right-4 md:-right-2 md:-top-2 w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-amber-400 rounded-full flex items-center justify-center text-white font-bold text-xs sm:text-sm md:text-base shadow-lg shrink-0">
                     {step.step}
                   </div>
-                  <div className="w-20 h-20 bg-teal-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                    <span className="material-icons text-teal-600 text-4xl">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-teal-100 rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-5 flex-shrink-0">
+                    <span className="material-icons text-teal-600 text-2xl sm:text-3xl md:text-4xl">
                       {step.icon}
                     </span>
                   </div>
-                  <h3 className="text-xl font-bold text-slate-900 mb-3">
+                  <h3 className="text-base sm:text-lg md:text-xl font-bold text-slate-900 mb-2 break-words">
                     {step.title}
                   </h3>
-                  <p className="text-slate-600">{step.desc}</p>
+                  <p className="text-xs sm:text-sm md:text-base text-slate-600 break-words">
+                    {step.desc}
+                  </p>
                 </div>
               </motion.div>
             ))}
@@ -464,24 +441,24 @@ export default function HomePage() {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+      <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-slate-50">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
+          <div className="text-center mb-10 sm:mb-14">
             <h2
-              className="text-4xl font-bold text-slate-900 mb-4"
+              className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 mb-3"
               data-aos="fade-up"
             >
               Why Families Choose Care.xyz
             </h2>
             <p
-              className="text-xl text-slate-600"
+              className="text-sm sm:text-base lg:text-lg text-slate-600"
               data-aos="fade-up"
               data-aos-delay="100"
             >
               The most trusted platform for finding quality care
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6 md:gap-8">
             {[
               {
                 icon: "verified_user",
@@ -510,56 +487,49 @@ export default function HomePage() {
             ].map((feature, i) => (
               <motion.div
                 key={i}
-                whileHover={{ y: -5 }}
+                whileHover={{ y: -4 }}
                 data-aos="fade-up"
                 data-aos-delay={i * 100}
                 className="text-center"
               >
                 <div
-                  className={`w-20 h-20 ${feature.color} rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg`}
+                  className={`w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 ${feature.color} rounded-2xl flex items-center justify-center mx-auto mb-3 sm:mb-4 md:mb-6 shadow-md`}
                 >
-                  <span className="material-icons text-4xl">
+                  <span className="material-icons text-2xl sm:text-3xl md:text-4xl">
                     {feature.icon}
                   </span>
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3">
+                <h3 className="text-base sm:text-lg md:text-xl font-bold text-slate-900 mb-2">
                   {feature.title}
                 </h3>
-                <p className="text-slate-600">{feature.desc}</p>
+                <p className="text-xs sm:text-sm md:text-base text-slate-600">
+                  {feature.desc}
+                </p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-linear-to-br from-teal-600 to-teal-700 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div
-            style={{
-              backgroundImage: `radial-linear(circle at 2px 2px, white 1px, transparent 0)`,
-              backgroundSize: "40px 40px",
-              height: "100%",
-            }}
-          ></div>
-        </div>
+      {/* Stats */}
+      <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-linear-to-br from-teal-600 to-teal-700 relative overflow-hidden">
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center mb-16">
+          <div className="text-center mb-10 sm:mb-14">
             <h2
-              className="text-4xl font-bold text-white mb-4"
+              className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3"
               data-aos="fade-up"
             >
               Trusted by Thousands
             </h2>
             <p
-              className="text-xl text-teal-100"
+              className="text-sm sm:text-base lg:text-lg text-teal-100"
               data-aos="fade-up"
               data-aos-delay="100"
             >
               Join the growing community of satisfied families
             </p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
             {[
               { number: "50,000+", label: "Verified Caregivers" },
               { number: "2M+", label: "Happy Families" },
@@ -568,34 +538,36 @@ export default function HomePage() {
             ].map((stat, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, scale: 0.5 }}
+                initial={{ opacity: 0, scale: 0.6 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
                 className="text-center"
               >
-                <div className="text-5xl md:text-6xl font-bold text-white mb-2">
+                <div className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-1 sm:mb-2">
                   {stat.number}
                 </div>
-                <div className="text-teal-100 font-semibold">{stat.label}</div>
+                <div className="text-xs sm:text-sm md:text-base text-teal-100 font-semibold">
+                  {stat.label}
+                </div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Testimonials Carousel */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-50">
+      {/* Testimonials */}
+      <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
+          <div className="text-center mb-8 sm:mb-12">
             <h2
-              className="text-4xl font-bold text-slate-900 mb-4"
+              className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 mb-3"
               data-aos="fade-up"
             >
               What Families Are Saying
             </h2>
             <p
-              className="text-xl text-slate-600"
+              className="text-sm sm:text-base lg:text-lg text-slate-600"
               data-aos="fade-up"
               data-aos-delay="100"
             >
@@ -604,11 +576,11 @@ export default function HomePage() {
           </div>
           <Swiper
             modules={[Autoplay, Pagination]}
-            spaceBetween={30}
+            spaceBetween={16}
             slidesPerView={1}
             breakpoints={{
-              640: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 },
+              640: { slidesPerView: 2, spaceBetween: 20 },
+              1024: { slidesPerView: 3, spaceBetween: 24 },
             }}
             autoplay={{ delay: 4000 }}
             pagination={{ clickable: true }}
@@ -657,30 +629,32 @@ export default function HomePage() {
               },
             ].map((testimonial, i) => (
               <SwiperSlide key={i}>
-                <div className="bg-white rounded-2xl p-8 shadow-lg h-full">
-                  <div className="flex items-center gap-1 mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <span key={i} className="material-icons text-amber-400">
+                <div className="bg-slate-50 rounded-2xl p-4 sm:p-5 md:p-7 shadow-sm h-full">
+                  <div className="flex items-center gap-0.5 mb-3">
+                    {[...Array(testimonial.rating)].map((_, j) => (
+                      <span
+                        key={j}
+                        className="material-icons text-amber-400 text-base sm:text-lg"
+                      >
                         star
                       </span>
                     ))}
                   </div>
-                  <p className="text-slate-600 mb-6 italic">
+                  <p className="text-slate-600 mb-4 sm:mb-5 italic text-xs sm:text-sm md:text-base">
                     &quot;{testimonial.text}&quot;
                   </p>
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-2 sm:gap-3">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={testimonial.image}
                       alt={testimonial.name}
-                      className="w-12 h-12 rounded-full object-cover"
-                      width={48}
-                      height={48}
+                      className="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover shrink-0"
                     />
-                    <div>
-                      <p className="font-bold text-slate-900">
+                    <div className="min-w-0">
+                      <p className="font-bold text-slate-900 text-xs sm:text-sm truncate">
                         {testimonial.name}
                       </p>
-                      <p className="text-sm text-slate-500">
+                      <p className="text-xs text-slate-500 truncate">
                         {testimonial.role}
                       </p>
                     </div>
@@ -692,24 +666,24 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* For Caregivers CTA */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+      {/* Caregiver CTA */}
+      <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-slate-50">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
+              initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl font-bold text-slate-900 mb-6">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 mb-4 sm:mb-6">
                 Are you a professional caregiver?
               </h2>
-              <p className="text-xl text-slate-600 mb-8">
+              <p className="text-sm sm:text-base lg:text-lg text-slate-600 mb-6 sm:mb-8">
                 Join thousands of caregivers who have found meaningful work
                 through our platform. Set your own rates, choose your schedule,
                 and connect with families who need your expertise.
               </p>
-              <ul className="space-y-4 mb-8">
+              <ul className="space-y-2.5 sm:space-y-3 mb-7 sm:mb-8">
                 {[
                   "Flexible scheduling that works for you",
                   "Competitive pay rates you control",
@@ -718,55 +692,54 @@ export default function HomePage() {
                   "Professional development resources",
                   "24/7 support team",
                 ].map((benefit, i) => (
-                  <li key={i} className="flex items-center gap-3">
-                    <div className="w-6 h-6 bg-teal-100 rounded-full flex items-center justify-center shrink-0">
-                      <span className="material-icons text-teal-600 text-sm">
+                  <li key={i} className="flex items-center gap-2.5 sm:gap-3">
+                    <div className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 bg-teal-100 rounded-full flex items-center justify-center shrink-0">
+                      <span className="material-icons text-teal-600 text-xs">
                         check
                       </span>
                     </div>
-                    <span className="text-slate-700">{benefit}</span>
+                    <span className="text-xs sm:text-sm md:text-base text-slate-700">
+                      {benefit}
+                    </span>
                   </li>
                 ))}
               </ul>
-              <CustomButton
-                className="bg-teal-600 hover:text-black text-white   font-bold transition-all hover:border-teal-600
-                        border-teal-600
- rounded-xl "
-              >
-                <Link href="/register?role=caregiver" className="flex ">
-                  <p> Start Your Caregiver Journey</p>
-                  <p className="material-icons">arrow_forward</p>
-                </Link>
-              </CustomButton>
+              <Link href="/register?role=caregiver">
+                <button className="bg-teal-600 text-white font-bold rounded-xl px-5 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-base hover:bg-teal-700 transition-colors inline-flex items-center gap-2">
+                  Start Your Caregiver Journey{" "}
+                  <span className="material-icons text-base">
+                    arrow_forward
+                  </span>
+                </button>
+              </Link>
             </motion.div>
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
+              initial={{ opacity: 0, x: 40 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               className="relative"
             >
               <div className="relative rounded-3xl overflow-hidden shadow-2xl">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=800&h=600&fit=crop"
                   alt="Professional caregiver"
-                  className="w-full h-[500px] object-cover"
-                  width={800}
-                  height={500}
+                  className="w-full h-56 sm:h-72 md:h-80 lg:h-[460px] object-cover"
                 />
-                <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 to-transparent"></div>
-                <div className="absolute bottom-8 left-8 right-8">
-                  <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6">
-                    <div className="flex items-center gap-4 mb-3">
-                      <div className="w-12 h-12 bg-teal-600 rounded-full flex items-center justify-center">
-                        <span className="material-icons text-white">
+                <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 md:bottom-8 md:left-8 md:right-8">
+                  <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-3 sm:p-4 md:p-6">
+                    <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
+                      <div className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-teal-600 rounded-full flex items-center justify-center shrink-0">
+                        <span className="material-icons text-white text-base sm:text-lg md:text-xl">
                           trending_up
                         </span>
                       </div>
                       <div>
-                        <p className="text-2xl font-bold text-slate-900">
+                        <p className="text-lg sm:text-xl md:text-2xl font-bold text-slate-900">
                           $2,500+
                         </p>
-                        <p className="text-sm text-slate-600">
+                        <p className="text-xs sm:text-sm text-slate-600">
                           Average monthly earnings
                         </p>
                       </div>
@@ -779,25 +752,25 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-50">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
+      {/* FAQ */}
+      <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-white">
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-8 sm:mb-12">
             <h2
-              className="text-4xl font-bold text-slate-900 mb-4"
+              className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 mb-3"
               data-aos="fade-up"
             >
               Frequently Asked Questions
             </h2>
             <p
-              className="text-xl text-slate-600"
+              className="text-sm sm:text-base lg:text-lg text-slate-600"
               data-aos="fade-up"
               data-aos-delay="100"
             >
               Everything you need to know about Care.xyz
             </p>
           </div>
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {[
               {
                 question: "How are caregivers verified?",
@@ -834,15 +807,15 @@ export default function HomePage() {
                 key={i}
                 data-aos="fade-up"
                 data-aos-delay={i * 50}
-                className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all group"
+                className="bg-slate-50 rounded-xl p-4 sm:p-5 md:p-6 shadow-sm hover:shadow-md transition-all group"
               >
-                <summary className="font-bold text-slate-900 cursor-pointer flex items-center justify-between">
+                <summary className="font-bold text-slate-900 cursor-pointer flex items-center justify-between text-sm sm:text-base">
                   {faq.question}
-                  <span className="material-icons text-teal-600 group-open:rotate-180 transition-transform">
+                  <span className="material-icons text-teal-600 group-open:rotate-180 transition-transform shrink-0 ml-3">
                     expand_more
                   </span>
                 </summary>
-                <p className="mt-4 text-slate-600 leading-relaxed">
+                <p className="mt-3 text-slate-600 leading-relaxed text-xs sm:text-sm md:text-base">
                   {faq.answer}
                 </p>
               </motion.details>
@@ -852,77 +825,94 @@ export default function HomePage() {
       </section>
 
       {/* Trust Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+      <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-slate-50">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
+              initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               className="relative"
             >
-              <div className="bg-linear-to-br from-amber-50 to-teal-50 rounded-3xl p-12 relative overflow-hidden">
-                <div className="relative z-10">
-                  <div className="w-full rounded-2xl flex items-center justify-center">
-                    <img
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOKf1ULoqcdo3xqKfjQywgtj2iKxOF-TJaUSAfqjJDqKafnWY1bDt7G7XDHiYSgJllU0wE1VnzgufihVStE9OReI_QzXfFugn9eW3SFgwcQK9CPQQ5yUQFiG1Oioedh4SQl7VarruPjMD50dv8FaJxlST3G377IQcGIDcc8zp95XkzZ3tzxfpLh341GlvccHpXOyq3V5iCDb8V-8ffJ9Y3VVLfEmgxa7L8M2HORBkZ9YPUb3xcISMau7eqkj88RlveAbA-N8zVmVk"
-                      alt="family image"
-                      width={400}
-                      height={650}
-                    />
-                  </div>
+              <div className="bg-linear-to-br from-amber-50 to-teal-50 rounded-3xl p-5 sm:p-8 md:p-10 relative overflow-hidden">
+                <div className="w-full rounded-2xl flex items-center justify-center">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOKf1ULoqcdo3xqKfjQywgtj2iKxOF-TJaUSAfqjJDqKafnWY1bDt7G7XDHiYSgJllU0wE1VnzgufihVStE9OReI_QzXfFugn9eW3SFgwcQK9CPQQ5yUQFiG1Oioedh4SQl7VarruPjMD50dv8FaJxlST3G377IQcGIDcc8zp95XkzZ3tzxfpLh341GlvccHpXOyq3V5iCDb8V-8ffJ9Y3VVLfEmgxa7L8M2HORBkZ9YPUb3xcISMau7eqkj88RlveAbA-N8zVmVk"
+                    alt="family"
+                    className="w-full rounded-2xl object-cover"
+                  />
                 </div>
-                <div className="absolute bottom-8 left-8 bg-amber-400 text-white px-6 py-4 rounded-2xl shadow-xl z-40">
-                  <p className="font-bold text-lg">
+                <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 md:bottom-8 md:left-8 md:right-8 bg-amber-400 text-white px-4 py-3 sm:px-5 sm:py-3.5 md:px-6 md:py-4 rounded-2xl shadow-xl z-40">
+                  <p className="font-bold text-xs sm:text-base md:text-lg">
                     &quot;Peace of mind is priceless.&quot;
                   </p>
                 </div>
               </div>
             </motion.div>
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
+              initial={{ opacity: 0, x: 40 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <div className="flex items-center gap-2 mb-4">
+              <div className="flex items-center gap-1 mb-4 sm:mb-5">
                 {[1, 2, 3, 4, 5].map((i) => (
-                  <span key={i} className="material-icons text-amber-400">
+                  <span
+                    key={i}
+                    className="material-icons text-amber-400 text-base sm:text-lg md:text-xl"
+                  >
                     star
                   </span>
                 ))}
               </div>
-              <h2 className="text-4xl font-bold text-slate-900 mb-6">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 mb-4 sm:mb-6">
                 Trust is our foundation for every care connection.
               </h2>
-              <p className="text-lg text-slate-600 mb-8 italic">
+              <p className="text-sm sm:text-base md:text-lg text-slate-600 mb-6 sm:mb-8 italic">
                 &quot;Finding a sitter for my two energetic boys was stressful
                 until I used Care.xyz. The vetting process gave me confidence,
                 and Sarah has been a blessing to our family for over a year
                 now.&quot;
               </p>
-              <div className="flex items-center gap-4 mb-12">
-                <div className="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center">
-                  <span className="material-icons text-teal-600">person</span>
+              <div className="flex items-center gap-2.5 sm:gap-3 md:gap-4 mb-8 sm:mb-12">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-teal-100 rounded-full flex items-center justify-center shrink-0">
+                  <span className="material-icons text-teal-600 text-base sm:text-lg">
+                    person
+                  </span>
                 </div>
                 <div>
-                  <p className="font-bold text-slate-900">Jessica Miller</p>
-                  <p className="text-sm text-slate-500">
+                  <p className="font-bold text-slate-900 text-xs sm:text-sm md:text-base">
+                    Jessica Miller
+                  </p>
+                  <p className="text-xs text-slate-500">
                     Parent, San Francisco
                   </p>
                 </div>
               </div>
-              <div className="grid grid-cols-3 gap-8">
+              <div className="grid grid-cols-3 gap-3 sm:gap-6 md:gap-8">
                 <div>
-                  <p className="text-3xl font-bold text-teal-600 mb-1">98%</p>
-                  <p className="text-sm text-slate-600">Satisfaction Rate</p>
+                  <p className="text-lg sm:text-2xl md:text-3xl font-bold text-teal-600 mb-1">
+                    98%
+                  </p>
+                  <p className="text-xs sm:text-sm text-slate-600">
+                    Satisfaction Rate
+                  </p>
                 </div>
                 <div>
-                  <p className="text-3xl font-bold text-teal-600 mb-1">50k+</p>
-                  <p className="text-sm text-slate-600">Verified Caregivers</p>
+                  <p className="text-lg sm:text-2xl md:text-3xl font-bold text-teal-600 mb-1">
+                    50k+
+                  </p>
+                  <p className="text-xs sm:text-sm text-slate-600">
+                    Verified Caregivers
+                  </p>
                 </div>
                 <div>
-                  <p className="text-3xl font-bold text-teal-600 mb-1">24/7</p>
-                  <p className="text-sm text-slate-600">Support Team</p>
+                  <p className="text-lg sm:text-2xl md:text-3xl font-bold text-teal-600 mb-1">
+                    24/7
+                  </p>
+                  <p className="text-xs sm:text-sm text-slate-600">
+                    Support Team
+                  </p>
                 </div>
               </div>
             </motion.div>
@@ -930,50 +920,42 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
+      {/* Final CTA */}
+      <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="max-w-6xl mx-auto bg-linear-to-r from-teal-600 to-teal-700 rounded-3xl p-12 text-center relative overflow-hidden"
+          className="max-w-5xl mx-auto bg-linear-to-r from-teal-600 to-teal-700 rounded-3xl p-6 sm:p-10 md:p-12 text-center relative overflow-hidden"
         >
-          <div className="absolute inset-0 opacity-10">
-            <div
-              style={{
-                backgroundImage: `radial-linear(circle at 2px 2px, white 1px, transparent 0)`,
-                backgroundSize: "40px 40px",
-                height: "100%",
-              }}
-            ></div>
-          </div>
           <div className="relative z-10">
-            <h2 className="text-4xl font-bold text-white mb-4">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4">
               Ready to find the perfect care?
             </h2>
-            <p className="text-xl text-teal-100 mb-8">
+            <p className="text-sm sm:text-base lg:text-lg text-teal-100 mb-6 sm:mb-8">
               Join thousands of families finding trusted help every day.
-              <br />
+              <br className="hidden sm:block" />
               Sign up now and get your first match within 24 hours.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
               <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.96 }}
               >
                 <Link
                   href="/register"
-                  className="inline-block bg-white text-teal-600 font-bold px-8 py-4 rounded-full hover:bg-slate-100 transition-all"
+                  className="inline-block bg-white text-teal-600 font-bold px-6 sm:px-7 py-2.5 sm:py-3.5 rounded-full hover:bg-slate-100 transition-all text-sm sm:text-base"
                 >
                   Get Started
                 </Link>
               </motion.div>
               <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.96 }}
               >
                 <Link
                   href="/register?role=caregiver"
-                  className="inline-block bg-transparent border-2 border-white text-white font-bold px-8 py-4 rounded-full hover:bg-white/10 transition-all"
+                  className="inline-block bg-transparent border-2 border-white text-white font-bold px-6 sm:px-7 py-2.5 sm:py-3.5 rounded-full hover:bg-white/10 transition-all text-sm sm:text-base"
                 >
                   Become a Caregiver
                 </Link>
@@ -983,121 +965,89 @@ export default function HomePage() {
         </motion.div>
       </section>
 
-      <footer className="bg-slate-900 py-16 px-4 sm:px-6 lg:px-8">
+      {/* Footer */}
+      <footer className="bg-slate-900 py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-            <div>
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 md:gap-10 mb-10 sm:mb-12">
+            <div className="col-span-2 sm:col-span-2 lg:col-span-1">
               <div className="flex items-center gap-2 mb-4">
                 <div className="w-8 h-8 bg-teal-600 rounded-lg flex items-center justify-center">
-                  <span className="material-icons text-white text-xl">
+                  <span className="material-icons text-white text-lg">
                     health_and_safety
                   </span>
                 </div>
-                <span className="text-xl font-bold text-white">Care.xyz</span>
+                <span className="text-base sm:text-lg md:text-xl font-bold text-white">
+                  Care.xyz
+                </span>
               </div>
-              <p className="text-slate-400 text-sm leading-relaxed">
+              <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
                 Transforming the way families find trusted, professional care
                 for their loved ones across the globe.
               </p>
             </div>
-
             <div>
-              <h4 className="font-bold text-white mb-4">Services</h4>
-              <ul className="space-y-3 text-sm text-slate-400">
-                <li>
-                  <Link
-                    href="#"
-                    className="hover:text-teal-400 transition-colors"
-                  >
-                    Senior Care
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="hover:text-teal-400 transition-colors"
-                  >
-                    Specialized Nursing
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="hover:text-teal-400 transition-colors"
-                  >
-                    Dementia Care
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="hover:text-teal-400 transition-colors"
-                  >
-                    Child Care
-                  </Link>
-                </li>
+              <h4 className="font-bold text-white mb-3 sm:mb-4 text-xs sm:text-sm md:text-base">
+                Services
+              </h4>
+              <ul className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-slate-400">
+                {[
+                  "Senior Care",
+                  "Specialized Nursing",
+                  "Dementia Care",
+                  "Child Care",
+                ].map((s) => (
+                  <li key={s}>
+                    <Link
+                      href="#"
+                      className="hover:text-teal-400 transition-colors"
+                    >
+                      {s}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
-
             <div>
-              <h4 className="font-bold text-white mb-4">Company</h4>
-              <ul className="space-y-3 text-sm text-slate-400">
-                <li>
-                  <Link
-                    href="#"
-                    className="hover:text-teal-400 transition-colors"
-                  >
-                    About Us
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="hover:text-teal-400 transition-colors"
-                  >
-                    Careers
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="hover:text-teal-400 transition-colors"
-                  >
-                    Privacy Policy
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="hover:text-teal-400 transition-colors"
-                  >
-                    Contact
-                  </Link>
-                </li>
+              <h4 className="font-bold text-white mb-3 sm:mb-4 text-xs sm:text-sm md:text-base">
+                Company
+              </h4>
+              <ul className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-slate-400">
+                {["About Us", "Careers", "Privacy Policy", "Contact"].map(
+                  (s) => (
+                    <li key={s}>
+                      <Link
+                        href="#"
+                        className="hover:text-teal-400 transition-colors"
+                      >
+                        {s}
+                      </Link>
+                    </li>
+                  ),
+                )}
               </ul>
             </div>
-
-            <div>
-              <h4 className="font-bold text-white mb-4">Newsletter</h4>
+            <div className="col-span-2 sm:col-span-1">
+              <h4 className="font-bold text-white mb-3 sm:mb-4 text-xs sm:text-sm md:text-base">
+                Newsletter
+              </h4>
               <div className="flex gap-2">
                 <input
                   type="email"
                   placeholder="Your email"
-                  className="flex-1 px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent text-sm"
+                  className="flex-1 px-2.5 sm:px-3 py-1.5 sm:py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500 text-xs sm:text-sm min-w-0"
                 />
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-6 py-2.5 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-lg transition-all text-sm"
+                  className="px-3 sm:px-4 py-1.5 sm:py-2 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-lg transition-all text-xs sm:text-sm shrink-0"
                 >
                   Join
                 </motion.button>
               </div>
             </div>
           </div>
-
-          <div className="border-t border-slate-800 pt-8 text-center">
-            <p className="text-sm text-slate-500">
+          <div className="border-t border-slate-800 pt-6 sm:pt-8 text-center">
+            <p className="text-xs sm:text-sm text-slate-500">
               © 2026 Care.xyz Inc. All rights reserved. Providing compassionate
               care nationwide.
             </p>

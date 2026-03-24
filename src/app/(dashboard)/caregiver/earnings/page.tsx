@@ -95,52 +95,60 @@ export default function CaregiverEarningsPage() {
   return (
     <>
       {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-slate-900 mb-2">My Earnings</h1>
-        <p className="text-slate-600">Track your income and payments</p>
+      <div className="mb-4 sm:mb-8">
+        <h1 className="text-lg sm:text-3xl font-bold text-slate-900 mb-2">
+          My Earnings
+        </h1>
+        <p className="text-xs sm:text-sm text-slate-600">
+          Track your income and payments
+        </p>
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div className="bg-gradient-to-br from-teal-600 to-teal-700 rounded-xl shadow-lg p-6 text-white">
-          <div className="flex items-center justify-between mb-4">
-            <span className="material-icons text-4xl opacity-80">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-6 mb-4 sm:mb-8">
+        <div className="bg-gradient-to-br from-teal-600 to-teal-700 rounded-xl shadow-lg p-4 sm:p-6 text-white">
+          <div className="flex items-center justify-between mb-2 sm:mb-4">
+            <span className="material-icons text-2xl sm:text-4xl opacity-80">
               account_balance_wallet
             </span>
-            <span className="text-sm bg-white/20 px-3 py-1 rounded-full">
+            <span className="text-xs sm:text-sm bg-white/20 px-2 sm:px-3 py-1 rounded-full">
               Total
             </span>
           </div>
-          <p className="text-sm opacity-90 mb-1">Total Earnings</p>
-          <p className="text-4xl font-bold">${totalEarnings.toFixed(2)}</p>
+          <p className="text-xs sm:text-sm opacity-90 mb-1">Total Earnings</p>
+          <p className="text-2xl sm:text-4xl font-bold">
+            ${totalEarnings.toFixed(2)}
+          </p>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-          <div className="flex items-center gap-3 mb-2">
-            <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-              <span className="material-icons text-blue-600">
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-3 sm:p-6">
+          <div className="flex items-center gap-2 sm:gap-3 mb-2">
+            <div className="w-8 h-8 sm:w-12 sm:h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+              <span className="material-icons text-base sm:text-2xl text-blue-600">
                 calendar_month
               </span>
             </div>
             <div>
-              <p className="text-sm text-slate-600">This Month</p>
-              <p className="text-2xl font-bold text-slate-900">
+              <p className="text-xs sm:text-sm text-slate-600">This Month</p>
+              <p className="text-lg sm:text-2xl font-bold text-slate-900">
                 ${thisMonthEarnings.toFixed(2)}
               </p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-          <div className="flex items-center gap-3 mb-2">
-            <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-              <span className="material-icons text-green-600">
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-3 sm:p-6">
+          <div className="flex items-center gap-2 sm:gap-3 mb-2">
+            <div className="w-8 h-8 sm:w-12 sm:h-12 bg-green-100 rounded-lg flex items-center justify-center">
+              <span className="material-icons text-base sm:text-2xl text-green-600">
                 check_circle
               </span>
             </div>
             <div>
-              <p className="text-sm text-slate-600">Completed Jobs</p>
-              <p className="text-2xl font-bold text-slate-900">
+              <p className="text-xs sm:text-sm text-slate-600">
+                Completed Jobs
+              </p>
+              <p className="text-lg sm:text-2xl font-bold text-slate-900">
                 {completedBookings}
               </p>
             </div>
@@ -165,13 +173,13 @@ export default function CaregiverEarningsPage() {
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4 mb-6">
-        <div className="flex flex-wrap gap-3">
+      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-3 sm:p-4 mb-4 sm:mb-6">
+        <div className="flex flex-wrap gap-2 sm:gap-3">
           {["all", "completed", "ongoing"].map((filterOption) => (
             <button
               key={filterOption}
               onClick={() => setFilter(filterOption)}
-              className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+              className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all ${
                 filter === filterOption
                   ? "bg-teal-600 text-white"
                   : "bg-slate-100 text-slate-700 hover:bg-slate-200"
@@ -202,22 +210,22 @@ export default function CaregiverEarningsPage() {
             <table className="w-full">
               <thead className="bg-slate-50 border-b border-slate-200">
                 <tr>
-                  <th className="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase">
+                  <th className="px-3 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-slate-600 uppercase">
                     Date
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase">
+                  <th className="hidden sm:table-cell px-3 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-slate-600 uppercase">
                     Booking ID
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase">
+                  <th className="px-3 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-slate-600 uppercase">
                     Service
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase">
+                  <th className="hidden sm:table-cell px-3 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-slate-600 uppercase">
                     Client
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase">
+                  <th className="px-3 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-slate-600 uppercase">
                     Amount
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase">
+                  <th className="px-3 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-slate-600 uppercase">
                     Status
                   </th>
                 </tr>
@@ -232,26 +240,26 @@ export default function CaregiverEarningsPage() {
                       key={earning.id}
                       className="hover:bg-slate-50 transition-colors"
                     >
-                      <td className="px-6 py-4 text-sm text-slate-900">
+                      <td className="px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm text-slate-900">
                         {new Date(earning.date).toLocaleDateString("en-US", {
                           year: "numeric",
                           month: "short",
                           day: "numeric",
                         })}
                       </td>
-                      <td className="px-6 py-4 text-sm text-slate-600 font-mono">
+                      <td className="hidden sm:table-cell px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm text-slate-600 font-mono">
                         {earning.booking_number}
                       </td>
-                      <td className="px-6 py-4 text-sm font-semibold text-slate-900">
+                      <td className="px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm font-semibold text-slate-900">
                         {earning.service_name}
                       </td>
-                      <td className="px-6 py-4 text-sm text-slate-600">
+                      <td className="hidden sm:table-cell px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm text-slate-600">
                         {earning.client_name}
                       </td>
-                      <td className="px-6 py-4 text-sm font-bold text-teal-600">
+                      <td className="px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm font-bold text-teal-600">
                         ${earning.amount.toFixed(2)}
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="px-3 sm:px-6 py-3 sm:py-4">
                         <span
                           className={`px-3 py-1 rounded-full text-xs font-semibold ${
                             earning.status === "COMPLETED"

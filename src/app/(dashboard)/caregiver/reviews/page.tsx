@@ -109,13 +109,17 @@ export default function CaregiverReviewsPage() {
   return (
     <>
       {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-slate-900 mb-2">My Reviews</h1>
-        <p className="text-slate-600">See what clients say about you</p>
+      <div className="mb-4 sm:mb-8">
+        <h1 className="text-lg sm:text-3xl font-bold text-slate-900 mb-2">
+          My Reviews
+        </h1>
+        <p className="text-xs sm:text-sm text-slate-600">
+          See what clients say about you
+        </p>
       </div>
 
       {/* Rating Overview */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 sm:gap-6 mb-4 sm:mb-8">
         {/* Average Rating Card */}
         <div className="bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl shadow-lg p-8 text-white">
           <div className="text-center">

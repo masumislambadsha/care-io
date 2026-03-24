@@ -360,21 +360,22 @@ export default function AddressesPage() {
   return (
     <>
       {/* Header */}
-      <div className="mb-8 flex items-center justify-between">
+      <div className="mb-4 sm:mb-8 flex gap-2 items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-slate-900 mb-2">
+          <h1 className="text-lg sm:text-3xl font-bold text-slate-900 mb-1 sm:mb-2">
             Saved Addresses
           </h1>
-          <p className="text-slate-600">
+          <p className="text-xs sm:text-sm text-slate-600">
             Manage your addresses for faster booking
           </p>
         </div>
         <button
           onClick={openAddModal}
-          className="px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-lg transition-all flex items-center gap-2"
+          className="px-3 sm:px-6 py-2 sm:py-3 bg-teal-600 hover:bg-teal-700 text-white text-xs sm:text-sm font-semibold rounded-lg transition-all flex items-center gap-1 sm:gap-2"
         >
-          <span className="material-icons">add</span>
-          Add Address
+          <span className="material-icons text-sm sm:text-base" style={{fontSize:"15px"}}>add</span>
+          <span className="hidden sm:inline">Add Address</span>
+          <span className="sm:hidden">Add</span>
         </button>
       </div>
 
@@ -394,9 +395,9 @@ export default function AddressesPage() {
           </p>
           <button
             onClick={openAddModal}
-            className="px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-lg transition-all inline-flex items-center gap-2"
+            className=" px-3 text-sm sm:px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-lg transition-all inline-flex items-center gap-2"
           >
-            <span className="material-icons">add</span>
+            <span className="material-icons" style={{fontSize:"15px"}}>add</span>
             Add First Address
           </button>
         </div>

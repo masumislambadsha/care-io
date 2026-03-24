@@ -68,7 +68,7 @@ export const authOptions: NextAuthOptions = {
 
         if (!existingUser) {
           // Create new user
-          const { data: newUser } = await supabaseAdmin
+          const { data: newUser, error: insertError } = await supabaseAdmin
             .from("users")
             .insert({
               email: token.email,
@@ -76,9 +76,15 @@ export const authOptions: NextAuthOptions = {
               image: token.picture || null,
               email_verified: new Date().toISOString(),
               role: "CLIENT",
+              status: "ACTIVE",
             })
             .select()
             .single();
+
+          if (insertError || !newUser) {
+            console.error("Google OAuth user creation failed:", insertError);
+            return token;
+          }
 
           token.id = newUser.id;
           token.role = newUser.role;

@@ -158,34 +158,38 @@ export default function NotificationsPage() {
   return (
     <>
       {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-slate-900 mb-2">
+      <div className="mb-4 sm:mb-8">
+        <h1 className="text-lg sm:text-3xl font-bold text-slate-900 mb-2">
           Notifications
         </h1>
-        <p className="text-slate-600">Stay updated with your activities</p>
+        <p className="text-xs sm:text-sm text-slate-600">
+          Stay updated with your activities
+        </p>
       </div>
 
       {/* Stats & Actions */}
-      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
+      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-3 sm:p-6 mb-4 sm:mb-6">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4 sm:gap-6">
             <div>
-              <p className="text-sm text-slate-600">Total</p>
-              <p className="text-2xl font-bold text-slate-900">
+              <p className="text-xs sm:text-sm text-slate-600">Total</p>
+              <p className="text-lg sm:text-2xl font-bold text-slate-900">
                 {notifications.length}
               </p>
             </div>
-            <div className="w-px h-12 bg-slate-200"></div>
+            <div className="w-px h-10 sm:h-12 bg-slate-200"></div>
             <div>
-              <p className="text-sm text-slate-600">Unread</p>
-              <p className="text-2xl font-bold text-teal-600">{unreadCount}</p>
+              <p className="text-xs sm:text-sm text-slate-600">Unread</p>
+              <p className="text-lg sm:text-2xl font-bold text-teal-600">
+                {unreadCount}
+              </p>
             </div>
           </div>
 
           {unreadCount > 0 && (
             <button
               onClick={markAllAsRead}
-              className="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-lg transition-all"
+              className="px-3 sm:px-4 py-1.5 sm:py-2 bg-teal-600 hover:bg-teal-700 text-white text-xs sm:text-sm font-semibold rounded-lg transition-all"
             >
               Mark All as Read
             </button>
@@ -194,12 +198,24 @@ export default function NotificationsPage() {
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4 mb-6">
-        <div className="flex gap-3">
+      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-3 sm:p-4 mb-4 sm:mb-6">
+        <div className="flex gap-2 sm:gap-3">
           <button
             onClick={() => setFilter("all")}
-            className={`px-4
-late-100 text-slate-700 hover:bg-slate-200"
+            className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all ${
+              filter === "all"
+                ? "bg-teal-600 text-white"
+                : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+            }`}
+          >
+            All ({notifications.length})
+          </button>
+          <button
+            onClick={() => setFilter("unread")}
+            className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all ${
+              filter === "unread"
+                ? "bg-teal-600 text-white"
+                : "bg-slate-100 text-slate-700 hover:bg-slate-200"
             }`}
           >
             Unread ({unreadCount})
