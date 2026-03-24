@@ -3,6 +3,7 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import toast from "react-hot-toast";
 
 export default function ProfilePage() {
@@ -126,6 +127,8 @@ export default function ProfilePage() {
       if (response.ok) {
         setFormData((prev) => ({ ...prev, image: data.url }));
         toast.success("Image uploaded successfully");
+        // Immediately refresh session so avatars update everywhere
+        await update({ user: { image: data.url } });
       } else {
         toast.error(data.error || "Failed to upload image");
       }
@@ -160,10 +163,12 @@ export default function ProfilePage() {
             <div className="flex items-end gap-2 sm:gap-4">
               <div className="relative group">
                 <div className="w-20 h-20 sm:w-32 sm:h-32 bg-white rounded-full border-4 border-white shadow-lg overflow-hidden">
-                  {formData.image ? (
-                    <img
-                      src={formData.image}
+                  {formData.image || session?.user?.image ? (
+                    <Image
+                      src={formData.image || session?.user?.image!}
                       alt={formData.name}
+                      width={128}
+                      height={128}
                       className="w-full h-full object-cover"
                     />
                   ) : (
@@ -306,7 +311,9 @@ export default function ProfilePage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
         {/* Security */}
         <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
-          <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">Security</h3>
+          <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">
+            Security
+          </h3>
           <button className="w-full flex items-center justify-between p-4 border-2 border-slate-200 dark:border-slate-600 rounded-lg hover:border-teal-600 hover:bg-teal-50 dark:hover:bg-teal-900/20 transition-all group">
             <div className="flex items-center gap-3">
               <span className="material-icons text-slate-600 dark:text-slate-400 group-hover:text-teal-600">
@@ -324,7 +331,9 @@ export default function ProfilePage() {
 
         {/* Preferences */}
         <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
-          <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">Preferences</h3>
+          <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">
+            Preferences
+          </h3>
           <button className="w-full flex items-center justify-between p-4 border-2 border-slate-200 dark:border-slate-600 rounded-lg hover:border-teal-600 hover:bg-teal-50 dark:hover:bg-teal-900/20 transition-all group">
             <div className="flex items-center gap-3">
               <span className="material-icons text-slate-600 dark:text-slate-400 group-hover:text-teal-600">

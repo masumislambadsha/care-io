@@ -15,14 +15,14 @@ export function ThemeToggle() {
   return (
     <button
       onClick={handleToggle}
-      className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+      className="p-1 rounded-lg cursor-pointer transition-colors"
       aria-label="Toggle theme"
       title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
     >
       {theme === "dark" ? (
         <span className="material-icons text-amber-400">light_mode</span>
       ) : (
-        <span className="material-icons text-slate-600">dark_mode</span>
+        <span className="material-icons text-teal-600">dark_mode</span>
       )}
     </button>
   );

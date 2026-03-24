@@ -132,7 +132,7 @@ export default function CaregiversPage() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="bg-linear-to-br from-teal-600 to-teal-700 text-white py-16">
+      <section className="bg-linear-to-br from-teal-600 to-teal-700 text-white pt-40 -mt-15 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

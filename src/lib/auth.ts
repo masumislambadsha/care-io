@@ -52,10 +52,11 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user, account }) {
+    async jwt({ token, user, account, trigger, session }) {
       if (user) {
         token.id = user.id as string;
         token.role = user.role as string;
+        token.image = user.image as string | null;
       }
 
       // Handle Google OAuth
@@ -67,7 +68,7 @@ export const authOptions: NextAuthOptions = {
           .single();
 
         if (!existingUser) {
-          // Create new user
+          // Create new user — store Google profile image
           const { data: newUser, error: insertError } = await supabaseAdmin
             .from("users")
             .insert({
@@ -88,10 +89,34 @@ export const authOptions: NextAuthOptions = {
 
           token.id = newUser.id;
           token.role = newUser.role;
+          token.image = newUser.image ?? null;
         } else {
           token.id = existingUser.id;
           token.role = existingUser.role;
+          token.image = existingUser.image ?? null;
+
+          // If DB has no image yet, store the Google one
+          if (!existingUser.image && token.picture) {
+            await supabaseAdmin
+              .from("users")
+              .update({ image: token.picture })
+              .eq("id", existingUser.id);
+            token.image = token.picture;
+          }
         }
+      }
+
+      // On session update (e.g. after profile save) or on every refresh,
+      // pull the latest image from the DB so uploads are reflected immediately
+      if (trigger === "update" && session?.user?.image !== undefined) {
+        token.image = session.user.image;
+      } else if (token.id && !user && !account) {
+        const { data: dbUser } = await supabaseAdmin
+          .from("users")
+          .select("image")
+          .eq("id", token.id)
+          .single();
+        if (dbUser) token.image = dbUser.image ?? null;
       }
 
       return token;
@@ -100,6 +125,8 @@ export const authOptions: NextAuthOptions = {
       if (session.user) {
         session.user.id = token.id as string;
         session.user.role = token.role as string;
+        session.user.image =
+          (token.image as string) ?? session.user.image ?? null;
       }
       return session;
     },

@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
@@ -9,6 +10,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import NotificationButton from "./NotificationButton";
 import BurgerCheckbox from "./BurgerCheckbox";
 import { ThemeToggle } from "./shared/ThemeToggle";
+import profile from "../../public/profile.png"
 
 const navLinks = [
   { href: "/services", label: "Services" },
@@ -57,9 +59,10 @@ export default function Navbar() {
         ? "/caregiver/schedule"
         : "/dashboard";
 
+        const noProfileImg = profile
   return (
     <>
-      <nav className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-50 shadow-sm">
+      <nav className="base backdrop-blur-3xl border-b border-slate-200 dark:border-slate-700 fixed w-full top-0 z-50 shadow-sm ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
@@ -72,7 +75,7 @@ export default function Navbar() {
                   health_and_safety
                 </span>
               </div>
-              <span className="text-xl font-bold text-slate-900 dark:text-white">
+              <span className="text-xl font-bold text-white">
                 Care.xyz
               </span>
             </Link>
@@ -83,7 +86,7 @@ export default function Navbar() {
                 <Link
                   key={href}
                   href={href}
-                  className="text-slate-700 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400 font-medium transition-colors"
+                  className="text-slate-300 hover:text-teal-600 dark:hover:text-teal-400 font-medium transition-colors"
                 >
                   {label}
                 </Link>
@@ -102,16 +105,27 @@ export default function Navbar() {
                   <div className="relative hidden md:block" ref={dropdownRef}>
                     <button
                       onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                      className="flex items-center gap-3 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg p-2 transition-colors"
+                      className="flex items-center gap-3 cursor-pointer rounded-lg p-2 transition-colors"
                     >
-                      <div className="w-10 h-10 bg-teal-600 rounded-full flex items-center justify-center text-white font-bold">
-                        {session.user?.name?.charAt(0).toUpperCase() || "U"}
+                      <div className="w-10 h-10 bg-teal-600 rounded-full flex items-center justify-center text-white font-bold overflow-hidden">
+
+                        {session.user?.image ? (
+                          <Image
+                            src={session.user.image || noProfileImg}
+                            alt={session.user.name || "User"}
+                            width={40}
+                            height={40}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          session.user?.name?.charAt(0).toUpperCase() || "U"
+                        )}
                       </div>
                       <div className="hidden md:block text-left">
-                        <p className="text-sm font-semibold text-slate-900 dark:text-white">
+                        <p className="text-sm font-semibold text-[#f5f5f5]">
                           {session.user?.name}
                         </p>
-                        <p className="text-xs text-slate-500 dark:text-slate-400">
+                        <p className="text-xs text-slate-400">
                           {session.user?.role}
                         </p>
                       </div>
@@ -286,8 +300,18 @@ export default function Navbar() {
               {session ? (
                 <>
                   <div className="flex items-center gap-3 mb-5">
-                    <div className="w-10 h-10 rounded-full bg-teal-600 flex items-center justify-center text-white font-bold">
-                      {session.user?.name?.[0]?.toUpperCase()}
+                    <div className="w-10 h-10 rounded-full bg-teal-600 flex items-center justify-center text-white font-bold overflow-hidden">
+                      {session.user?.image ? (
+                        <Image
+                          src={session.user.image}
+                          alt={session.user.name || "User"}
+                          width={40}
+                          height={40}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        session.user?.name?.[0]?.toUpperCase()
+                      )}
                     </div>
                     <div>
                       <p className="text-sm font-semibold text-slate-900 dark:text-white">

@@ -134,7 +134,7 @@ export default function NotificationButton() {
   if (!mounted) {
     return (
       <div className="relative">
-        <button className="relative p-2 rounded-lg hover:bg-teal-50 text-teal-600 transition-colors">
+        <button className="relative p-1 cursor-pointer rounded-lg text-teal-600 transition-colors">
           <span className="material-symbols-outlined text-xl">
             notifications
           </span>
@@ -148,7 +148,7 @@ export default function NotificationButton() {
       <button
         ref={btnRef}
         onClick={handleToggle}
-        className="relative p-2 rounded-lg hover:bg-teal-50 text-teal-600 transition-colors"
+        className="relative p-1 rounded-lg cursor-pointer text-teal-600 transition-colors"
       >
         <span className="material-symbols-outlined text-xl">notifications</span>
         {unreadCount > 0 && (

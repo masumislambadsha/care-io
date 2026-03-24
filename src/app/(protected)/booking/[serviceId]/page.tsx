@@ -40,7 +40,7 @@ export default function BookingPage() {
     startTime: "",
     endDate: "",
     durationType: "HOURLY" as "HOURLY" | "DAILY" | "WEEKLY",
-    durationValue: 1,
+    durationValue: 0,
     division: "",
     district: "",
     city: "",
@@ -82,10 +82,10 @@ export default function BookingPage() {
 
   if (status === "loading") {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center dark:bg-slate-950">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-teal-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-slate-600">Loading...</p>
+          <p className="text-slate-600 dark:text-slate-400">Loading...</p>
         </div>
       </div>
     );
@@ -181,11 +181,11 @@ export default function BookingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 overflow-x-hidden">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 overflow-x-hidden">
       <Navbar />
 
       {/* Progress Steps */}
-      <div className="bg-white border-b border-slate-200 py-5 overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 py-5 overflow-hidden">
         <div className="max-w-4xl mx-auto px-4">
           <div className="flex items-center justify-between">
             {steps.map((step, index) => (
@@ -195,7 +195,7 @@ export default function BookingPage() {
                     className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-all ${
                       currentStep >= step.number
                         ? "bg-teal-600 text-white shadow-md shadow-teal-200"
-                        : "bg-slate-100 text-slate-400"
+                        : "bg-slate-100 dark:bg-slate-700 text-slate-400 dark:text-slate-500"
                     }`}
                   >
                     {currentStep > step.number ? (
@@ -217,7 +217,9 @@ export default function BookingPage() {
                 {index < steps.length - 1 && (
                   <div
                     className={`flex-1 h-0.5 mx-3 transition-all ${
-                      currentStep > step.number ? "bg-teal-500" : "bg-slate-200"
+                      currentStep > step.number
+                        ? "bg-teal-500"
+                        : "bg-slate-200 dark:bg-slate-700"
                     }`}
                   />
                 )}
@@ -241,11 +243,11 @@ export default function BookingPage() {
           transition={{ duration: 0.3 }}
         >
           {currentStep === 1 && (
-            <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-4 sm:p-8">
-              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-3 sm:mb-6">
+            <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg border border-slate-100 dark:border-slate-700 p-4 sm:p-8">
+              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-6">
                 Choose Your Caregiver
               </h2>
-              <p className="text-slate-600 mb-5 sm:mb-8">
+              <p className="text-slate-600 dark:text-slate-400 mb-5 sm:mb-8">
                 Select a caregiver for this service
               </p>
 
@@ -254,11 +256,13 @@ export default function BookingPage() {
                 {loadingCaregivers ? (
                   <div className="text-center py-12">
                     <div className="w-12 h-12 border-4 border-teal-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                    <p className="text-slate-600">Loading caregivers...</p>
+                    <p className="text-slate-600 dark:text-slate-400">
+                      Loading caregivers...
+                    </p>
                   </div>
                 ) : caregivers.length === 0 ? (
                   <div className="text-center py-12">
-                    <p className="text-slate-600">
+                    <p className="text-slate-600 dark:text-slate-400">
                       No caregivers available at the moment
                     </p>
                   </div>
@@ -274,8 +278,8 @@ export default function BookingPage() {
                       }
                       className={`border-2 rounded-xl p-4 sm:p-6 cursor-pointer transition-all hover:shadow-lg ${
                         bookingData.caregiverId === caregiver.id
-                          ? "border-teal-600 bg-teal-50"
-                          : "border-slate-200 hover:border-teal-300"
+                          ? "border-teal-600 bg-teal-50 dark:bg-teal-900/20"
+                          : "border-slate-200 dark:border-slate-600 hover:border-teal-300"
                       }`}
                     >
                       <div className="flex items-start gap-3 sm:gap-6">
@@ -293,10 +297,10 @@ export default function BookingPage() {
                         <div className="flex-1 min-w-0">
                           <div className="flex items-start justify-between mb-2 gap-2">
                             <div className="min-w-0">
-                              <h3 className="text-base sm:text-xl font-bold text-slate-900 truncate">
+                              <h3 className="text-base sm:text-xl font-bold text-slate-900 dark:text-white truncate">
                                 {caregiver.name}
                               </h3>
-                              <p className="text-xs sm:text-sm text-slate-600">
+                              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
                                 {caregiver.experience} years experience
                               </p>
                             </div>
@@ -319,17 +323,17 @@ export default function BookingPage() {
                                   className={`material-icons text-xs sm:text-sm ${
                                     i < Math.floor(caregiver.avg_rating)
                                       ? "text-yellow-400"
-                                      : "text-slate-300"
+                                      : "text-slate-300 dark:text-slate-600"
                                   }`}
                                 >
                                   star
                                 </span>
                               ))}
                             </div>
-                            <span className="text-xs sm:text-sm font-semibold text-slate-700">
+                            <span className="text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300">
                               {caregiver.avg_rating.toFixed(1)}
                             </span>
-                            <span className="text-xs sm:text-sm text-slate-500">
+                            <span className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
                               ({caregiver.total_reviews} reviews)
                             </span>
                           </div>
@@ -374,18 +378,18 @@ export default function BookingPage() {
           )}
 
           {currentStep === 2 && (
-            <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-4 sm:p-8">
-              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-3 sm:mb-6 break-words">
+            <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg border border-slate-100 dark:border-slate-700 p-4 sm:p-8">
+              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-6 break-words">
                 Schedule Your Service
               </h2>
-              <p className="text-slate-600 mb-5 sm:mb-8 text-sm sm:text-base">
+              <p className="text-slate-600 dark:text-slate-400 mb-5 sm:mb-8 text-sm sm:text-base">
                 Choose date, time, and duration
               </p>
 
               <div className="space-y-6">
                 {/* Duration Type */}
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-3">
+                  <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-3">
                     Duration Type
                   </label>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -397,8 +401,8 @@ export default function BookingPage() {
                         }
                         className={`p-4 border-2 rounded-xl font-semibold transition-all ${
                           bookingData.durationType === type
-                            ? "border-teal-600 bg-teal-50 text-teal-700"
-                            : "border-slate-200 text-slate-700 hover:border-teal-300"
+                            ? "border-teal-600 bg-teal-50 dark:bg-teal-900/20 text-teal-700 dark:text-teal-400"
+                            : "border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-300 hover:border-teal-300"
                         }`}
                       >
                         {type}
@@ -410,7 +414,7 @@ export default function BookingPage() {
                 {/* Start Date & Time */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-semibold text-slate-700 mb-2">
+                    <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                       Start Date
                     </label>
                     <div className="relative">
@@ -427,13 +431,13 @@ export default function BookingPage() {
                           })
                         }
                         min={new Date().toISOString().split("T")[0]}
-                        className="w-full px-4 py-3 pl-11 border-2 border-slate-200 rounded-lg focus:border-teal-600 focus:outline-none text-slate-900 cursor-pointer"
+                        className="w-full px-4 py-3 pl-11 border-2 border-slate-200 dark:border-slate-600 rounded-lg focus:border-teal-600 focus:outline-none text-slate-900 dark:text-white dark:bg-slate-700 cursor-pointer"
                         style={{ colorScheme: "light" }}
                       />
                     </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-slate-700 mb-2">
+                    <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                       Start Time
                     </label>
                     <div className="relative">
@@ -449,7 +453,7 @@ export default function BookingPage() {
                             startTime: e.target.value,
                           })
                         }
-                        className="w-full px-4 py-3 pl-11 border-2 border-slate-200 rounded-lg focus:border-teal-600 focus:outline-none text-slate-900 cursor-pointer"
+                        className="w-full px-4 py-3 pl-11 border-2 border-slate-200 dark:border-slate-600 rounded-lg focus:border-teal-600 focus:outline-none text-slate-900 dark:text-white dark:bg-slate-700 cursor-pointer"
                         style={{ colorScheme: "light" }}
                       />
                     </div>
@@ -458,7 +462,7 @@ export default function BookingPage() {
 
                 {/* Duration Value */}
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-2">
+                  <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                     Duration (
                     {bookingData.durationType === "HOURLY"
                       ? "hours"
@@ -479,9 +483,9 @@ export default function BookingPage() {
                           ),
                         })
                       }
-                      className="sm:w-12 w-10 sm:h-12 h-10 flex items-center justify-center border-2 border-slate-200 rounded-lg hover:border-teal-600 hover:bg-teal-50 transition-all"
+                      className="sm:w-12 w-10 sm:h-12 h-10 flex items-center justify-center border-2 border-slate-200 dark:border-slate-600 rounded-lg hover:border-teal-600 hover:bg-teal-50 dark:hover:bg-teal-900/20 transition-all"
                     >
-                      <span className="material-icons text-slate-700">
+                      <span className="material-icons text-slate-700 dark:text-slate-300">
                         remove
                       </span>
                     </button>
@@ -498,7 +502,7 @@ export default function BookingPage() {
                           });
                         }
                       }}
-                      className="sm:px-4 py-3 border-2 border-slate-200 rounded-lg focus:border-teal-600 focus:outline-none text-slate-900 text-center text-xs sm:text-xl font-semibold"
+                      className="sm:px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-lg focus:border-teal-600 focus:outline-none text-slate-900 dark:text-white dark:bg-slate-700 text-center text-xs w-full sm:text-xl font-semibold"
                     />
                     <button
                       type="button"
@@ -508,9 +512,11 @@ export default function BookingPage() {
                           durationValue: bookingData.durationValue + 1,
                         })
                       }
-                      className="sm:w-12 w-10 sm:h-12 h-10 flex items-center justify-center border-2 border-slate-200 rounded-lg hover:border-teal-600 hover:bg-teal-50 transition-all"
+                      className="sm:w-12 w-10 sm:h-12 h-10 flex items-center justify-center border-2 border-slate-200 dark:border-slate-600 rounded-lg hover:border-teal-600 hover:bg-teal-50 dark:hover:bg-teal-900/20 transition-all"
                     >
-                      <span className="material-icons text-slate-700">add</span>
+                      <span className="material-icons text-slate-700 dark:text-slate-300">
+                        add
+                      </span>
                     </button>
                   </div>
                 </div>
@@ -540,11 +546,11 @@ export default function BookingPage() {
           )}
 
           {currentStep === 3 && (
-            <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-4 sm:p-8">
-              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-3 sm:mb-6">
+            <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg border border-slate-100 dark:border-slate-700 p-4 sm:p-8">
+              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-6">
                 Service Location
               </h2>
-              <p className="text-slate-600 mb-5 sm:mb-8">
+              <p className="text-slate-600 dark:text-slate-400 mb-5 sm:mb-8">
                 Where should the caregiver provide service?
               </p>
 
@@ -696,11 +702,11 @@ export default function BookingPage() {
           )}
 
           {currentStep === 4 && (
-            <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-4 sm:p-8">
-              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-3 sm:mb-6">
+            <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg border border-slate-100 dark:border-slate-700 p-4 sm:p-8">
+              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-6">
                 Review & Payment
               </h2>
-              <p className="text-slate-600 mb-5 sm:mb-8">
+              <p className="text-slate-600 dark:text-slate-400 mb-5 sm:mb-8">
                 Review your booking and proceed to payment
               </p>
 

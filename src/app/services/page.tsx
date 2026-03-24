@@ -125,7 +125,7 @@ export default function ServicesPage() {
         </div>
       </div>
 
-      <section className="bg-linear-to-br from-teal-600 to-teal-700 py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      <section className="bg-linear-to-br from-teal-600 to-teal-700 -mt-15 pt-40 py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div
             style={{

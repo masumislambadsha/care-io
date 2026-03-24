@@ -4,6 +4,7 @@ import { useSession, signOut } from "next-auth/react";
 import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import toast from "react-hot-toast";
 import NotificationButton from "@/components/NotificationButton";
 import { ThemeToggle } from "@/components/shared/ThemeToggle";
@@ -173,8 +174,18 @@ export default function DashboardLayout({
               !isSidebarOpen && "justify-center"
             }`}
           >
-            <div className="w-10 h-10 bg-teal-600 rounded-full flex items-center justify-center text-white font-bold">
-              {session?.user?.name?.charAt(0).toUpperCase()}
+            <div className="w-10 h-10 bg-teal-600 rounded-full flex items-center justify-center text-white font-bold overflow-hidden shrink-0">
+              {session?.user?.image ? (
+                <Image
+                  src={session.user.image}
+                  alt={session.user.name || "User"}
+                  width={40}
+                  height={40}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                session?.user?.name?.charAt(0).toUpperCase()
+              )}
             </div>
             {isSidebarOpen && (
               <div className="flex-1 min-w-0">
