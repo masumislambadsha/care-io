@@ -10,7 +10,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import NotificationButton from "./NotificationButton";
 import BurgerCheckbox from "./BurgerCheckbox";
 import { ThemeToggle } from "./shared/ThemeToggle";
-import profile from "../../public/profile.png"
+import profile from "../../public/profile.png";
 
 const navLinks = [
   { href: "/services", label: "Services" },
@@ -59,10 +59,10 @@ export default function Navbar() {
         ? "/caregiver/schedule"
         : "/dashboard";
 
-        const noProfileImg = profile
+  const noProfileImg = profile;
   return (
     <>
-      <nav className="base backdrop-blur-3xl border-b border-slate-200 dark:border-slate-700 fixed w-full top-0 z-50 shadow-sm ">
+      <nav className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-3xl border-b border-slate-200 dark:border-slate-700 fixed w-full top-0 z-50 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
@@ -75,9 +75,7 @@ export default function Navbar() {
                   health_and_safety
                 </span>
               </div>
-              <span className="text-xl font-bold text-white">
-                Care.xyz
-              </span>
+              <span className="text-xl font-bold text-slate-900 dark:text-white">Care.xyz</span>
             </Link>
 
             {/* Desktop Nav Links */}
@@ -86,7 +84,7 @@ export default function Navbar() {
                 <Link
                   key={href}
                   href={href}
-                  className="text-slate-300 hover:text-teal-600 dark:hover:text-teal-400 font-medium transition-colors"
+                  className="dark:text-slate-300 text-slate-900 hover:text-teal-600 dark:hover:text-teal-400 font-medium transition-colors"
                 >
                   {label}
                 </Link>
@@ -108,7 +106,6 @@ export default function Navbar() {
                       className="flex items-center gap-3 cursor-pointer rounded-lg p-2 transition-colors"
                     >
                       <div className="w-10 h-10 bg-teal-600 rounded-full flex items-center justify-center text-white font-bold overflow-hidden">
-
                         {session.user?.image ? (
                           <Image
                             src={session.user.image || noProfileImg}
@@ -122,7 +119,7 @@ export default function Navbar() {
                         )}
                       </div>
                       <div className="hidden md:block text-left">
-                        <p className="text-sm font-semibold text-[#f5f5f5]">
+                        <p className="text-sm font-semibold text-slate-900 dark:text-white">
                           {session.user?.name}
                         </p>
                         <p className="text-xs text-slate-400">

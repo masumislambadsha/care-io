@@ -7,6 +7,13 @@ import { useSession } from "next-auth/react";
 import Navbar from "@/components/Navbar";
 import toast from "react-hot-toast";
 import { PromoCodeInput } from "@/components/booking/PromoCodeInput";
+import { DatePicker, DateField, Calendar, Label, TimeField } from "@heroui/react";
+import {
+  parseDate,
+  today,
+  getLocalTimeZone,
+  type CalendarDate,
+} from "@internationalized/date";
 
 type Step = 1 | 2 | 3 | 4;
 
@@ -49,7 +56,6 @@ export default function BookingPage() {
     specialInstructions: "",
   });
 
-  // Fetch caregivers
   useEffect(() => {
     fetchCaregivers();
   }, []);
@@ -59,7 +65,6 @@ export default function BookingPage() {
       setLoadingCaregivers(true);
       const response = await fetch("/api/caregivers");
       const data = await response.json();
-
       if (response.ok) {
         setCaregivers(data.caregivers || []);
       } else {
@@ -73,7 +78,6 @@ export default function BookingPage() {
     }
   };
 
-  // Redirect if not authenticated
   useEffect(() => {
     if (status === "unauthenticated") {
       router.push(`/login?callbackUrl=/booking/${serviceId}`);
@@ -99,30 +103,21 @@ export default function BookingPage() {
   ];
 
   const nextStep = () => {
-    if (currentStep < 4) {
-      setCurrentStep((currentStep + 1) as Step);
-    }
+    if (currentStep < 4) setCurrentStep((currentStep + 1) as Step);
   };
 
   const prevStep = () => {
-    if (currentStep > 1) {
-      setCurrentStep((currentStep - 1) as Step);
-    }
+    if (currentStep > 1) setCurrentStep((currentStep - 1) as Step);
   };
 
   const handlePayment = async () => {
     setIsProcessing(true);
-
     try {
-      // Calculate amounts
       const baseAmount = 25 * bookingData.durationValue;
       const platformFee = baseAmount * 0.1;
       const totalAmount = baseAmount + platformFee - promoDiscount;
-
-      // Combine date and time
       const startDateTime = `${bookingData.startDate}T${bookingData.startTime}`;
 
-      // Store booking data in session storage for success page
       sessionStorage.setItem(
         "pendingBooking",
         JSON.stringify({
@@ -138,12 +133,9 @@ export default function BookingPage() {
 
       toast.loading("Creating checkout session...");
 
-      // Create checkout session
       const response = await fetch("/api/bookings/create-checkout", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...bookingData,
           startDate: startDateTime,
@@ -161,7 +153,6 @@ export default function BookingPage() {
         throw new Error(data.error || "Failed to create checkout session");
       }
 
-      // Redirect to Stripe Checkout URL directly
       if (data.url) {
         toast.dismiss();
         toast.success("Redirecting to payment...");
@@ -185,7 +176,7 @@ export default function BookingPage() {
       <Navbar />
 
       {/* Progress Steps */}
-      <div className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 py-5 overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 -mt-15 pt-40 py-6 overflow-hidden">
         <div className="max-w-4xl mx-auto px-4">
           <div className="flex items-center justify-between">
             {steps.map((step, index) => (
@@ -242,6 +233,7 @@ export default function BookingPage() {
           exit={{ opacity: 0, x: -20 }}
           transition={{ duration: 0.3 }}
         >
+          {/* Step 1 - Choose Caregiver */}
           {currentStep === 1 && (
             <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg border border-slate-100 dark:border-slate-700 p-4 sm:p-8">
               <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-6">
@@ -251,14 +243,11 @@ export default function BookingPage() {
                 Select a caregiver for this service
               </p>
 
-              {/* Caregiver Cards */}
               <div className="space-y-4">
                 {loadingCaregivers ? (
                   <div className="text-center py-12">
                     <div className="w-12 h-12 border-4 border-teal-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                    <p className="text-slate-600 dark:text-slate-400">
-                      Loading caregivers...
-                    </p>
+                    <p className="text-slate-600 dark:text-slate-400">Loading caregivers...</p>
                   </div>
                 ) : caregivers.length === 0 ? (
                   <div className="text-center py-12">
@@ -271,10 +260,7 @@ export default function BookingPage() {
                     <div
                       key={caregiver.id}
                       onClick={() =>
-                        setBookingData({
-                          ...bookingData,
-                          caregiverId: caregiver.id,
-                        })
+                        setBookingData({ ...bookingData, caregiverId: caregiver.id })
                       }
                       className={`border-2 rounded-xl p-4 sm:p-6 cursor-pointer transition-all hover:shadow-lg ${
                         bookingData.caregiverId === caregiver.id
@@ -283,7 +269,6 @@ export default function BookingPage() {
                       }`}
                     >
                       <div className="flex items-start gap-3 sm:gap-6">
-                        {/* Avatar */}
                         <img
                           src={
                             caregiver.image ||
@@ -292,8 +277,6 @@ export default function BookingPage() {
                           alt={caregiver.name}
                           className="w-16 h-16 sm:w-24 sm:h-24 rounded-full object-cover border-4 border-white shadow-lg flex-shrink-0"
                         />
-
-                        {/* Info */}
                         <div className="flex-1 min-w-0">
                           <div className="flex items-start justify-between mb-2 gap-2">
                             <div className="min-w-0">
@@ -307,14 +290,10 @@ export default function BookingPage() {
                             <div className="text-right flex-shrink-0">
                               <div className="text-lg sm:text-2xl font-bold text-teal-600">
                                 ${caregiver.hourly_rate}
-                                <span className="text-xs sm:text-sm text-slate-500">
-                                  /hr
-                                </span>
+                                <span className="text-xs sm:text-sm text-slate-500">/hr</span>
                               </div>
                             </div>
                           </div>
-
-                          {/* Rating */}
                           <div className="flex items-center gap-1 sm:gap-2 mb-2 sm:mb-3 flex-wrap">
                             <div className="flex items-center gap-0.5">
                               {[...Array(5)].map((_, i) => (
@@ -337,24 +316,18 @@ export default function BookingPage() {
                               ({caregiver.total_reviews} reviews)
                             </span>
                           </div>
-
-                          {/* Certifications */}
                           <div className="flex flex-wrap gap-1 sm:gap-2">
-                            {caregiver.certifications
-                              .slice(0, 3)
-                              .map((cert, idx) => (
-                                <span
-                                  key={idx}
-                                  className="px-2 sm:px-3 py-0.5 sm:py-1 bg-teal-100 text-teal-700 text-xs font-semibold rounded-full"
-                                >
-                                  {cert}
-                                </span>
-                              ))}
+                            {caregiver.certifications.slice(0, 3).map((cert, idx) => (
+                              <span
+                                key={idx}
+                                className="px-2 sm:px-3 py-0.5 sm:py-1 bg-teal-100 text-teal-700 text-xs font-semibold rounded-full"
+                              >
+                                {cert}
+                              </span>
+                            ))}
                           </div>
                         </div>
-
-                        {/* Selection Indicator */}
-                        <div className="flex items-center flex-shrink-0">
+                        <div className="flex items-center shrink-0">
                           <div
                             className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full border-2 flex items-center justify-center ${
                               bookingData.caregiverId === caregiver.id
@@ -377,9 +350,10 @@ export default function BookingPage() {
             </div>
           )}
 
+          {/* Step 2 - Schedule */}
           {currentStep === 2 && (
             <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg border border-slate-100 dark:border-slate-700 p-4 sm:p-8">
-              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-6 break-words">
+              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-6 wrap-break-word">
                 Schedule Your Service
               </h2>
               <p className="text-slate-600 dark:text-slate-400 mb-5 sm:mb-8 text-sm sm:text-base">
@@ -412,51 +386,102 @@ export default function BookingPage() {
                 </div>
 
                 {/* Start Date & Time */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid items-center grid-cols-1 sm:grid-cols-2 gap-4">
+                  {/* Start Date */}
                   <div>
-                    <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
-                      Start Date
-                    </label>
-                    <div className="relative">
-                      <span className="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-teal-600 z-10 pointer-events-none">
-                        calendar_today
-                      </span>
-                      <input
-                        type="date"
-                        value={bookingData.startDate}
-                        onChange={(e) =>
-                          setBookingData({
-                            ...bookingData,
-                            startDate: e.target.value,
-                          })
-                        }
-                        min={new Date().toISOString().split("T")[0]}
-                        className="w-full px-4 py-3 pl-11 border-2 border-slate-200 dark:border-slate-600 rounded-lg focus:border-teal-600 focus:outline-none text-slate-900 dark:text-white dark:bg-slate-700 cursor-pointer"
-                        style={{ colorScheme: "light" }}
-                      />
-                    </div>
+                    <DatePicker
+                      className="w-full [&>div:first-child]:mb-2"
+                      name="startDate"
+                      minValue={today(getLocalTimeZone())}
+                      value={
+                        bookingData.startDate
+                          ? parseDate(bookingData.startDate)
+                          : null
+                      }
+                      onChange={(date: CalendarDate | null) =>
+                        setBookingData({
+                          ...bookingData,
+                          startDate: date ? date.toString() : "",
+                        })
+                      }
+                    >
+                      <Label className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                        Start Date
+                      </Label>
+                      <DateField.Group
+                        fullWidth
+                        className="flex items-center gap-3 px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 hover:border-teal-600 transition-colors w-full [&>*]:p-0 [&>*]:border-0 [&>*]:shadow-none [&>*]:bg-transparent"
+                      >
+                        <span className="material-symbols-outlined text-teal-600 text-xl shrink-0">
+                          calendar_today
+                        </span>
+                        <DateField.Input className="flex-1 text-slate-900 dark:text-white bg-transparent p-0">
+                          {(segment) => <DateField.Segment segment={segment} />}
+                        </DateField.Input>
+                        <DateField.Suffix>
+                          <DatePicker.Trigger className="text-slate-400 hover:text-teal-600 transition-colors">
+                            <DatePicker.TriggerIndicator />
+                          </DatePicker.Trigger>
+                        </DateField.Suffix>
+                      </DateField.Group>
+                      <DatePicker.Popover>
+                        <Calendar aria-label="Start date">
+                          <Calendar.Header>
+                            <Calendar.YearPickerTrigger>
+                              <Calendar.YearPickerTriggerHeading />
+                              <Calendar.YearPickerTriggerIndicator />
+                            </Calendar.YearPickerTrigger>
+                            <Calendar.NavButton slot="previous" />
+                            <Calendar.NavButton slot="next" />
+                          </Calendar.Header>
+                          <Calendar.Grid>
+                            <Calendar.GridHeader>
+                              {(day) => (
+                                <Calendar.HeaderCell>{day}</Calendar.HeaderCell>
+                              )}
+                            </Calendar.GridHeader>
+                            <Calendar.GridBody>
+                              {(date) => <Calendar.Cell date={date} />}
+                            </Calendar.GridBody>
+                          </Calendar.Grid>
+                          <Calendar.YearPickerGrid>
+                            <Calendar.YearPickerGridBody>
+                              {({ year }) => (
+                                <Calendar.YearPickerCell year={year} />
+                              )}
+                            </Calendar.YearPickerGridBody>
+                          </Calendar.YearPickerGrid>
+                        </Calendar>
+                      </DatePicker.Popover>
+                    </DatePicker>
                   </div>
+
+                  {/* Start Time */}
                   <div>
-                    <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
-                      Start Time
-                    </label>
-                    <div className="relative">
-                      <span className="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-teal-600 z-10 pointer-events-none">
-                        schedule
-                      </span>
-                      <input
-                        type="time"
-                        value={bookingData.startTime}
-                        onChange={(e) =>
-                          setBookingData({
-                            ...bookingData,
-                            startTime: e.target.value,
-                          })
-                        }
-                        className="w-full px-4 py-3 pl-11 border-2 border-slate-200 dark:border-slate-600 rounded-lg focus:border-teal-600 focus:outline-none text-slate-900 dark:text-white dark:bg-slate-700 cursor-pointer"
-                        style={{ colorScheme: "light" }}
-                      />
-                    </div>
+                    <TimeField
+                      className="w-full [&>div:first-child]:mb-2"
+                      name="startTime"
+                      onChange={(time) =>
+                        setBookingData({
+                          ...bookingData,
+                          startTime: time
+                            ? `${String(time.hour).padStart(2, "0")}:${String(time.minute).padStart(2, "0")}`
+                            : "",
+                        })
+                      }
+                    >
+                      <Label className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                        Start Time
+                      </Label>
+                      <TimeField.Group className="flex items-center gap-3 px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 hover:border-teal-600 transition-colors w-full [&>*]:p-0 [&>*]:border-0 [&>*]:shadow-none [&>*]:bg-transparent">
+                        <span className="material-icons text-teal-600 text-xl shrink-0">
+                          schedule
+                        </span>
+                        <TimeField.Input className="flex-1 text-slate-900 dark:text-white bg-transparent p-0">
+                          {(segment) => <TimeField.Segment segment={segment} />}
+                        </TimeField.Input>
+                      </TimeField.Group>
+                    </TimeField>
                   </div>
                 </div>
 
@@ -477,10 +502,7 @@ export default function BookingPage() {
                       onClick={() =>
                         setBookingData({
                           ...bookingData,
-                          durationValue: Math.max(
-                            1,
-                            bookingData.durationValue - 1,
-                          ),
+                          durationValue: Math.max(1, bookingData.durationValue - 1),
                         })
                       }
                       className="sm:w-12 w-10 sm:h-12 h-10 flex items-center justify-center border-2 border-slate-200 dark:border-slate-600 rounded-lg hover:border-teal-600 hover:bg-teal-50 dark:hover:bg-teal-900/20 transition-all"
@@ -528,16 +550,10 @@ export default function BookingPage() {
                     <span className="font-semibold">
                       Service will be provided for {bookingData.durationValue}{" "}
                       {bookingData.durationType === "HOURLY"
-                        ? bookingData.durationValue === 1
-                          ? "hour"
-                          : "hours"
+                        ? bookingData.durationValue === 1 ? "hour" : "hours"
                         : bookingData.durationType === "DAILY"
-                          ? bookingData.durationValue === 1
-                            ? "day"
-                            : "days"
-                          : bookingData.durationValue === 1
-                            ? "week"
-                            : "weeks"}
+                          ? bookingData.durationValue === 1 ? "day" : "days"
+                          : bookingData.durationValue === 1 ? "week" : "weeks"}
                     </span>
                   </div>
                 </div>
@@ -545,6 +561,7 @@ export default function BookingPage() {
             </div>
           )}
 
+          {/* Step 3 - Location */}
           {currentStep === 3 && (
             <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg border border-slate-100 dark:border-slate-700 p-4 sm:p-8">
               <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-6">
@@ -555,7 +572,6 @@ export default function BookingPage() {
               </p>
 
               <div className="space-y-6">
-                {/* Division */}
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-2">
                     Division
@@ -585,7 +601,6 @@ export default function BookingPage() {
                   </select>
                 </div>
 
-                {/* District */}
                 {bookingData.division && (
                   <div>
                     <label className="block text-sm font-semibold text-slate-700 mb-2">
@@ -615,16 +630,14 @@ export default function BookingPage() {
                       {bookingData.division === "Chittagong" && (
                         <>
                           <option value="Chittagong">Chittagong</option>
-                          <option value="Cox's Bazar">Cox's Bazar</option>
+                          <option value="Cox's Bazar">Cox&apos;s Bazar</option>
                           <option value="Comilla">Comilla</option>
                         </>
                       )}
-                      {/* Add more districts for other divisions as needed */}
                     </select>
                   </div>
                 )}
 
-                {/* City */}
                 {bookingData.district && (
                   <div>
                     <label className="block text-sm font-semibold text-slate-700 mb-2">
@@ -642,7 +655,6 @@ export default function BookingPage() {
                   </div>
                 )}
 
-                {/* Area */}
                 {bookingData.city && (
                   <div>
                     <label className="block text-sm font-semibold text-slate-700 mb-2">
@@ -660,7 +672,6 @@ export default function BookingPage() {
                   </div>
                 )}
 
-                {/* Full Address */}
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-2">
                     Full Address
@@ -668,10 +679,7 @@ export default function BookingPage() {
                   <textarea
                     value={bookingData.address}
                     onChange={(e) =>
-                      setBookingData({
-                        ...bookingData,
-                        address: e.target.value,
-                      })
+                      setBookingData({ ...bookingData, address: e.target.value })
                     }
                     placeholder="House/Flat number, Road, Block, etc."
                     rows={3}
@@ -679,7 +687,6 @@ export default function BookingPage() {
                   />
                 </div>
 
-                {/* Special Instructions */}
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-2">
                     Special Instructions (Optional)
@@ -701,6 +708,7 @@ export default function BookingPage() {
             </div>
           )}
 
+          {/* Step 4 - Review & Pay */}
           {currentStep === 4 && (
             <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg border border-slate-100 dark:border-slate-700 p-4 sm:p-8">
               <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-6">
@@ -713,11 +721,7 @@ export default function BookingPage() {
               <div className="space-y-6">
                 {/* Booking Summary */}
                 <div className="bg-slate-50 rounded-xl p-6 space-y-4">
-                  <h3 className="text-lg font-bold text-slate-900 mb-4">
-                    Booking Summary
-                  </h3>
-
-                  {/* Caregiver Info */}
+                  <h3 className="text-lg font-bold text-slate-900 mb-4">Booking Summary</h3>
                   <div className="flex items-center gap-4 pb-4 border-b border-slate-200">
                     {(() => {
                       const selectedCaregiver = caregivers.find(
@@ -734,9 +738,7 @@ export default function BookingPage() {
                             className="w-16 h-16 rounded-full object-cover"
                           />
                           <div>
-                            <p className="font-semibold text-slate-900">
-                              {selectedCaregiver.name}
-                            </p>
+                            <p className="font-semibold text-slate-900">{selectedCaregiver.name}</p>
                             <p className="text-sm text-slate-600">
                               {selectedCaregiver.experience} years experience
                             </p>
@@ -748,12 +750,9 @@ export default function BookingPage() {
                     })()}
                   </div>
 
-                  {/* Schedule */}
                   <div className="space-y-2">
                     <div className="flex items-center gap-2 text-slate-700">
-                      <span className="material-icons text-teal-600 text-sm">
-                        calendar_today
-                      </span>
+                      <span className="material-icons text-teal-600 text-sm">calendar_today</span>
                       <span className="text-sm">
                         {bookingData.startDate && bookingData.startTime
                           ? `${bookingData.startDate} at ${bookingData.startTime}`
@@ -761,9 +760,7 @@ export default function BookingPage() {
                       </span>
                     </div>
                     <div className="flex items-center gap-2 text-slate-700">
-                      <span className="material-icons text-teal-600 text-sm">
-                        schedule
-                      </span>
+                      <span className="material-icons text-teal-600 text-sm">schedule</span>
                       <span className="text-sm">
                         {bookingData.durationValue}{" "}
                         {bookingData.durationType.toLowerCase()}
@@ -771,22 +768,13 @@ export default function BookingPage() {
                     </div>
                   </div>
 
-                  {/* Location */}
                   <div className="pt-4 border-t border-slate-200">
                     <div className="flex items-start gap-2 text-slate-700">
-                      <span className="material-icons text-teal-600 text-sm">
-                        location_on
-                      </span>
+                      <span className="material-icons text-teal-600 text-sm">location_on</span>
                       <div className="text-sm">
-                        <p>
-                          {bookingData.area}, {bookingData.city}
-                        </p>
-                        <p>
-                          {bookingData.district}, {bookingData.division}
-                        </p>
-                        <p className="text-slate-600 mt-1">
-                          {bookingData.address}
-                        </p>
+                        <p>{bookingData.area}, {bookingData.city}</p>
+                        <p>{bookingData.district}, {bookingData.division}</p>
+                        <p className="text-slate-600 mt-1">{bookingData.address}</p>
                       </div>
                     </div>
                   </div>
@@ -794,17 +782,11 @@ export default function BookingPage() {
 
                 {/* Price Breakdown */}
                 <div className="bg-slate-50 rounded-xl p-6">
-                  <h3 className="text-lg font-bold text-slate-900 mb-4">
-                    Price Breakdown
-                  </h3>
+                  <h3 className="text-lg font-bold text-slate-900 mb-4">Price Breakdown</h3>
                   <div className="space-y-3">
                     <div className="flex justify-between text-slate-700">
-                      <span>
-                        Base Rate ($25/hr × {bookingData.durationValue})
-                      </span>
-                      <span className="font-semibold">
-                        ${25 * bookingData.durationValue}
-                      </span>
+                      <span>Base Rate ($25/hr × {bookingData.durationValue})</span>
+                      <span className="font-semibold">${25 * bookingData.durationValue}</span>
                     </div>
                     <div className="flex justify-between text-slate-700">
                       <span>Platform Fee (10%)</span>
@@ -815,19 +797,13 @@ export default function BookingPage() {
                     {promoDiscount > 0 && (
                       <div className="flex justify-between text-green-600">
                         <span>Promo Discount ({promoCode})</span>
-                        <span className="font-semibold">
-                          -${promoDiscount.toFixed(2)}
-                        </span>
+                        <span className="font-semibold">-${promoDiscount.toFixed(2)}</span>
                       </div>
                     )}
                     <div className="pt-3 border-t-2 border-slate-300 flex justify-between text-lg font-bold text-slate-900">
                       <span>Total Amount</span>
                       <span className="text-teal-600">
-                        $
-                        {(
-                          25 * bookingData.durationValue * 1.1 -
-                          promoDiscount
-                        ).toFixed(2)}
+                        ${(25 * bookingData.durationValue * 1.1 - promoDiscount).toFixed(2)}
                       </span>
                     </div>
                   </div>
@@ -835,12 +811,9 @@ export default function BookingPage() {
 
                 {/* Promo Code */}
                 <div className="bg-slate-50 rounded-xl p-6">
-                  {/* Promo Banner */}
-                  <div className="bg-gradient-to-r from-teal-500 to-teal-600 rounded-lg p-4 mb-4 text-white">
+                  <div className="bg-linear-to-r from-teal-500 to-teal-600 rounded-lg p-4 mb-4 text-white">
                     <div className="flex items-center gap-3">
-                      <span className="material-icons text-3xl">
-                        local_offer
-                      </span>
+                      <span className="material-icons text-3xl">local_offer</span>
                       <div>
                         <p className="font-bold text-lg">New User Offer!</p>
                         <p className="text-sm text-teal-50">
@@ -853,7 +826,6 @@ export default function BookingPage() {
                       </div>
                     </div>
                   </div>
-
                   <PromoCodeInput
                     bookingAmount={25 * bookingData.durationValue * 1.1}
                     onApply={(discount, code) => {
@@ -865,11 +837,7 @@ export default function BookingPage() {
 
                 {/* Payment Method */}
                 <div className="bg-slate-50 rounded-xl p-6">
-                  <h3 className="text-lg font-bold text-slate-900 mb-4">
-                    Payment Method
-                  </h3>
-
-                  {/* Test Card Info Banner */}
+                  <h3 className="text-lg font-bold text-slate-900 mb-4">Payment Method</h3>
                   <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-4 mb-4">
                     <div className="flex items-start gap-3">
                       <span className="material-icons text-blue-600">info</span>
@@ -891,18 +859,11 @@ export default function BookingPage() {
                       </div>
                     </div>
                   </div>
-
                   <div className="flex items-center gap-3 p-4 bg-white border-2 border-teal-600 rounded-lg">
-                    <span className="material-icons text-teal-600">
-                      credit_card
-                    </span>
+                    <span className="material-icons text-teal-600">credit_card</span>
                     <div>
-                      <p className="font-semibold text-slate-900">
-                        Stripe Checkout
-                      </p>
-                      <p className="text-sm text-slate-600">
-                        Secure payment via Stripe
-                      </p>
+                      <p className="font-semibold text-slate-900">Stripe Checkout</p>
+                      <p className="text-sm text-slate-600">Secure payment via Stripe</p>
                     </div>
                   </div>
                 </div>
@@ -910,13 +871,10 @@ export default function BookingPage() {
                 {/* Terms */}
                 <div className="bg-yellow-50 border-2 border-yellow-200 rounded-xl p-4">
                   <div className="flex items-start gap-2">
-                    <span className="material-icons text-yellow-600 text-sm">
-                      info
-                    </span>
+                    <span className="material-icons text-yellow-600 text-sm">info</span>
                     <p className="text-sm text-yellow-800">
-                      By proceeding, you agree to our Terms of Service and
-                      Cancellation Policy. Payment will be processed securely
-                      through Stripe.
+                      By proceeding, you agree to our Terms of Service and Cancellation
+                      Policy. Payment will be processed securely through Stripe.
                     </p>
                   </div>
                 </div>

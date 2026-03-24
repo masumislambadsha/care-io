@@ -17,6 +17,8 @@
     "clean": "rm -rf .next out node_modules/.cache"
   },
   "dependencies": {
+    "@heroui/react": "^3.0.1",
+    "@heroui/styles": "^3.0.1",
     "@hookform/resolvers": "^5.2.2",
     "@react-email/components": "^1.0.7",
     "@reduxjs/toolkit": "^2.11.2",
