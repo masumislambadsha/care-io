@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -199,7 +199,7 @@ export default function ProfilePage() {
                 )}
               </div>
               <div className="mb-2 sm:mb-4">
-                <h2 className="text-base sm:text-2xl font-bold text-slate-900">
+                <h2 className="text-base sm:text-2xl font-bold text-slate-900 dark:text-white">
                   {formData.name}
                 </h2>
                 <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 truncate max-w-[140px] sm:max-w-none">
@@ -222,7 +222,7 @@ export default function ProfilePage() {
           <div className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                   Full Name
                 </label>
                 <input
@@ -232,12 +232,12 @@ export default function ProfilePage() {
                     setFormData({ ...formData, name: e.target.value })
                   }
                   disabled={!isEditing}
-                  className="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-lg focus:border-teal-600 focus:outline-none text-slate-900 dark:text-white dark:bg-slate-700 disabled:bg-slate-50"
+                  className="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-lg focus:border-teal-600 focus:outline-none text-slate-900 dark:text-white dark:bg-slate-700 disabled:bg-slate-50 dark:disabled:bg-slate-800"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                   Email Address
                 </label>
                 <input
@@ -249,7 +249,7 @@ export default function ProfilePage() {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                   Phone Number
                 </label>
                 <input
@@ -260,12 +260,12 @@ export default function ProfilePage() {
                   }
                   disabled={!isEditing}
                   placeholder="+880 1XXX-XXXXXX"
-                  className="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-lg focus:border-teal-600 focus:outline-none text-slate-900 dark:text-white dark:bg-slate-700 disabled:bg-slate-50"
+                  className="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-lg focus:border-teal-600 focus:outline-none text-slate-900 dark:text-white dark:bg-slate-700 disabled:bg-slate-50 dark:disabled:bg-slate-800"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                   Role
                 </label>
                 <input
@@ -292,7 +292,7 @@ export default function ProfilePage() {
                     fetchProfile();
                   }}
                   disabled={isSaving}
-                  className="flex-1 px-6 py-3 border-2 border-slate-200 text-slate-700 font-semibold rounded-lg hover:border-teal-600 hover:text-teal-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 px-6 py-3 border-2 border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-300 font-semibold rounded-lg hover:border-teal-600 hover:text-teal-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Cancel
                 </button>
@@ -306,13 +306,13 @@ export default function ProfilePage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
         {/* Security */}
         <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
-          <h3 className="text-lg font-bold text-slate-900 mb-4">Security</h3>
-          <button className="w-full flex items-center justify-between p-4 border-2 border-slate-200 rounded-lg hover:border-teal-600 hover:bg-teal-50 transition-all group">
+          <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">Security</h3>
+          <button className="w-full flex items-center justify-between p-4 border-2 border-slate-200 dark:border-slate-600 rounded-lg hover:border-teal-600 hover:bg-teal-50 dark:hover:bg-teal-900/20 transition-all group">
             <div className="flex items-center gap-3">
               <span className="material-icons text-slate-600 dark:text-slate-400 group-hover:text-teal-600">
                 lock
               </span>
-              <span className="font-semibold text-slate-900 group-hover:text-teal-700">
+              <span className="font-semibold text-slate-900 dark:text-white group-hover:text-teal-700">
                 Change Password
               </span>
             </div>
@@ -324,13 +324,13 @@ export default function ProfilePage() {
 
         {/* Preferences */}
         <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
-          <h3 className="text-lg font-bold text-slate-900 mb-4">Preferences</h3>
-          <button className="w-full flex items-center justify-between p-4 border-2 border-slate-200 rounded-lg hover:border-teal-600 hover:bg-teal-50 transition-all group">
+          <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">Preferences</h3>
+          <button className="w-full flex items-center justify-between p-4 border-2 border-slate-200 dark:border-slate-600 rounded-lg hover:border-teal-600 hover:bg-teal-50 dark:hover:bg-teal-900/20 transition-all group">
             <div className="flex items-center gap-3">
               <span className="material-icons text-slate-600 dark:text-slate-400 group-hover:text-teal-600">
                 notifications
               </span>
-              <span className="font-semibold text-slate-900 group-hover:text-teal-700">
+              <span className="font-semibold text-slate-900 dark:text-white group-hover:text-teal-700">
                 Notifications
               </span>
             </div>

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -98,7 +98,7 @@ export default function PaymentsPage() {
   return (
     <>
       <div className="mb-4 sm:mb-8">
-        <h1 className="text-lg sm:text-3xl font-bold text-slate-900 mb-1 sm:mb-2">
+        <h1 className="text-lg sm:text-3xl font-bold text-slate-900 dark:text-white mb-1 sm:mb-2">
           Payment History
         </h1>
         <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
@@ -119,7 +119,7 @@ export default function PaymentsPage() {
               <p className="text-[10px] sm:text-xs text-slate-600 dark:text-slate-400 leading-tight">
                 Total Spent
               </p>
-              <p className="text-xs sm:text-2xl font-bold text-slate-900 leading-tight">
+              <p className="text-xs sm:text-2xl font-bold text-slate-900 dark:text-white leading-tight">
                 ${totalSpent.toFixed(2)}
               </p>
             </div>
@@ -136,7 +136,7 @@ export default function PaymentsPage() {
               <p className="text-[10px] sm:text-xs text-slate-600 dark:text-slate-400 leading-tight">
                 Successful
               </p>
-              <p className="text-xs sm:text-2xl font-bold text-slate-900 leading-tight">
+              <p className="text-xs sm:text-2xl font-bold text-slate-900 dark:text-white leading-tight">
                 {successfulPayments}
               </p>
             </div>
@@ -153,7 +153,7 @@ export default function PaymentsPage() {
               <p className="text-[10px] sm:text-xs text-slate-600 dark:text-slate-400 leading-tight">
                 Transactions
               </p>
-              <p className="text-xs sm:text-2xl font-bold text-slate-900 leading-tight">
+              <p className="text-xs sm:text-2xl font-bold text-slate-900 dark:text-white leading-tight">
                 {payments.length}
               </p>
             </div>
@@ -172,7 +172,7 @@ export default function PaymentsPage() {
                 className={`px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm rounded-lg font-semibold transition-all ${
                   filter === filterOption
                     ? "bg-teal-600 text-white"
-                    : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                    : "bg-slate-100 text-slate-700 hover:bg-slate-200 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-slate-600"
                 }`}
               >
                 {filterOption.charAt(0).toUpperCase() + filterOption.slice(1)}
@@ -185,12 +185,12 @@ export default function PaymentsPage() {
       {/* Payments List */}
       {payments.length === 0 ? (
         <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-12 text-center">
-          <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div className="w-20 h-20 bg-slate-100 dark:bg-slate-700 rounded-full flex items-center justify-center mx-auto mb-4">
             <span className="material-icons text-slate-400 text-4xl">
               receipt
             </span>
           </div>
-          <h3 className="text-xl font-bold text-slate-900 mb-2">
+          <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
             No payments yet
           </h3>
           <p className="text-slate-600 dark:text-slate-400">
@@ -235,7 +235,7 @@ export default function PaymentsPage() {
                       key={payment.id}
                       className="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors"
                     >
-                      <td className="px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm text-slate-900">
+                      <td className="px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm text-slate-900 dark:text-white">
                         {payment.created_at
                           ? new Date(payment.created_at).toLocaleDateString(
                               "en-US",
@@ -247,7 +247,7 @@ export default function PaymentsPage() {
                             )
                           : "N/A"}
                       </td>
-                      <td className="px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm font-semibold text-slate-900">
+                      <td className="px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm font-semibold text-slate-900 dark:text-white">
                         {payment.service_name}
                       </td>
                       <td className="hidden sm:table-cell px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm text-slate-600 dark:text-slate-400">

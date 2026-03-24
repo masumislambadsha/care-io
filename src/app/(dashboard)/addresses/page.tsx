@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -362,7 +362,7 @@ export default function AddressesPage() {
       {/* Header */}
       <div className="mb-4 sm:mb-8 flex gap-2 items-center justify-between">
         <div>
-          <h1 className="text-lg sm:text-3xl font-bold text-slate-900 mb-1 sm:mb-2">
+          <h1 className="text-lg sm:text-3xl font-bold text-slate-900 dark:text-white mb-1 sm:mb-2">
             Saved Addresses
           </h1>
           <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
@@ -382,12 +382,12 @@ export default function AddressesPage() {
       {/* Addresses Grid */}
       {addresses.length === 0 ? (
         <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-12 text-center">
-          <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div className="w-20 h-20 bg-slate-100 dark:bg-slate-700 rounded-full flex items-center justify-center mx-auto mb-4">
             <span className="material-icons text-slate-400 text-4xl">
               location_on
             </span>
           </div>
-          <h3 className="text-xl font-bold text-slate-900 mb-2">
+          <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
             No saved addresses yet
           </h3>
           <p className="text-slate-600 dark:text-slate-400 mb-6">
@@ -408,7 +408,7 @@ export default function AddressesPage() {
               key={address.id}
               className={`bg-white dark:bg-slate-800 rounded-xl shadow-sm border-2 p-6 hover:shadow-md transition-all ${
                 address.is_default
-                  ? "border-teal-600 bg-teal-50"
+                  ? "border-teal-600 bg-teal-50 dark:bg-teal-900/20"
                   : "border-slate-200"
               }`}
             >
@@ -420,7 +420,7 @@ export default function AddressesPage() {
                     </span>
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-slate-900">
+                    <h3 className="text-lg font-bold text-slate-900 dark:text-white">
                       {address.label}
                     </h3>
                     {address.is_default && (
@@ -433,7 +433,7 @@ export default function AddressesPage() {
                 <div className="flex gap-2">
                   <button
                     onClick={() => openEditModal(address)}
-                    className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
+                    className="p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
                   >
                     <span className="material-icons text-slate-600 dark:text-slate-400 text-xl">
                       edit
@@ -441,7 +441,7 @@ export default function AddressesPage() {
                   </button>
                   <button
                     onClick={() => deleteAddress(address.id)}
-                    className="p-2 hover:bg-red-50 rounded-lg transition-colors"
+                    className="p-2 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
                   >
                     <span className="material-icons text-red-600 text-xl">
                       delete
@@ -451,7 +451,7 @@ export default function AddressesPage() {
               </div>
 
               <div className="space-y-2 mb-4">
-                <p className="text-slate-700">{address.address}</p>
+                <p className="text-slate-700 dark:text-slate-300">{address.address}</p>
                 <p className="text-sm text-slate-600 dark:text-slate-400">
                   {address.area}, {address.city}
                 </p>
@@ -478,12 +478,12 @@ export default function AddressesPage() {
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white dark:bg-slate-800 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             <div className="sticky top-0 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 px-6 py-4 flex items-center justify-between">
-              <h2 className="text-2xl font-bold text-slate-900">
+              <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
                 {editingAddress ? "Edit Address" : "Add New Address"}
               </h2>
               <button
                 onClick={() => setShowModal(false)}
-                className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 transition-all"
+                className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 transition-all"
               >
                 <span className="material-icons text-slate-600 dark:text-slate-400">close</span>
               </button>
@@ -492,13 +492,13 @@ export default function AddressesPage() {
             <form onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-4">
               {/* Label */}
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                   Label *
                 </label>
                 <input
                   type="text"
                   {...register("label")}
-                  className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg focus:border-teal-600 focus:outline-none transition-colors text-slate-900"
+                  className="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-lg focus:border-teal-600 focus:outline-none transition-colors text-slate-900 dark:text-white dark:bg-slate-700"
                   placeholder="e.g., Home, Office, Parents House"
                 />
                 {errors.label && (
@@ -510,12 +510,12 @@ export default function AddressesPage() {
 
               {/* Division */}
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                   Division *
                 </label>
                 <select
                   {...register("division")}
-                  className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg focus:border-teal-600 focus:outline-none transition-colors text-slate-900"
+                  className="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-lg focus:border-teal-600 focus:outline-none transition-colors text-slate-900 dark:text-white dark:bg-slate-700"
                 >
                   <option value="">Select Division</option>
                   {divisions.map((div) => (
@@ -533,13 +533,13 @@ export default function AddressesPage() {
 
               {/* District */}
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                   District *
                 </label>
                 <select
                   {...register("district")}
                   disabled={!selectedDivision}
-                  className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg focus:border-teal-600 focus:outline-none transition-colors text-slate-900 disabled:bg-slate-100"
+                  className="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-lg focus:border-teal-600 focus:outline-none transition-colors text-slate-900 dark:text-white dark:bg-slate-700 disabled:bg-slate-100 dark:disabled:bg-slate-800"
                 >
                   <option value="">Select District</option>
                   {availableDistricts.map((dist) => (
@@ -557,13 +557,13 @@ export default function AddressesPage() {
 
               {/* City */}
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                   City *
                 </label>
                 <select
                   {...register("city")}
                   disabled={!selectedDistrict}
-                  className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg focus:border-teal-600 focus:outline-none transition-colors text-slate-900 disabled:bg-slate-100"
+                  className="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-lg focus:border-teal-600 focus:outline-none transition-colors text-slate-900 dark:text-white dark:bg-slate-700 disabled:bg-slate-100 dark:disabled:bg-slate-800"
                 >
                   <option value="">Select City</option>
                   {availableCities.map((city) => (
@@ -581,14 +581,14 @@ export default function AddressesPage() {
 
               {/* Area */}
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                   Area *
                 </label>
                 {availableAreas.length > 0 ? (
                   <select
                     {...register("area")}
                     disabled={!selectedCity}
-                    className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg focus:border-teal-600 focus:outline-none transition-colors text-slate-900 disabled:bg-slate-100"
+                    className="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-lg focus:border-teal-600 focus:outline-none transition-colors text-slate-900 dark:text-white dark:bg-slate-700 disabled:bg-slate-100 dark:disabled:bg-slate-800"
                   >
                     <option value="">Select Area</option>
                     {availableAreas.map((area) => (
@@ -603,7 +603,7 @@ export default function AddressesPage() {
                     type="text"
                     {...register("area")}
                     disabled={!selectedCity}
-                    className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg focus:border-teal-600 focus:outline-none transition-colors text-slate-900 disabled:bg-slate-100"
+                    className="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-lg focus:border-teal-600 focus:outline-none transition-colors text-slate-900 dark:text-white dark:bg-slate-700 disabled:bg-slate-100 dark:disabled:bg-slate-800"
                     placeholder="Enter your area"
                   />
                 )}
@@ -616,13 +616,13 @@ export default function AddressesPage() {
 
               {/* Address */}
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                   Detailed Address *
                 </label>
                 <textarea
                   {...register("address")}
                   rows={3}
-                  className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg focus:border-teal-600 focus:outline-none transition-colors text-slate-900"
+                  className="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-lg focus:border-teal-600 focus:outline-none transition-colors text-slate-900 dark:text-white dark:bg-slate-700"
                   placeholder="House/Flat number, Road, Block, etc."
                 ></textarea>
                 {errors.address && (
@@ -642,7 +642,7 @@ export default function AddressesPage() {
                 />
                 <label
                   htmlFor="is_default"
-                  className="text-sm font-semibold text-slate-700"
+                  className="text-sm font-semibold text-slate-700 dark:text-slate-300"
                 >
                   Set as default address
                 </label>
@@ -653,7 +653,7 @@ export default function AddressesPage() {
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="flex-1 px-4 py-3 border-2 border-slate-200 text-slate-700 font-semibold rounded-lg hover:border-slate-300 transition-all"
+                  className="flex-1 px-4 py-3 border-2 border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-300 font-semibold rounded-lg hover:border-slate-300 dark:hover:border-slate-500 transition-all"
                 >
                   Cancel
                 </button>

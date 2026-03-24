@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -167,7 +167,7 @@ export default function FamilyMembersPage() {
       {/* Header */}
       <div className="mb-4 sm:mb-8 flex items-center justify-between">
         <div>
-          <h1 className="text-lg sm:text-3xl font-bold text-slate-900 mb-1 sm:mb-2">
+          <h1 className="text-lg sm:text-3xl font-bold text-slate-900 dark:text-white mb-1 sm:mb-2">
             Family Members
           </h1>
           <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
@@ -187,13 +187,13 @@ export default function FamilyMembersPage() {
       {/* Family Members Grid */}
       {members.length === 0 ? (
         <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-12 text-center">
-          <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div className="w-20 h-20 bg-slate-100 dark:bg-slate-700 rounded-full flex items-center justify-center mx-auto mb-4">
             <span className="material-icons text-slate-400 text-4xl"
             style={{fontSize:"25px"}}>
               family_restroom
             </span>
           </div>
-          <h3 className="text-xl font-bold text-slate-900 mb-2">
+          <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
             No family members yet
           </h3>
           <p className="text-slate-600 dark:text-slate-400 mb-6">
@@ -223,7 +223,7 @@ export default function FamilyMembersPage() {
                 </div>
                 <button
                   onClick={() => deleteMember(member.id)}
-                  className="p-2 hover:bg-red-50 rounded-lg transition-colors"
+                  className="p-2 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
                 >
                   <span className="material-icons text-red-600 text-xl">
                     delete
@@ -231,7 +231,7 @@ export default function FamilyMembersPage() {
                 </button>
               </div>
 
-              <h3 className="text-xl font-bold text-slate-900 mb-2">
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
                 {member.name}
               </h3>
 
@@ -249,10 +249,10 @@ export default function FamilyMembersPage() {
                 </div>
 
                 {member.special_needs && (
-                  <div className="flex items-start gap-2 text-slate-600 dark:text-slate-400 mt-3 pt-3 border-t border-slate-200">
+                  <div className="flex items-start gap-2 text-slate-600 dark:text-slate-400 mt-3 pt-3 border-t border-slate-200 dark:border-slate-700">
                     <span className="material-icons text-sm">info</span>
                     <div>
-                      <p className="text-xs font-semibold text-slate-700 mb-1">
+                      <p className="text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
                         Special Needs
                       </p>
                       <p className="text-sm">{member.special_needs}</p>
@@ -270,12 +270,12 @@ export default function FamilyMembersPage() {
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white dark:bg-slate-800 rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
             <div className="sticky top-0 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 px-6 py-4 flex items-center justify-between">
-              <h2 className="text-2xl font-bold text-slate-900">
+              <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
                 {editingMember ? "Edit Family Member" : "Add Family Member"}
               </h2>
               <button
                 onClick={() => setShowModal(false)}
-                className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 transition-all"
+                className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 transition-all"
               >
                 <span className="material-icons text-slate-600 dark:text-slate-400">close</span>
               </button>
@@ -284,13 +284,13 @@ export default function FamilyMembersPage() {
             <form onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-4">
               {/* Name */}
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                   Full Name *
                 </label>
                 <input
                   type="text"
                   {...register("name")}
-                  className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg focus:border-teal-600 focus:outline-none transition-colors text-slate-900"
+                  className="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-lg focus:border-teal-600 focus:outline-none transition-colors text-slate-900 dark:text-white dark:bg-slate-700"
                   placeholder="Enter name"
                 />
                 {errors.name && (
@@ -302,13 +302,13 @@ export default function FamilyMembersPage() {
 
               {/* Age */}
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                   Age *
                 </label>
                 <input
                   type="number"
                   {...register("age", { valueAsNumber: true })}
-                  className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg focus:border-teal-600 focus:outline-none transition-colors text-slate-900"
+                  className="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-lg focus:border-teal-600 focus:outline-none transition-colors text-slate-900 dark:text-white dark:bg-slate-700"
                   placeholder="Enter age"
                 />
                 {errors.age && (
@@ -320,12 +320,12 @@ export default function FamilyMembersPage() {
 
               {/* Relationship */}
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                   Relationship *
                 </label>
                 <select
                   {...register("relationship")}
-                  className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg focus:border-teal-600 focus:outline-none transition-colors text-slate-900"
+                  className="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-lg focus:border-teal-600 focus:outline-none transition-colors text-slate-900 dark:text-white dark:bg-slate-700"
                 >
                   <option value="">Select relationship</option>
                   <option value="Child">Child</option>
@@ -344,13 +344,13 @@ export default function FamilyMembersPage() {
 
               {/* Special Needs */}
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                   Special Needs (Optional)
                 </label>
                 <textarea
                   {...register("special_needs")}
                   rows={3}
-                  className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg focus:border-teal-600 focus:outline-none transition-colors text-slate-900"
+                  className="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-lg focus:border-teal-600 focus:outline-none transition-colors text-slate-900 dark:text-white dark:bg-slate-700"
                   placeholder="Any special needs or medical conditions"
                 ></textarea>
               </div>
@@ -360,7 +360,7 @@ export default function FamilyMembersPage() {
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="flex-1 px-4 py-3 border-2 border-slate-200 text-slate-700 font-semibold rounded-lg hover:border-slate-300 transition-all"
+                  className="flex-1 px-4 py-3 border-2 border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-300 font-semibold rounded-lg hover:border-slate-300 dark:hover:border-slate-500 transition-all"
                 >
                   Cancel
                 </button>
