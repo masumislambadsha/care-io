@@ -87,7 +87,7 @@ export async function PUT(req: NextRequest) {
       );
     }
 
-    // Get caregiver details
+    
     const { data: caregiver, error: fetchError } = await supabaseAdmin
       .from("caregiver_profiles")
       .select("*, user:users!caregiver_profiles_user_id_fkey(name, email)")
@@ -102,7 +102,7 @@ export async function PUT(req: NextRequest) {
     }
 
     if (action === "approve") {
-      // Update verification status to APPROVED
+      
       const { error: updateError } = await supabaseAdmin
         .from("caregiver_profiles")
         .update({ verification_status: "APPROVED" })
@@ -115,17 +115,17 @@ export async function PUT(req: NextRequest) {
         );
       }
 
-      // Send approval email
+      
       try {
         await sendVerificationApprovedEmail(
           caregiver.user.email,
           caregiver.user.name,
         );
       } catch (emailError) {
-        // Don't fail the request if email fails
+        
       }
 
-      // Create notification
+      
       await supabaseAdmin.from("notifications").insert({
         user_id: caregiverId,
         type: "CAREGIVER_APPROVED",
@@ -146,7 +146,7 @@ export async function PUT(req: NextRequest) {
         );
       }
 
-      // Update verification status to REJECTED
+      
       const { error: updateError } = await supabaseAdmin
         .from("caregiver_profiles")
         .update({ verification_status: "REJECTED" })
@@ -159,7 +159,7 @@ export async function PUT(req: NextRequest) {
         );
       }
 
-      // Create notification
+      
       await supabaseAdmin.from("notifications").insert({
         user_id: caregiverId,
         type: "CAREGIVER_REJECTED",
@@ -167,7 +167,7 @@ export async function PUT(req: NextRequest) {
         message: `Your caregiver application has been reviewed. Reason: ${reason}`,
       });
 
-      // Send rejection email
+      
       try {
         await sendVerificationRejectedEmail(
           caregiver.user.email,
@@ -175,7 +175,7 @@ export async function PUT(req: NextRequest) {
           reason,
         );
       } catch (emailError) {
-        // Don't fail the request if email fails
+        
       }
 
       return NextResponse.json({

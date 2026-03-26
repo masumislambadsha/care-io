@@ -219,7 +219,7 @@ export default function RegisterCaregiverPage() {
               </p>
             </div>
 
-            {/* Progress Steps */}
+            
             <div className="mb-8 flex items-center justify-center gap-4">
               {[1, 2, 3].map((s) => (
                 <div key={s} className="flex items-center gap-2">
@@ -405,7 +405,7 @@ export default function RegisterCaregiverPage() {
                     Security & Documents
                   </h2>
 
-                  {/* Profile Image */}
+                  
                   <div>
                     <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                       Profile Picture (Optional)
@@ -431,7 +431,7 @@ export default function RegisterCaregiverPage() {
                     )}
                   </div>
 
-                  {/* NID Document */}
+                  
                   <div>
                     <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                       NID/National ID Document *
@@ -457,7 +457,7 @@ export default function RegisterCaregiverPage() {
                     )}
                   </div>
 
-                  {/* Certificates */}
+                  
                   <div>
                     <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                       Certificates (Optional)

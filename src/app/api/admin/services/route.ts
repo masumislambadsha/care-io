@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Check if slug already exists
+    
     const { data: existing } = await supabaseAdmin
       .from("services")
       .select("id")

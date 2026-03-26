@@ -21,7 +21,7 @@ export async function GET(req: NextRequest) {
     const startDate = new Date();
     startDate.setDate(startDate.getDate() - days);
 
-    // Fetch all bookings
+    
     const { data: bookings, error: bookingsError } = await supabaseAdmin
       .from("bookings")
       .select(
@@ -41,7 +41,7 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    // Fetch all users
+    
     const { data: users, error: usersError } = await supabaseAdmin
       .from("users")
       .select("id, role, created_at");
@@ -54,7 +54,7 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    // Fetch caregiver profiles for ratings
+    
     const { data: caregiverProfiles, error: profilesError } =
       await supabaseAdmin
         .from("caregiver_profiles")
@@ -64,7 +64,7 @@ export async function GET(req: NextRequest) {
       console.error("Profiles fetch error:", profilesError);
     }
 
-    // Calculate revenue
+    
     const totalRevenue = bookings
       .filter((b: any) => b.payment_status === "PAID")
       .reduce((sum: number, b: any) => sum + parseFloat(b.total_amount), 0);
@@ -97,27 +97,27 @@ export async function GET(req: NextRequest) {
         ? ((thisMonthRevenue - lastMonthRevenue) / lastMonthRevenue) * 100
         : 0;
 
-    // Bookings by status
+    
     const bookingsByStatus = bookings.reduce((acc: any, b: any) => {
       acc[b.status] = (acc[b.status] || 0) + 1;
       return acc;
     }, {});
 
-    // Bookings by service
+    
     const bookingsByService = bookings.reduce((acc: any, b: any) => {
       const serviceName = b.service?.name || "Unknown";
       acc[serviceName] = (acc[serviceName] || 0) + 1;
       return acc;
     }, {});
 
-    // Users stats
+    
     const clients = users.filter((u: any) => u.role === "CLIENT").length;
     const caregivers = users.filter((u: any) => u.role === "CAREGIVER").length;
     const newThisMonth = users.filter(
       (u: any) => new Date(u.created_at) >= thisMonth,
     ).length;
 
-    // Top caregivers
+    
     const caregiverStats = bookings.reduce((acc: any, b: any) => {
       if (b.caregiver_id) {
         if (!acc[b.caregiver_id]) {
@@ -147,7 +147,7 @@ export async function GET(req: NextRequest) {
       .sort((a: any, b: any) => b.revenue - a.revenue)
       .slice(0, 10);
 
-    // Top services
+    
     const serviceStats = bookings.reduce((acc: any, b: any) => {
       const serviceName = b.service?.name || "Unknown";
       if (!acc[serviceName]) {
@@ -169,7 +169,7 @@ export async function GET(req: NextRequest) {
       .sort((a: any, b: any) => b.revenue - a.revenue)
       .slice(0, 10);
 
-    // Revenue by month (last 12 months)
+    
     const revenueByMonth = [];
     for (let i = 11; i >= 0; i--) {
       const monthDate = new Date();

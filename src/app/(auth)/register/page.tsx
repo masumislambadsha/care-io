@@ -15,7 +15,7 @@ export default function RegisterPage() {
 
   const handleRoleSelect = (role: "client" | "caregiver") => {
     setSelectedRole(role);
-    // Navigate to specific registration form
+    
     setTimeout(() => {
       router.push(`/register/${role}`);
     }, 300);
@@ -23,7 +23,7 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col">
-      {/* Navbar */}
+      
       <nav className="bg-white border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
@@ -48,7 +48,7 @@ export default function RegisterPage() {
         </div>
       </nav>
 
-      {/* Main Content */}
+      
       <main className="flex-grow flex items-center justify-center p-6">
         <div className="w-full max-w-4xl">
           <motion.div
@@ -65,7 +65,7 @@ export default function RegisterPage() {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Client Card */}
+            
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -111,7 +111,7 @@ export default function RegisterPage() {
               </div>
             </motion.div>
 
-            {/* Caregiver Card */}
+            
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}

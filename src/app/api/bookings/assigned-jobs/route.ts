@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // Only caregivers can access this endpoint
+    
     if (session.user.role !== "CAREGIVER") {
       return NextResponse.json(
         { error: "Only caregivers can access assigned jobs" },
@@ -21,7 +21,7 @@ export async function GET(req: NextRequest) {
 
     const userId = session.user.id;
 
-    // Fetch bookings where this user is the CAREGIVER (jobs assigned TO them)
+    
     const { data: bookings, error } = await supabaseAdmin
       .from("bookings")
       .select(
@@ -42,7 +42,7 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    // Transform the data
+    
     const transformedJobs = bookings.map((booking: any) => ({
       id: booking.id,
       booking_number: booking.booking_number,

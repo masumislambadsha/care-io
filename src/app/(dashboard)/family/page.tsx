@@ -164,7 +164,7 @@ export default function FamilyMembersPage() {
 
   return (
     <>
-      {/* Header */}
+      
       <div className="mb-4 sm:mb-8 flex items-center justify-between">
         <div>
           <h1 className="text-lg sm:text-3xl font-bold text-slate-900 dark:text-white mb-1 sm:mb-2">
@@ -184,7 +184,7 @@ export default function FamilyMembersPage() {
         </button>
       </div>
 
-      {/* Family Members Grid */}
+      
       {members.length === 0 ? (
         <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-12 text-center">
           <div className="w-20 h-20 bg-slate-100 dark:bg-slate-700 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -265,7 +265,7 @@ export default function FamilyMembersPage() {
         </div>
       )}
 
-      {/* Add/Edit Modal */}
+      
       {showModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white dark:bg-slate-800 rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
@@ -282,7 +282,7 @@ export default function FamilyMembersPage() {
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-4">
-              {/* Name */}
+              
               <div>
                 <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                   Full Name *
@@ -300,7 +300,7 @@ export default function FamilyMembersPage() {
                 )}
               </div>
 
-              {/* Age */}
+              
               <div>
                 <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                   Age *
@@ -318,7 +318,7 @@ export default function FamilyMembersPage() {
                 )}
               </div>
 
-              {/* Relationship */}
+              
               <div>
                 <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                   Relationship *
@@ -342,7 +342,7 @@ export default function FamilyMembersPage() {
                 )}
               </div>
 
-              {/* Special Needs */}
+              
               <div>
                 <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                   Special Needs (Optional)
@@ -355,7 +355,7 @@ export default function FamilyMembersPage() {
                 ></textarea>
               </div>
 
-              {/* Actions */}
+              
               <div className="flex gap-3 pt-4">
                 <button
                   type="button"

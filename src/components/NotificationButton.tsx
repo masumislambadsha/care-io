@@ -170,7 +170,7 @@ export default function NotificationButton() {
             width: Math.min(320, window.innerWidth - 16),
           }}
         >
-          {/* Header */}
+          
           <div className="flex items-center justify-between px-4 py-3 border-b border-teal-100">
             <span className="font-bold text-teal-700 text-sm">
               Notifications
@@ -185,7 +185,7 @@ export default function NotificationButton() {
             )}
           </div>
 
-          {/* List */}
+          
           <div
             className="max-h-80 overflow-y-auto"
             onWheel={(e) => e.stopPropagation()}
@@ -233,7 +233,7 @@ export default function NotificationButton() {
             )}
           </div>
 
-          {/* Footer */}
+          
           {notifications.length > 0 && (
             <div className="px-4 py-3 border-t border-slate-100">
               <Link

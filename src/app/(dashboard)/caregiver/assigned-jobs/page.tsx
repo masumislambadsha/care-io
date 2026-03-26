@@ -123,7 +123,7 @@ export default function AssignedJobsPage() {
 
   return (
     <>
-      {/* Header */}
+      
       <div className="mb-4 sm:mb-8">
         <h1 className="text-lg sm:text-3xl font-bold text-slate-900 dark:text-white mb-2">
           Assigned Jobs
@@ -133,7 +133,7 @@ export default function AssignedJobsPage() {
         </p>
       </div>
 
-      {/* Stats */}
+      
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-6 mb-4 sm:mb-8">
         <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-3 sm:p-6">
           <div className="flex items-center gap-2 sm:gap-3">
@@ -208,7 +208,7 @@ export default function AssignedJobsPage() {
         </div>
       </div>
 
-      {/* Filters */}
+      
       <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-3 sm:p-4 mb-4 sm:mb-6">
         <div className="flex flex-wrap gap-2 sm:gap-3">
           {["all", "confirmed", "ongoing", "completed", "cancelled"].map(
@@ -229,7 +229,7 @@ export default function AssignedJobsPage() {
         </div>
       </div>
 
-      {/* Jobs List */}
+      
       {jobs.filter((j) =>
         filter === "all" ? true : j.status.toLowerCase() === filter,
       ).length === 0 ? (
@@ -360,7 +360,7 @@ export default function AssignedJobsPage() {
         </div>
       )}
 
-      {/* Job Details Modal */}
+      
       {showDetailsModal && selectedJob && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white dark:bg-slate-800 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">

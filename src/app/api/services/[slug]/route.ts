@@ -6,16 +6,16 @@ export async function GET(
   context: { params: Promise<{ slug: string }> },
 ) {
   try {
-    // In Next.js 15, params is a Promise
+    
     const params = await context.params;
 
-    // First check if ANY services exist
+    
     const { data: allServices, error: allError } = await supabaseAdmin
       .from("services")
       .select("id, name, slug")
       .limit(10);
 
-    // Now try to find the specific service
+    
     const { data: service, error } = await supabaseAdmin
       .from("services")
       .select("*")

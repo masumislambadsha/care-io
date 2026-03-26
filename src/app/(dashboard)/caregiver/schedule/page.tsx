@@ -99,7 +99,7 @@ export default function CaregiverSchedulePage() {
 
   return (
     <>
-      {/* Header */}
+      
       <div className="mb-4 sm:mb-8">
         <h1 className="text-lg sm:text-3xl font-bold text-slate-900 dark:text-white mb-2">
           My Schedule
@@ -109,7 +109,7 @@ export default function CaregiverSchedulePage() {
         </p>
       </div>
 
-      {/* Stats */}
+      
       <div className="grid grid-cols-3 gap-2 sm:gap-6 mb-4 sm:mb-8">
         <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-2 sm:p-6">
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-3">
@@ -166,7 +166,7 @@ export default function CaregiverSchedulePage() {
         </div>
       </div>
 
-      {/* Today's Schedule */}
+      
       <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-3 sm:p-6 mb-4 sm:mb-8">
         <h2 className="text-base sm:text-xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-6">
           Today's Schedule
@@ -240,7 +240,7 @@ export default function CaregiverSchedulePage() {
         )}
       </div>
 
-      {/* Upcoming Bookings */}
+      
       <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-3 sm:p-6">
         <h2 className="text-base sm:text-xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-6">
           Upcoming Bookings

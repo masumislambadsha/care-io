@@ -89,7 +89,7 @@ export default function SettingsPage() {
         </p>
       </div>
 
-      {/* Notifications */}
+      
       <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-4 sm:p-6 mb-4 sm:mb-6">
         <h2 className="text-base sm:text-xl font-bold text-slate-900 dark:text-white mb-4 sm:mb-6">
           Notifications
@@ -284,7 +284,7 @@ export default function SettingsPage() {
         </div>
       </div>
 
-      {/* Save Button */}
+      
       <div className="mt-6">
         <button
           onClick={handleSaveSettings}

@@ -56,7 +56,7 @@ export default function CaregiverAvailabilityPage() {
       if (response.ok && data.availability) {
         setSchedule(data.availability);
       } else {
-        // Initialize with default schedule (all unavailable)
+        
         initializeSchedule();
       }
     } catch (error) {
@@ -141,7 +141,7 @@ export default function CaregiverAvailabilityPage() {
 
   return (
     <>
-      {/* Header */}
+      
       <div className="mb-4 sm:mb-8">
         <h1 className="text-lg sm:text-3xl font-bold text-slate-900 dark:text-white mb-2">
           Manage Availability
@@ -151,7 +151,7 @@ export default function CaregiverAvailabilityPage() {
         </p>
       </div>
 
-      {/* Quick Actions */}
+      
       <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-3 sm:p-6 mb-4 sm:mb-6">
         <div className="flex flex-wrap items-center gap-2 sm:gap-4">
           <button
@@ -181,7 +181,7 @@ export default function CaregiverAvailabilityPage() {
         </div>
       </div>
 
-      {/* Weekly Schedule */}
+      
       <div className="space-y-4 mb-6">
         {schedule.map((daySchedule, dayIndex) => (
           <div
@@ -233,7 +233,7 @@ export default function CaregiverAvailabilityPage() {
         ))}
       </div>
 
-      {/* Legend */}
+      
       <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6 mb-6">
         <h3 className="text-sm font-bold text-slate-900 dark:text-white mb-3">Legend</h3>
         <div className="flex flex-wrap gap-4">
@@ -248,7 +248,7 @@ export default function CaregiverAvailabilityPage() {
         </div>
       </div>
 
-      {/* Save Button */}
+      
       <div className="flex justify-end">
         <button
           onClick={saveAvailability}

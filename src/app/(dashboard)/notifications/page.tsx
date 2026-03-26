@@ -157,7 +157,7 @@ export default function NotificationsPage() {
 
   return (
     <>
-      {/* Header */}
+      
       <div className="mb-4 sm:mb-8">
         <h1 className="text-lg sm:text-3xl font-bold text-slate-900 mb-2">
           Notifications
@@ -167,7 +167,7 @@ export default function NotificationsPage() {
         </p>
       </div>
 
-      {/* Stats & Actions */}
+      
       <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-3 sm:p-6 mb-4 sm:mb-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4 sm:gap-6">
@@ -197,7 +197,7 @@ export default function NotificationsPage() {
         </div>
       </div>
 
-      {/* Filters */}
+      
       <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-3 sm:p-4 mb-4 sm:mb-6">
         <div className="flex gap-2 sm:gap-3">
           <button
@@ -223,7 +223,7 @@ export default function NotificationsPage() {
         </div>
       </div>
 
-      {/* Notifications List */}
+      
       {filteredNotifications.length === 0 ? (
         <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-12 text-center">
           <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -255,7 +255,7 @@ export default function NotificationsPage() {
             >
               <div className="p-6">
                 <div className="flex items-start gap-4">
-                  {/* Icon */}
+                  
                   <div
                     className={`w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 ${getNotificationColor(
                       notification.type,
@@ -266,7 +266,7 @@ export default function NotificationsPage() {
                     </span>
                   </div>
 
-                  {/* Content */}
+                  
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between gap-4 mb-2">
                       <h3
@@ -300,7 +300,7 @@ export default function NotificationsPage() {
                   </div>
                 </div>
 
-                {/* Actions */}
+                
                 <div className="flex items-center gap-3 mt-4 pt-4 border-t border-slate-200">
                   {notification.link && (
                     <Link

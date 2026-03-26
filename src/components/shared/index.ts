@@ -1,4 +1,4 @@
-// Shared components barrel export
+
 export { ThemeToggle } from "./ThemeToggle";
 export { StatusBadge } from "./StatusBadge";
 export { Loading } from "./Loading";

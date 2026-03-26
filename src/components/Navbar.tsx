@@ -38,7 +38,7 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Lock body scroll when mobile menu is open
+  
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => {
@@ -65,7 +65,7 @@ export default function Navbar() {
       <nav className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-3xl border-b border-slate-200 dark:border-slate-700 fixed w-full top-0 z-50 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            {/* Logo */}
+            
             <Link
               href="/"
               className="flex items-center gap-2 hover:opacity-80 transition-opacity"
@@ -78,7 +78,7 @@ export default function Navbar() {
               <span className="text-xl font-bold text-slate-900 dark:text-white">Care.io</span>
             </Link>
 
-            {/* Desktop Nav Links */}
+            
             <div className="hidden md:flex items-center gap-8">
               {navLinks.map(({ href, label }) => (
                 <Link
@@ -91,7 +91,7 @@ export default function Navbar() {
               ))}
             </div>
 
-            {/* Auth Section */}
+            
             <div className="flex items-center gap-4">
               {status === "loading" ? (
                 <div className="w-8 h-8 border-2 border-teal-600 border-t-transparent rounded-full animate-spin" />
@@ -99,7 +99,7 @@ export default function Navbar() {
                 <>
                   <NotificationButton />
                   <ThemeToggle />
-                  {/* User Dropdown */}
+                  
                   <div className="relative hidden md:block" ref={dropdownRef}>
                     <button
                       onClick={() => setIsDropdownOpen(!isDropdownOpen)}
@@ -228,7 +228,7 @@ export default function Navbar() {
                 </div>
               )}
 
-              {/* Burger — mobile only */}
+              
               <div className="md:hidden">
                 <BurgerCheckbox checked={mobileOpen} onChange={setMobileOpen} />
               </div>
@@ -237,7 +237,7 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile menu — full screen overlay */}
+      
       <AnimatePresence>
         {mobileOpen && (
           <motion.div

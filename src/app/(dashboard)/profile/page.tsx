@@ -76,7 +76,7 @@ export default function ProfilePage() {
       if (response.ok) {
         toast.success("Profile updated successfully!");
         setIsEditing(false);
-        // Update session with new data
+        
         await update({
           ...session,
           user: {
@@ -100,13 +100,13 @@ export default function ProfilePage() {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    // Validate file type
+    
     if (!file.type.startsWith("image/")) {
       toast.error("Please upload an image file");
       return;
     }
 
-    // Validate file size (max 5MB)
+    
     if (file.size > 5 * 1024 * 1024) {
       toast.error("Image size should be less than 5MB");
       return;
@@ -127,7 +127,7 @@ export default function ProfilePage() {
       if (response.ok) {
         setFormData((prev) => ({ ...prev, image: data.url }));
         toast.success("Image uploaded successfully");
-        // Immediately refresh session so avatars update everywhere
+        
         await update({ user: { image: data.url } });
       } else {
         toast.error(data.error || "Failed to upload image");
@@ -142,7 +142,7 @@ export default function ProfilePage() {
 
   return (
     <>
-      {/* Header */}
+      
       <div className="mb-4 sm:mb-8">
         <h1 className="text-lg sm:text-3xl font-bold text-slate-900 dark:text-white mb-1 sm:mb-2">
           Profile
@@ -152,12 +152,12 @@ export default function ProfilePage() {
         </p>
       </div>
 
-      {/* Profile Card */}
+      
       <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
-        {/* Cover */}
+        
         <div className="h-32 bg-linear-to-r from-teal-500 to-blue-500"></div>
 
-        {/* Profile Info */}
+        
         <div className="px-4 sm:px-8 pb-4 sm:pb-8">
           <div className="flex items-end justify-between flex-col sm:flex-row -mt-10 sm:-mt-16 mb-4 sm:mb-6">
             <div className="flex items-end gap-2 sm:gap-4">
@@ -223,7 +223,7 @@ export default function ProfilePage() {
             </button>
           </div>
 
-          {/* Form */}
+          
           <div className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
@@ -307,9 +307,9 @@ export default function ProfilePage() {
         </div>
       </div>
 
-      {/* Additional Sections */}
+      
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-        {/* Security */}
+        
         <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
           <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">
             Security
@@ -329,7 +329,7 @@ export default function ProfilePage() {
           </button>
         </div>
 
-        {/* Preferences */}
+        
         <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
           <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">
             Preferences

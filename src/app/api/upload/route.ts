@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "No file provided" }, { status: 400 });
     }
 
-    // Validate file type
+    
     if (!file.type.startsWith("image/")) {
       return NextResponse.json(
         { error: "File must be an image" },
@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Validate file size (max 5MB)
+    
     if (file.size > 5 * 1024 * 1024) {
       return NextResponse.json(
         { error: "File size must be less than 5MB" },
@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Upload to Cloudinary
+    
     const url = await uploadToCloudinary(file, "care-xyz/profile-images");
 
     return NextResponse.json({ url }, { status: 200 });

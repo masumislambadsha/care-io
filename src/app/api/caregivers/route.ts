@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
 
-// Enable ISR with 60 second revalidation
+
 export const revalidate = 60;
 
 export async function GET() {
@@ -26,7 +26,7 @@ export async function GET() {
       );
     }
 
-    // Transform data to flatten caregiver_profile
+    
     const transformedCaregivers = caregivers.map((caregiver: any) => ({
       id: caregiver.id,
       name: caregiver.name,

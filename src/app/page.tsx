@@ -125,7 +125,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900 overflow-x-hidden">
       <Navbar />
-      {/* Hero */}
+      
       <section className="relative h-[480px] sm:h-[560px] md:h-[680px] overflow-hidden">
         <Swiper
           modules={[Autoplay, EffectFade, Pagination]}
@@ -190,7 +190,7 @@ export default function HomePage() {
           ))}
         </Swiper>
 
-        {/* Search bar */}
+        
         <div className="absolute bottom-0 left-0 right-0 z-20 pb-4 sm:pb-8">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -229,7 +229,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Services */}
+      
       <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-slate-800">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-0 mb-8 sm:mb-12">
@@ -275,7 +275,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Featured Caregivers */}
+      
       <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-900">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-8 sm:mb-12">
@@ -303,7 +303,7 @@ export default function HomePage() {
                 className="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all border border-slate-100 dark:border-slate-700"
               >
                 <div className="relative h-48 sm:h-52 md:h-60 bg-linear-to-br from-teal-100 to-blue-100">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  
                   <img
                     src={
                       caregiver.image ||
@@ -374,7 +374,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* How it Works */}
+      
       <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-slate-800 overflow-hidden">
         <div className="max-w-7xl mx-auto text-center">
           <h2
@@ -440,7 +440,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Why Choose Us */}
+      
       <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-900">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-10 sm:mb-14">
@@ -511,7 +511,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Stats */}
+      
       <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-linear-to-br from-teal-600 to-teal-700 relative overflow-hidden">
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-10 sm:mb-14">
@@ -556,7 +556,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Testimonials */}
+      
       <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-slate-800">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-8 sm:mb-12">
@@ -644,7 +644,7 @@ export default function HomePage() {
                     &quot;{testimonial.text}&quot;
                   </p>
                   <div className="flex items-center gap-2 sm:gap-3">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    
                     <img
                       src={testimonial.image}
                       alt={testimonial.name}
@@ -666,7 +666,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Caregiver CTA */}
+      
       <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-900">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
@@ -720,7 +720,7 @@ export default function HomePage() {
               className="relative"
             >
               <div className="relative rounded-3xl overflow-hidden shadow-2xl">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
+                
                 <img
                   src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=800&h=600&fit=crop"
                   alt="Professional caregiver"
@@ -752,7 +752,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* FAQ */}
+      
       <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-slate-800">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-8 sm:mb-12">
@@ -824,7 +824,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Trust Section */}
+      
       <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-900">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
@@ -836,7 +836,7 @@ export default function HomePage() {
             >
               <div className="bg-linear-to-br from-amber-50 to-teal-50 dark:from-amber-900/20 dark:to-teal-900/20 rounded-3xl p-5 sm:p-8 md:p-10 relative overflow-hidden">
                 <div className="w-full rounded-2xl flex items-center justify-center">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  
                   <img
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOKf1ULoqcdo3xqKfjQywgtj2iKxOF-TJaUSAfqjJDqKafnWY1bDt7G7XDHiYSgJllU0wE1VnzgufihVStE9OReI_QzXfFugn9eW3SFgwcQK9CPQQ5yUQFiG1Oioedh4SQl7VarruPjMD50dv8FaJxlST3G377IQcGIDcc8zp95XkzZ3tzxfpLh341GlvccHpXOyq3V5iCDb8V-8ffJ9Y3VVLfEmgxa7L8M2HORBkZ9YPUb3xcISMau7eqkj88RlveAbA-N8zVmVk"
                     alt="family"
@@ -920,7 +920,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Final CTA */}
+      
       <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -965,7 +965,7 @@ export default function HomePage() {
         </motion.div>
       </section>
 
-      {/* Footer */}
+      
       <footer className="bg-slate-900 py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 md:gap-10 mb-10 sm:mb-12">

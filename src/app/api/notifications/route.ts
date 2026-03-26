@@ -26,7 +26,7 @@ export async function GET() {
       );
     }
 
-    // Count unread notifications
+    
     const unreadCount = notifications.filter((n) => !n.is_read).length;
 
     return NextResponse.json({ notifications, unreadCount });
@@ -51,7 +51,7 @@ export async function PUT(req: NextRequest) {
     const { notificationId, markAllAsRead } = body;
 
     if (markAllAsRead) {
-      // Mark all notifications as read
+      
       const { error } = await supabaseAdmin
         .from("notifications")
         .update({ is_read: true })
@@ -71,7 +71,7 @@ export async function PUT(req: NextRequest) {
     }
 
     if (notificationId) {
-      // Mark single notification as read
+      
       const { error } = await supabaseAdmin
         .from("notifications")
         .update({ is_read: true })
@@ -117,7 +117,7 @@ export async function DELETE(req: NextRequest) {
       );
     }
 
-    // Delete notification
+    
     const { error } = await supabaseAdmin
       .from("notifications")
       .delete()

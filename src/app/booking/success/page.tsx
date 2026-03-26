@@ -19,7 +19,7 @@ function SuccessContent() {
       return;
     }
 
-    // Create booking from session storage data
+    
     const createBooking = async () => {
       try {
         const bookingDataStr = sessionStorage.getItem("pendingBooking");
@@ -87,7 +87,7 @@ function SuccessContent() {
         transition={{ duration: 0.5 }}
         className="max-w-md w-full bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-8 text-center"
       >
-        {/* Success Icon */}
+        
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
@@ -99,7 +99,7 @@ function SuccessContent() {
           </span>
         </motion.div>
 
-        {/* Success Message */}
+        
         <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-3">
           Booking Confirmed!
         </h1>
@@ -108,7 +108,7 @@ function SuccessContent() {
           You'll receive a confirmation email shortly.
         </p>
 
-        {/* Info Box */}
+        
         <div className="bg-teal-50 dark:bg-teal-900/20 border-2 border-teal-200 dark:border-teal-800 rounded-xl p-4 mb-6">
           <div className="flex items-center gap-2 text-teal-700 dark:text-teal-400 mb-2">
             <span className="material-icons text-sm">info</span>
@@ -120,12 +120,12 @@ function SuccessContent() {
           </p>
         </div>
 
-        {/* Countdown */}
+        
         <p className="text-sm text-slate-500 dark:text-slate-400 mb-6">
           Redirecting to your bookings in {countdown} seconds...
         </p>
 
-        {/* Action Buttons */}
+        
         <div className="space-y-3">
           <Link
             href="/my-bookings"

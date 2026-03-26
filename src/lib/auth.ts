@@ -21,7 +21,7 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Email and password required");
         }
 
-        // Fetch user from Supabase
+        
         const { data: user, error } = await supabaseAdmin
           .from("users")
           .select("*")
@@ -32,7 +32,7 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Invalid credentials");
         }
 
-        // Verify password
+        
         const isValid = await bcrypt.compare(
           credentials.password,
           user.password,
@@ -59,7 +59,7 @@ export const authOptions: NextAuthOptions = {
         token.image = user.image as string | null;
       }
 
-      // Handle Google OAuth
+      
       if (account?.provider === "google") {
         const { data: existingUser } = await supabaseAdmin
           .from("users")
@@ -68,7 +68,7 @@ export const authOptions: NextAuthOptions = {
           .single();
 
         if (!existingUser) {
-          // Create new user — store Google profile image
+          
           const { data: newUser, error: insertError } = await supabaseAdmin
             .from("users")
             .insert({
@@ -95,7 +95,7 @@ export const authOptions: NextAuthOptions = {
           token.role = existingUser.role;
           token.image = existingUser.image ?? null;
 
-          // If DB has no image yet, store the Google one
+          
           if (!existingUser.image && token.picture) {
             await supabaseAdmin
               .from("users")
@@ -106,8 +106,8 @@ export const authOptions: NextAuthOptions = {
         }
       }
 
-      // On session update (e.g. after profile save) or on every refresh,
-      // pull the latest image from the DB so uploads are reflected immediately
+      
+      
       if (trigger === "update" && session?.user?.image !== undefined) {
         token.image = session.user.image;
       } else if (token.id && !user && !account) {

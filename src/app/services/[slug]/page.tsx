@@ -81,7 +81,7 @@ export default function ServiceDetailPage() {
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
       <Navbar />
 
-      {/* Breadcrumb */}
+      
       <div className="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center gap-2 text-sm">
@@ -110,7 +110,7 @@ export default function ServiceDetailPage() {
         </div>
       </div>
 
-      {/* Hero Section */}
+      
       <section className="relative h-96 overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
@@ -146,13 +146,13 @@ export default function ServiceDetailPage() {
         </div>
       </section>
 
-      {/* Main Content */}
+      
       <section className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            {/* Left Column */}
+            
             <div className="lg:col-span-2">
-              {/* Description */}
+              
               <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-8 mb-8">
                 <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">
                   About This Service
@@ -162,7 +162,7 @@ export default function ServiceDetailPage() {
                 </p>
               </div>
 
-              {/* Features */}
+              
               <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-8">
                 <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">
                   What&apos;s Included
@@ -182,7 +182,7 @@ export default function ServiceDetailPage() {
               </div>
             </div>
 
-            {/* Right Column - Booking Card */}
+            
             <div>
               <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-700 p-8 sticky top-24">
                 <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">
@@ -241,7 +241,7 @@ export default function ServiceDetailPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-teal-600">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl font-bold text-white mb-4">

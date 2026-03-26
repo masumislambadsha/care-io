@@ -13,7 +13,7 @@ export function ThemeInitializer() {
     dispatch(initializeTheme());
   }, [dispatch]);
 
-  // Prevent hydration mismatch by not rendering until mounted
+  
   if (!mounted) {
     return null;
   }

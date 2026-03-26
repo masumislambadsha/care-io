@@ -22,7 +22,7 @@ export async function POST(request: Request) {
       profile_image_url,
     } = body;
 
-    // Validate required fields
+    
     if (!name || !email || !password || !role) {
       return NextResponse.json(
         { error: "Missing required fields" },
@@ -30,7 +30,7 @@ export async function POST(request: Request) {
       );
     }
 
-    // Check if user already exists
+    
     const { data: existingUser } = await supabaseAdmin
       .from("users")
       .select("id")
@@ -44,10 +44,10 @@ export async function POST(request: Request) {
       );
     }
 
-    // Hash password
+    
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create user
+    
     const { data: user, error: userError } = await supabaseAdmin
       .from("users")
       .insert({
@@ -69,7 +69,7 @@ export async function POST(request: Request) {
       );
     }
 
-    // If caregiver, create caregiver profile
+    
     if (role === "CAREGIVER") {
       const { error: profileError } = await supabaseAdmin
         .from("caregiver_profiles")
@@ -86,11 +86,11 @@ export async function POST(request: Request) {
         });
 
       if (profileError) {
-        // Don't fail the registration, just log the error
+        
       }
     }
 
-    // Update user profile image if provided
+    
     if (profile_image_url) {
       await supabaseAdmin
         .from("users")
@@ -98,11 +98,11 @@ export async function POST(request: Request) {
         .eq("id", user.id);
     }
 
-    // Send welcome email
+    
     try {
       await sendWelcomeEmail(email, name, role);
     } catch (emailError) {
-      // Don't fail registration if email fails
+      
     }
 
     return NextResponse.json(

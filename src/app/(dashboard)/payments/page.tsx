@@ -40,7 +40,7 @@ export default function PaymentsPage() {
       const data = await response.json();
 
       if (response.ok) {
-        // Transform bookings to payment records
+        
         const paymentRecords = data.bookings.map((booking: any) => ({
           id: booking.id,
           booking_id: booking.id,
@@ -106,7 +106,7 @@ export default function PaymentsPage() {
         </p>
       </div>
 
-      {/* Stats */}
+      
       <div className="grid grid-cols-3 gap-2 sm:gap-6 mb-4 sm:mb-8">
         <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-2 sm:p-6">
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-3">
@@ -161,7 +161,7 @@ export default function PaymentsPage() {
         </div>
       </div>
 
-      {/* Filters */}
+      
       <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-3 sm:p-4 mb-4 sm:mb-6">
         <div className="flex flex-wrap gap-2">
           {["all", "paid", "pending", "failed", "refunded"].map(
@@ -182,7 +182,7 @@ export default function PaymentsPage() {
         </div>
       </div>
 
-      {/* Payments List */}
+      
       {payments.length === 0 ? (
         <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-12 text-center">
           <div className="w-20 h-20 bg-slate-100 dark:bg-slate-700 rounded-full flex items-center justify-center mx-auto mb-4">

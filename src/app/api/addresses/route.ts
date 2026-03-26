@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // If setting as default, unset other defaults
+    
     if (is_default) {
       await supabaseAdmin
         .from("addresses")
@@ -115,7 +115,7 @@ export async function PUT(req: NextRequest) {
     const body = await req.json();
     const { label, division, district, city, area, address, is_default } = body;
 
-    // If setting as default, unset other defaults
+    
     if (is_default) {
       await supabaseAdmin
         .from("addresses")

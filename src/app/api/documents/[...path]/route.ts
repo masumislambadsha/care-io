@@ -10,22 +10,22 @@ export async function GET(
     const session = await getServerSession(authOptions);
     const { path } = await params;
 
-    // Only allow authenticated users (especially admins) to view documents
+    
     if (!session?.user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // The path is a single encoded public_id
+    
     const publicId = decodeURIComponent(path.join("/"));
 
-    // Cloudinary raw files: the public_id from upload already includes extension
-    // So we should NOT add .pdf if it's already there
+    
+    
     const publicIdForUrl = publicId;
 
-    // Reconstruct the Cloudinary URL
+    
     const cloudinaryUrl = `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/raw/upload/${publicIdForUrl}`;
 
-    // Fetch the document from Cloudinary
+    
     const response = await fetch(cloudinaryUrl);
 
     if (!response.ok) {
@@ -35,13 +35,13 @@ export async function GET(
       );
     }
 
-    // Get the file content
+    
     const buffer = await response.arrayBuffer();
 
-    // Determine content type - assume PDF for raw files
+    
     const contentType = "application/pdf";
 
-    // Return the file with proper headers for inline viewing
+    
     return new NextResponse(buffer, {
       headers: {
         "Content-Type": contentType,

@@ -140,7 +140,7 @@ export default function AdminVerificationsPage() {
 
   return (
     <>
-      {/* Header */}
+      
       <div className="mb-4 sm:mb-8">
         <h1 className="text-lg sm:text-3xl font-bold text-slate-900 dark:text-white mb-2">
           Caregiver Verifications
@@ -150,7 +150,7 @@ export default function AdminVerificationsPage() {
         </p>
       </div>
 
-      {/* Stats */}
+      
       <div className="grid grid-cols-3 gap-2 sm:gap-6 mb-4 sm:mb-8">
         <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-2 sm:p-6">
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-3">
@@ -207,7 +207,7 @@ export default function AdminVerificationsPage() {
         </div>
       </div>
 
-      {/* Pending Caregivers */}
+      
       {caregivers.length === 0 ? (
         <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-12 text-center">
           <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -308,7 +308,7 @@ export default function AdminVerificationsPage() {
         </div>
       )}
 
-      {/* Details Modal */}
+      
       {showDetailsModal && selectedCaregiver && (
         <div className="fixed inset-0 bg-black/50 flex items-end sm:items-center justify-center z-50 p-0 sm:p-4">
           <div className="bg-white dark:bg-slate-800 rounded-t-2xl sm:rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
@@ -325,7 +325,7 @@ export default function AdminVerificationsPage() {
             </div>
 
             <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
-              {/* Applicant Info */}
+              
               <div className="flex items-center gap-4">
                 <div className="w-14 h-14 sm:w-20 sm:h-20 bg-teal-100 rounded-full flex items-center justify-center">
                   <span className="text-teal-600 font-bold text-xl sm:text-3xl">
@@ -340,13 +340,13 @@ export default function AdminVerificationsPage() {
                 </div>
               </div>
 
-              {/* Bio */}
+              
               <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-4">
                 <p className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Bio</p>
                 <p className="text-slate-900 dark:text-white">{selectedCaregiver.bio}</p>
               </div>
 
-              {/* Details Grid */}
+              
               <div className="grid grid-cols-2 gap-3">
                 <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-4">
                   <p className="text-sm text-slate-600 dark:text-slate-400 mb-1">Experience</p>
@@ -379,7 +379,7 @@ export default function AdminVerificationsPage() {
                 </div>
               </div>
 
-              {/* Services */}
+              
               <div>
                 <p className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                   Services Offered
@@ -396,7 +396,7 @@ export default function AdminVerificationsPage() {
                 </div>
               </div>
 
-              {/* Languages */}
+              
               <div>
                 <p className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                   Languages
@@ -413,7 +413,7 @@ export default function AdminVerificationsPage() {
                 </div>
               </div>
 
-              {/* Certifications */}
+              
               <div>
                 <p className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                   Certifications
@@ -439,13 +439,13 @@ export default function AdminVerificationsPage() {
                 </div>
               </div>
 
-              {/* Uploaded Documents */}
+              
               <div className="border-t border-slate-200 dark:border-slate-700 pt-6">
                 <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">
                   Uploaded Documents
                 </h3>
 
-                {/* Profile Picture */}
+                
                 {selectedCaregiver.profile_image_url && (
                   <div className="mb-4">
                     <p className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
@@ -459,7 +459,7 @@ export default function AdminVerificationsPage() {
                   </div>
                 )}
 
-                {/* NID Document */}
+                
                 {selectedCaregiver.nid_document_url && (
                   <div className="mb-4">
                     <p className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
@@ -480,7 +480,7 @@ export default function AdminVerificationsPage() {
                   </div>
                 )}
 
-                {/* Certificate Documents */}
+                
                 {selectedCaregiver.certificate_urls &&
                   selectedCaregiver.certificate_urls.length > 0 && (
                     <div className="mb-4">
@@ -517,7 +517,7 @@ export default function AdminVerificationsPage() {
                   )}
               </div>
 
-              {/* Actions */}
+              
               <div className="flex gap-2 sm:gap-3 pt-3 sm:pt-4 border-t border-slate-200 dark:border-slate-700">
                 <button
                   onClick={() => handleApprove(selectedCaregiver.user_id)}
@@ -541,7 +541,7 @@ export default function AdminVerificationsPage() {
         </div>
       )}
 
-      {/* Rejection Modal */}
+      
       {showRejectionModal && selectedCaregiver && (
         <div className="fixed inset-0 bg-black/50 flex items-end sm:items-center justify-center z-60 p-0 sm:p-4">
           <div className="bg-white dark:bg-slate-800 rounded-t-2xl sm:rounded-2xl max-w-md w-full">

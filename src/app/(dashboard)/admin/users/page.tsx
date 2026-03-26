@@ -163,7 +163,7 @@ export default function AdminUsersPage() {
 
   return (
     <>
-      {/* Header */}
+      
       <div className="mb-4 sm:mb-8">
         <h1 className="text-lg sm:text-3xl font-bold text-slate-900 dark:text-white mb-2">
           User Management
@@ -173,7 +173,7 @@ export default function AdminUsersPage() {
         </p>
       </div>
 
-      {/* Stats */}
+      
       <div className="grid grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-4 mb-4 sm:mb-8">
         <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-3 sm:p-4">
           <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mb-1">Total Users</p>
@@ -213,10 +213,10 @@ export default function AdminUsersPage() {
         </div>
       </div>
 
-      {/* Filters */}
+      
       <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-3 sm:p-6 mb-4 sm:mb-6">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-          {/* Search */}
+          
           <div>
             <label className="block text-xs sm:text-sm font-semibold text-slate-700 mb-1 sm:mb-2">
               Search
@@ -230,7 +230,7 @@ export default function AdminUsersPage() {
             />
           </div>
 
-          {/* Role Filter */}
+          
           <div>
             <label className="block text-xs sm:text-sm font-semibold text-slate-700 mb-1 sm:mb-2">
               Role
@@ -247,7 +247,7 @@ export default function AdminUsersPage() {
             </select>
           </div>
 
-          {/* Status Filter */}
+          
           <div>
             <label className="block text-xs sm:text-sm font-semibold text-slate-700 mb-1 sm:mb-2">
               Status
@@ -265,7 +265,7 @@ export default function AdminUsersPage() {
         </div>
       </div>
 
-      {/* Users — mobile cards */}
+      
       <div className="sm:hidden space-y-3">
         {filteredUsers.length === 0 ? (
           <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-8 text-center">
@@ -349,7 +349,7 @@ export default function AdminUsersPage() {
         )}
       </div>
 
-      {/* Users Table — sm and up */}
+      
       <div className="hidden sm:block bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
@@ -471,7 +471,7 @@ export default function AdminUsersPage() {
         </div>
       </div>
 
-      {/* User Details Modal */}
+      
       {showDetailsModal && selectedUser && (
         <div className="fixed inset-0 bg-black/50 flex items-end sm:items-center justify-center z-50 p-0 sm:p-4">
           <div className="bg-white dark:bg-slate-800 rounded-t-2xl sm:rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">

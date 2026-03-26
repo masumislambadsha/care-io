@@ -47,7 +47,7 @@ type AnalyticsData = {
 export default function AdminAnalyticsPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
-  const [dateRange, setDateRange] = useState("30"); // days
+  const [dateRange, setDateRange] = useState("30"); 
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -91,7 +91,7 @@ export default function AdminAnalyticsPage() {
 
   return (
     <>
-      {/* Header */}
+      
       <div className="mb-4 sm:mb-8 flex items-center justify-between">
         <div>
           <h1 className="text-lg sm:text-3xl font-bold text-slate-900 dark:text-white mb-2">
@@ -102,7 +102,7 @@ export default function AdminAnalyticsPage() {
           </p>
         </div>
 
-        {/* Date Range Filter */}
+        
         <select
           value={dateRange}
           onChange={(e) => setDateRange(e.target.value)}
@@ -115,7 +115,7 @@ export default function AdminAnalyticsPage() {
         </select>
       </div>
 
-      {/* Revenue Stats */}
+      
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-6 mb-4 sm:mb-8">
         <div className="bg-gradient-to-br from-teal-500 to-teal-600 rounded-xl shadow-lg p-3 sm:p-6 text-white">
           <div className="flex items-center justify-between mb-2">
@@ -174,9 +174,9 @@ export default function AdminAnalyticsPage() {
         </div>
       </div>
 
-      {/* Charts Row */}
+      
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-6 mb-4 sm:mb-8">
-        {/* Bookings by Status */}
+        
         <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-3 sm:p-6">
           <h3 className="text-sm sm:text-lg font-bold text-slate-900 dark:text-white mb-3 sm:mb-4">
             Bookings by Status
@@ -216,7 +216,7 @@ export default function AdminAnalyticsPage() {
           </div>
         </div>
 
-        {/* Revenue by Month */}
+        
         <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-3 sm:p-6">
           <h3 className="text-sm sm:text-lg font-bold text-slate-900 dark:text-white mb-3 sm:mb-4">
             Revenue Trend
@@ -252,9 +252,9 @@ export default function AdminAnalyticsPage() {
         </div>
       </div>
 
-      {/* Top Performers */}
+      
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-6 mb-4 sm:mb-8">
-        {/* Top Caregivers */}
+        
         <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-3 sm:p-6">
           <h3 className="text-sm sm:text-lg font-bold text-slate-900 dark:text-white mb-3 sm:mb-4">
             Top Caregivers
@@ -290,7 +290,7 @@ export default function AdminAnalyticsPage() {
           </div>
         </div>
 
-        {/* Top Services */}
+        
         <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-3 sm:p-6">
           <h3 className="text-sm sm:text-lg font-bold text-slate-900 dark:text-white mb-3 sm:mb-4">
             Top Services
@@ -319,7 +319,7 @@ export default function AdminAnalyticsPage() {
         </div>
       </div>
 
-      {/* User Distribution */}
+      
       <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-3 sm:p-6">
         <h3 className="text-sm sm:text-lg font-bold text-slate-900 dark:text-white mb-3 sm:mb-4">
           User Distribution

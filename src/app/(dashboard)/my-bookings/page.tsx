@@ -181,7 +181,7 @@ export default function MyBookingsPage() {
 
   return (
     <>
-      {/* Header */}
+      
       <div className="mb-4 sm:mb-8">
         <h1 className="text-lg sm:text-3xl font-bold text-slate-900 dark:text-white mb-1 sm:mb-2">
           My Bookings
@@ -193,7 +193,7 @@ export default function MyBookingsPage() {
         </p>
       </div>
 
-      {/* Filters */}
+      
       <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-3 sm:p-4 mb-4 sm:mb-6">
         <div className="flex flex-wrap gap-2">
           {["all", "confirmed", "ongoing", "completed", "cancelled"].map(
@@ -214,7 +214,7 @@ export default function MyBookingsPage() {
         </div>
       </div>
 
-      {/* Bookings List */}
+      
       {filteredBookings.length === 0 ? (
         <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6 sm:p-8 text-center">
           <div className="w-16 h-16 bg-slate-100 dark:bg-slate-700 rounded-full flex items-center justify-center mx-auto mb-3">
@@ -363,7 +363,7 @@ export default function MyBookingsPage() {
         </div>
       )}
 
-      {/* Review Modal */}
+      
       {showReviewModal && selectedBooking && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white dark:bg-slate-800 rounded-2xl max-w-md w-full">
@@ -438,7 +438,7 @@ export default function MyBookingsPage() {
         </div>
       )}
 
-      {/* Cancel Booking Modal */}
+      
       {showCancelModal && selectedBooking && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white dark:bg-slate-800 rounded-2xl max-w-md w-full">
@@ -508,7 +508,7 @@ export default function MyBookingsPage() {
         </div>
       )}
 
-      {/* Booking Details Modal */}
+      
       {showDetailsModal && selectedBooking && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white dark:bg-slate-800 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">

@@ -175,7 +175,7 @@ export default function BookingPage() {
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 overflow-x-hidden">
       <Navbar />
 
-      {/* Progress Steps */}
+      
       <div className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 -mt-15 pt-40 py-6 overflow-hidden">
         <div className="max-w-4xl mx-auto px-4">
           <div className="flex items-center justify-between">
@@ -224,7 +224,7 @@ export default function BookingPage() {
         </div>
       </div>
 
-      {/* Main Content */}
+      
       <main className="max-w-4xl mx-auto px-4 py-6 sm:py-12">
         <motion.div
           key={currentStep}
@@ -233,7 +233,7 @@ export default function BookingPage() {
           exit={{ opacity: 0, x: -20 }}
           transition={{ duration: 0.3 }}
         >
-          {/* Step 1 - Choose Caregiver */}
+          
           {currentStep === 1 && (
             <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg border border-slate-100 dark:border-slate-700 p-4 sm:p-8">
               <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-6">
@@ -350,7 +350,7 @@ export default function BookingPage() {
             </div>
           )}
 
-          {/* Step 2 - Schedule */}
+          
           {currentStep === 2 && (
             <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg border border-slate-100 dark:border-slate-700 p-4 sm:p-8">
               <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-6 wrap-break-word">
@@ -361,7 +361,7 @@ export default function BookingPage() {
               </p>
 
               <div className="space-y-6">
-                {/* Duration Type */}
+                
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-3">
                     Duration Type
@@ -385,9 +385,9 @@ export default function BookingPage() {
                   </div>
                 </div>
 
-                {/* Start Date & Time */}
+                
                 <div className="grid items-center grid-cols-1 sm:grid-cols-2 gap-4">
-                  {/* Start Date */}
+                  
                   <div>
                     <DatePicker
                       className="w-full [&>div:first-child]:mb-2"
@@ -456,7 +456,7 @@ export default function BookingPage() {
                     </DatePicker>
                   </div>
 
-                  {/* Start Time */}
+                  
                   <div>
                     <TimeField
                       className="w-full [&>div:first-child]:mb-2"
@@ -485,7 +485,7 @@ export default function BookingPage() {
                   </div>
                 </div>
 
-                {/* Duration Value */}
+                
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                     Duration (
@@ -543,7 +543,7 @@ export default function BookingPage() {
                   </div>
                 </div>
 
-                {/* Summary */}
+                
                 <div className="bg-teal-50 border-2 border-teal-200 rounded-xl p-4">
                   <div className="flex items-center gap-2 text-teal-700">
                     <span className="material-icons">info</span>
@@ -561,7 +561,7 @@ export default function BookingPage() {
             </div>
           )}
 
-          {/* Step 3 - Location */}
+          
           {currentStep === 3 && (
             <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg border border-slate-100 dark:border-slate-700 p-4 sm:p-8">
               <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-6">
@@ -708,7 +708,7 @@ export default function BookingPage() {
             </div>
           )}
 
-          {/* Step 4 - Review & Pay */}
+          
           {currentStep === 4 && (
             <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg border border-slate-100 dark:border-slate-700 p-4 sm:p-8">
               <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-6">
@@ -719,7 +719,7 @@ export default function BookingPage() {
               </p>
 
               <div className="space-y-6">
-                {/* Booking Summary */}
+                
                 <div className="bg-slate-50 rounded-xl p-6 space-y-4">
                   <h3 className="text-lg font-bold text-slate-900 mb-4">Booking Summary</h3>
                   <div className="flex items-center gap-4 pb-4 border-b border-slate-200">
@@ -780,7 +780,7 @@ export default function BookingPage() {
                   </div>
                 </div>
 
-                {/* Price Breakdown */}
+                
                 <div className="bg-slate-50 rounded-xl p-6">
                   <h3 className="text-lg font-bold text-slate-900 mb-4">Price Breakdown</h3>
                   <div className="space-y-3">
@@ -809,7 +809,7 @@ export default function BookingPage() {
                   </div>
                 </div>
 
-                {/* Promo Code */}
+                
                 <div className="bg-slate-50 rounded-xl p-6">
                   <div className="bg-linear-to-r from-teal-500 to-teal-600 rounded-lg p-4 mb-4 text-white">
                     <div className="flex items-center gap-3">
@@ -835,7 +835,7 @@ export default function BookingPage() {
                   />
                 </div>
 
-                {/* Payment Method */}
+                
                 <div className="bg-slate-50 rounded-xl p-6">
                   <h3 className="text-lg font-bold text-slate-900 mb-4">Payment Method</h3>
                   <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-4 mb-4">
@@ -868,7 +868,7 @@ export default function BookingPage() {
                   </div>
                 </div>
 
-                {/* Terms */}
+                
                 <div className="bg-yellow-50 border-2 border-yellow-200 rounded-xl p-4">
                   <div className="flex items-start gap-2">
                     <span className="material-icons text-yellow-600 text-sm">info</span>
@@ -883,7 +883,7 @@ export default function BookingPage() {
           )}
         </motion.div>
 
-        {/* Navigation Buttons */}
+        
         <div className="flex items-center justify-between mt-6 sm:mt-8 gap-3">
           <button
             onClick={prevStep}

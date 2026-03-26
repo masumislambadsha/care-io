@@ -10,11 +10,11 @@ export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
 });
 
 export const formatAmountForStripe = (amount: number): number => {
-  return Math.round(amount * 100); // Convert to cents
+  return Math.round(amount * 100); 
 };
 
 export const formatAmountFromStripe = (amount: number): number => {
-  return amount / 100; // Convert from cents
+  return amount / 100; 
 };
 
 export default stripe;

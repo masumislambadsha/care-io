@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Fetch promo code
+    
     const { data: promoCode, error } = await supabaseAdmin
       .from("promo_codes")
       .select("*")
@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Check if expired
+    
     if (promoCode.expires_at) {
       const expiryDate = new Date(promoCode.expires_at);
       if (expiryDate < new Date()) {
@@ -47,7 +47,7 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Check usage limit
+    
     if (promoCode.max_uses && promoCode.current_uses >= promoCode.max_uses) {
       return NextResponse.json(
         { valid: false, error: "Promo code usage limit reached" },
@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Calculate discount
+    
     let discountAmount = 0;
     if (promoCode.discount_type === "PERCENTAGE") {
       discountAmount = (bookingAmount * promoCode.discount_value) / 100;
@@ -63,7 +63,7 @@ export async function POST(req: NextRequest) {
       discountAmount = promoCode.discount_value;
     }
 
-    // Ensure discount doesn't exceed booking amount
+    
     discountAmount = Math.min(discountAmount, bookingAmount);
 
     return NextResponse.json({

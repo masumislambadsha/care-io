@@ -96,7 +96,7 @@ export default function CaregiverEarningsPage() {
 
   return (
     <>
-      {/* Header */}
+      
       <div className="mb-4 sm:mb-8">
         <h1 className="text-lg sm:text-3xl font-bold text-slate-900 dark:text-white mb-2">
           My Earnings
@@ -106,7 +106,7 @@ export default function CaregiverEarningsPage() {
         </p>
       </div>
 
-      {/* Stats */}
+      
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-6 mb-4 sm:mb-8">
         <div className="bg-linear-to-br from-teal-600 to-teal-700 rounded-xl shadow-lg p-4 sm:p-6 text-white">
           <div className="flex items-center justify-between mb-2 sm:mb-4">
@@ -160,7 +160,7 @@ export default function CaregiverEarningsPage() {
         </div>
       </div>
 
-      {/* Info Card */}
+      
       <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-4 mb-8">
         <div className="flex gap-3">
           <span className="material-icons text-blue-600">info</span>
@@ -176,7 +176,7 @@ export default function CaregiverEarningsPage() {
         </div>
       </div>
 
-      {/* Filters */}
+      
       <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-3 sm:p-4 mb-4 sm:mb-6">
         <div className="flex flex-wrap gap-2 sm:gap-3">
           {["all", "completed", "ongoing"].map((filterOption) => (
@@ -195,7 +195,7 @@ export default function CaregiverEarningsPage() {
         </div>
       </div>
 
-      {/* Earnings Table */}
+      
       {earnings.length === 0 ? (
         <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-12 text-center">
           <div className="w-20 h-20 bg-slate-100 dark:bg-slate-700 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -284,7 +284,7 @@ export default function CaregiverEarningsPage() {
         </div>
       )}
 
-      {/* Withdraw Button */}
+      
       {totalEarnings >= 50 && (
         <div className="mt-6 flex justify-end">
           <button className="px-8 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-lg transition-all shadow-lg">

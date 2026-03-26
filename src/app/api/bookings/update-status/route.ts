@@ -21,13 +21,13 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Validate status
+    
     const validStatuses = ["CONFIRMED", "ONGOING", "COMPLETED", "CANCELLED"];
     if (!validStatuses.includes(status)) {
       return NextResponse.json({ error: "Invalid status" }, { status: 400 });
     }
 
-    // Get booking to verify ownership
+    
     const { data: booking, error: fetchError } = await supabaseAdmin
       .from("bookings")
       .select("*")
@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Booking not found" }, { status: 404 });
     }
 
-    // Only caregiver can update status
+    
     if (booking.caregiver_id !== session.user.id) {
       return NextResponse.json(
         { error: "Only the assigned caregiver can update booking status" },
@@ -46,13 +46,13 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Update booking status
+    
     const updateData: any = {
       status,
       updated_at: new Date().toISOString(),
     };
 
-    // If marking as completed, set completed_at and payment_status
+    
 if (status === "COMPLETED") {
   updateData.completed_at = new Date().toISOString();
   updateData.payment_status = "PAID";
@@ -71,7 +71,7 @@ if (status === "COMPLETED") {
       );
     }
 
-    // Create notification for client
+    
     await supabaseAdmin.from("notifications").insert({
       user_id: booking.client_id,
       type: "BOOKING_STATUS_UPDATED",

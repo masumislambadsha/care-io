@@ -1,4 +1,4 @@
-// app/components/MovingBorderCard.tsx
+
 "use client";
 
 import React from "react";
@@ -18,12 +18,12 @@ const MovingBorderCard: React.FC<MovingBorderCardProps> = ({
 }) => {
   return (
     <div className="relative">
-      {/* animated border ring */}
+      
       <div
         className="pointer-events-none absolute inset-0 rounded-2xl overflow-hidden"
         style={{ borderRadius: radius }}
       >
-        {/* gradient background that spins */}
+        
         <div
           className="
             absolute inset-[-50%]
@@ -34,7 +34,7 @@ const MovingBorderCard: React.FC<MovingBorderCardProps> = ({
         />
       </div>
 
-      {/* inner white card that leaves space for the ring */}
+      
       <div
         className="relative bg-white rounded-2xl"
         style={{

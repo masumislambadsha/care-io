@@ -107,7 +107,7 @@ export default function AboutPage() {
     <div className="min-h-screen bg-slate-50 overflow-x-hidden">
       <Navbar />
 
-      {/* Hero */}
+      
       <section className="relative bg-linear-to-br from-teal-600 to-teal-700 py-20 sm:py-28 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
@@ -134,7 +134,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Mission */}
+      
       <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 items-center">
@@ -169,7 +169,7 @@ export default function AboutPage() {
               transition={{ duration: 0.7 }}
               className="relative"
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
+              
               <img
                 src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=700&h=500&fit=crop"
                 alt="Caregiver with family"
@@ -186,7 +186,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Values */}
+      
       <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-slate-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
@@ -230,7 +230,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Stats */}
+      
       <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-linear-to-br from-teal-600 to-teal-700">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
@@ -260,7 +260,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Timeline */}
+      
       <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12">
@@ -306,7 +306,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Team */}
+      
       <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-slate-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
@@ -333,7 +333,7 @@ export default function AboutPage() {
                 data-aos-delay={i * 80}
                 className="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 text-center"
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
+                
                 <img
                   src={member.image}
                   alt={member.name}
@@ -356,7 +356,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* CTA */}
+      
       <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-3xl mx-auto text-center">
           <h2
@@ -400,7 +400,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Footer */}
+      
       <footer className="bg-slate-900 text-slate-400 py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">

@@ -8,11 +8,11 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   useEffect(() => {
-    // Force light mode on auth pages
+    
     document.documentElement.classList.remove("dark");
     document.documentElement.style.colorScheme = "light";
 
-    // Add style to force input colors
+    
     const style = document.createElement("style");
     style.id = "auth-light-mode";
     style.textContent = `
@@ -30,7 +30,7 @@ export default function AuthLayout({
     document.head.appendChild(style);
 
     return () => {
-      // Restore color scheme on unmount
+      
       document.documentElement.style.colorScheme = "";
       const styleEl = document.getElementById("auth-light-mode");
       if (styleEl) {

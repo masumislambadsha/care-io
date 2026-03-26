@@ -141,7 +141,7 @@ export default function AdminBookingsPage() {
 
   return (
     <>
-      {/* Header */}
+      
       <div className="mb-4 sm:mb-8">
         <h1 className="text-lg sm:text-3xl font-bold text-slate-900 dark:text-white mb-2">
           Booking Management
@@ -151,7 +151,7 @@ export default function AdminBookingsPage() {
         </p>
       </div>
 
-      {/* Stats */}
+      
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-4 mb-4 sm:mb-8">
         <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-3 sm:p-4">
           <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mb-1">Total</p>
@@ -179,7 +179,7 @@ export default function AdminBookingsPage() {
         </div>
       </div>
 
-      {/* Filters */}
+      
       <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-3 sm:p-6 mb-4 sm:mb-6">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
           <div>
@@ -231,7 +231,7 @@ export default function AdminBookingsPage() {
         </div>
       </div>
 
-      {/* Bookings Table */}
+      
       <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
@@ -354,7 +354,7 @@ export default function AdminBookingsPage() {
         </div>
       </div>
 
-      {/* Booking Details Modal */}
+      
       {showDetailsModal && selectedBooking && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white dark:bg-slate-800 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
@@ -443,7 +443,7 @@ export default function AdminBookingsPage() {
                 </div>
               </div>
 
-              {/* Status Update Actions */}
+              
               {selectedBooking.status !== "COMPLETED" &&
                 selectedBooking.status !== "CANCELLED" && (
                   <div className="flex gap-3 pt-4 border-t border-slate-200 dark:border-slate-700">

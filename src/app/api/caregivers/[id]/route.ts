@@ -6,7 +6,7 @@ export async function GET(
   context: { params: Promise<{ id: string }> },
 ) {
   try {
-    // In Next.js 15, params is a Promise
+    
     const params = await context.params;
 
     const { data: caregiver, error } = await supabaseAdmin
@@ -29,7 +29,7 @@ export async function GET(
       );
     }
 
-    // Transform data
+    
     const transformedCaregiver = {
       id: caregiver.id,
       name: caregiver.name,

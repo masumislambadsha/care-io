@@ -3,7 +3,7 @@ import { supabaseAdmin } from "@/lib/supabase";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 
-// Enable ISR with 60 second revalidation
+
 export const revalidate = 60;
 
 export async function GET(req: NextRequest) {
@@ -11,14 +11,14 @@ export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const isAdmin = searchParams.get("admin") === "true";
 
-    // Check if admin request
+    
     if (isAdmin) {
       const session = await getServerSession(authOptions);
       if (session?.user?.role !== "ADMIN") {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
       }
 
-      // Fetch all services for admin
+      
       const { data: services, error } = await supabaseAdmin
         .from("services")
         .select("*")
@@ -35,7 +35,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ services });
     }
 
-    // Fetch only active services for public
+    
     const { data: services, error } = await supabaseAdmin
       .from("services")
       .select("*")

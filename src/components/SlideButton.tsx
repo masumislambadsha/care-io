@@ -21,14 +21,14 @@ export default function SlideButton({
       disabled={disabled}
       className={`relative overflow-hidden rounded-full border-2 border-black bg-black text-white font-black uppercase px-12 py-3 cursor-pointer disabled:cursor-default transition-all hover:shadow-lg ${className}`}
     >
-      {/* Text container with mix-blend-mode */}
+      
       <span className="relative block overflow-hidden mix-blend-difference">
         <span className="block relative hover:animate-move-up-alternate">
           {children}
         </span>
       </span>
 
-      {/* Sliding backgrounds */}
+      
       <span className="absolute block h-[102%] w-full bg-white pointer-events-none top-[-104%] left-[calc(-50%-50%*0.2)] skew-x-[-30deg] transition-transform duration-200 ease-in-out hover:translate-y-full" />
       <span className="absolute block h-[102%] w-full bg-white pointer-events-none top-[102%] left-[calc(50%+50%*0.2)] skew-x-[-30deg] transition-transform duration-200 ease-in-out -z-[1] hover:-translate-y-[102%]" />
     </button>

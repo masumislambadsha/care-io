@@ -82,7 +82,7 @@ export default function CaregiverDetailPage() {
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
       <Navbar />
 
-      {/* Breadcrumb */}
+      
       <div className="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center gap-2 text-sm">
@@ -111,11 +111,11 @@ export default function CaregiverDetailPage() {
         </div>
       </div>
 
-      {/* Main Content */}
+      
       <section className="py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Left Column - Profile Card */}
+            
             <div className="lg:col-span-1">
               <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-700 p-8 sticky top-24">
                 <div className="text-center mb-6">
@@ -134,7 +134,7 @@ export default function CaregiverDetailPage() {
                     {caregiver.services_offered.join(", ")}
                   </p>
 
-                  {/* Rating */}
+                  
                   <div className="flex items-center justify-center gap-2 mb-4">
                     <div className="flex items-center gap-1">
                       {[...Array(5)].map((_, i) => (
@@ -158,7 +158,7 @@ export default function CaregiverDetailPage() {
                     </span>
                   </div>
 
-                  {/* Verification Badge */}
+                  
                   {caregiver.verification_status === "APPROVED" && (
                     <div className="inline-flex items-center gap-2 bg-teal-100 text-teal-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
                       <span className="material-icons text-sm">verified</span>
@@ -167,7 +167,7 @@ export default function CaregiverDetailPage() {
                   )}
                 </div>
 
-                {/* Stats */}
+                
                 <div className="space-y-4 mb-6 pb-6 border-b border-slate-200 dark:border-slate-700">
                   <div className="flex items-center justify-between">
                     <span className="text-slate-600 dark:text-slate-400">
@@ -195,7 +195,7 @@ export default function CaregiverDetailPage() {
                   </div>
                 </div>
 
-                {/* Book Button */}
+                
                 <Link
                   href="/services"
                   className="block w-full bg-teal-600 hover:bg-teal-700 text-white text-center font-bold py-4 rounded-lg transition-all"
@@ -205,9 +205,9 @@ export default function CaregiverDetailPage() {
               </div>
             </div>
 
-            {/* Right Column - Details */}
+            
             <div className="lg:col-span-2 space-y-8">
-              {/* About */}
+              
               <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-8">
                 <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">
                   About {caregiver.name}
@@ -217,7 +217,7 @@ export default function CaregiverDetailPage() {
                 </p>
               </div>
 
-              {/* Services */}
+              
               <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-8">
                 <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">
                   Services Offered
@@ -234,7 +234,7 @@ export default function CaregiverDetailPage() {
                 </div>
               </div>
 
-              {/* Certifications */}
+              
               <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-8">
                 <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">
                   Certifications &amp; Skills
@@ -253,7 +253,7 @@ export default function CaregiverDetailPage() {
                 </div>
               </div>
 
-              {/* Languages */}
+              
               <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-8">
                 <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">
                   Languages

@@ -70,13 +70,13 @@ export function ConfirmModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      {/* Backdrop */}
+      
       <div
         className="absolute inset-0 bg-black/50 backdrop-blur-sm"
         onClick={!isLoading ? onClose : undefined}
       />
 
-      {/* Modal */}
+      
       <div className="relative bg-white dark:bg-slate-800 rounded-xl shadow-xl max-w-md w-full p-6 animate-in fade-in zoom-in duration-200">
         <div className="flex items-start gap-4">
           <div className={`${style.iconBg} rounded-full p-3 flex-shrink-0`}>

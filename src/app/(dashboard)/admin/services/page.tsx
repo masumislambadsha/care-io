@@ -52,7 +52,7 @@ export default function AdminServicesPage() {
   const fetchServices = async () => {
     try {
       setLoading(true);
-      // For admin, fetch all services (not just active ones)
+      
       const response = await fetch("/api/services?admin=true");
       const data = await response.json();
       if (response.ok) {
@@ -178,13 +178,13 @@ export default function AdminServicesPage() {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    // Validate file type
+    
     if (!file.type.startsWith("image/")) {
       toast.error("Please upload an image file");
       return;
     }
 
-    // Validate file size (max 5MB)
+    
     if (file.size > 5 * 1024 * 1024) {
       toast.error("Image size should be less than 5MB");
       return;
@@ -249,7 +249,7 @@ export default function AdminServicesPage() {
         </button>
       </div>
 
-      {/* Filter Tabs */}
+      
       <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-3 sm:p-4 mb-4 sm:mb-6">
         <div className="flex gap-2 sm:gap-3">
           {(["all", "active", "inactive"] as const).map((filterOption) => (
@@ -376,7 +376,7 @@ export default function AdminServicesPage() {
         </div>
       )}
 
-      {/* Create Service Modal */}
+      
       {showCreateModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 overflow-y-auto">
           <div className="bg-white dark:bg-slate-800 rounded-2xl max-w-2xl w-full my-8 flex flex-col max-h-[calc(100vh-4rem)]">
@@ -559,7 +559,7 @@ export default function AdminServicesPage() {
         </div>
       )}
 
-      {/* Edit Service Modal */}
+      
       {showEditModal && editingService && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 overflow-y-auto">
           <div className="bg-white dark:bg-slate-800 rounded-2xl max-w-2xl w-full my-8 flex flex-col max-h-[calc(100vh-4rem)]">

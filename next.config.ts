@@ -47,9 +47,8 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ["framer-motion", "swiper", "aos", "react-icons"],
     webpackBuildWorker: true,
   },
-  // Production optimizations
+
   productionBrowserSourceMaps: false,
-  // Empty turbopack config to silence the webpack warning in Next.js 16
   turbopack: {},
 };
 

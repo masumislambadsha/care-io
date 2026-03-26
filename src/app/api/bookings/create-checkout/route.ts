@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
       totalAmount,
     } = body;
 
-    // Create Stripe Checkout Session
+    
     const checkoutSession = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       line_items: [

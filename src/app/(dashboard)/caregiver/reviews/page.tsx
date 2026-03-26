@@ -60,12 +60,12 @@ export default function CaregiverReviewsPage() {
           client_image: r.client?.image || "",
           rating: r.rating,
           comment: r.comment,
-          service_name: "Service", // You can add this to the API
+          service_name: "Service", 
           created_at: r.created_at,
         }));
         setReviews(reviewsData);
 
-        // Calculate stats
+        
         const total = reviewsData.length;
         const avgRating =
           total > 0
@@ -108,7 +108,7 @@ export default function CaregiverReviewsPage() {
 
   return (
     <>
-      {/* Header */}
+      
       <div className="mb-4 sm:mb-8">
         <h1 className="text-lg sm:text-3xl font-bold text-slate-900 dark:text-white mb-2">
           My Reviews
@@ -118,9 +118,9 @@ export default function CaregiverReviewsPage() {
         </p>
       </div>
 
-      {/* Rating Overview */}
+      
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 sm:gap-6 mb-4 sm:mb-8">
-        {/* Average Rating Card */}
+        
         <div className="bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl shadow-lg p-8 text-white">
           <div className="text-center">
             <p className="text-sm opacity-90 mb-2">Average Rating</p>
@@ -147,7 +147,7 @@ export default function CaregiverReviewsPage() {
           </div>
         </div>
 
-        {/* Rating Distribution */}
+        
         <div className="lg:col-span-2 bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
           <h3 className="font-bold text-slate-900 dark:text-white mb-4">Rating Distribution</h3>
           <div className="space-y-3">
@@ -184,7 +184,7 @@ export default function CaregiverReviewsPage() {
         </div>
       </div>
 
-      {/* Reviews List */}
+      
       {reviews.length === 0 ? (
         <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-12 text-center">
           <div className="w-20 h-20 bg-slate-100 dark:bg-slate-700 rounded-full flex items-center justify-center mx-auto mb-4">

@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const { bookingId, caregiverId, rating, comment } = body;
 
-    // Validate input
+    
     if (!bookingId || !caregiverId || !rating) {
       return NextResponse.json(
         { error: "Missing required fields" },
@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Check if booking exists and belongs to user
+    
     const { data: booking, error: bookingError } = await supabaseAdmin
       .from("bookings")
       .select("*")
@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Check if review already exists
+    
     const { data: existingReview } = await supabaseAdmin
       .from("reviews")
       .select("id")
@@ -59,7 +59,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Create review
+    
     const { data: review, error: reviewError } = await supabaseAdmin
       .from("reviews")
       .insert({
@@ -80,7 +80,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Update caregiver's average rating
+    
     const { data: reviews } = await supabaseAdmin
       .from("reviews")
       .select("rating")

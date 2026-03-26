@@ -28,8 +28,8 @@ export default function AdminDashboardPage() {
         router.push("/dashboard");
         return;
       }
-      // Fetch admin stats
-      // For now, using mock data
+      
+      
       setStats({
         totalUsers: 1250,
         totalCaregivers: 450,
@@ -56,7 +56,7 @@ export default function AdminDashboardPage() {
 
   return (
     <>
-      {/* Header */}
+      
       <div className="mb-4 sm:mb-8">
         <h1 className="text-lg sm:text-3xl font-bold text-slate-900 dark:text-white mb-2">
           Admin Dashboard
@@ -66,7 +66,7 @@ export default function AdminDashboardPage() {
         </p>
       </div>
 
-      {/* Stats Grid */}
+      
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-6 mb-4 sm:mb-8">
         <div className="bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl shadow-lg p-3 sm:p-6 text-white">
           <div className="flex items-center justify-between mb-2 sm:mb-4">
@@ -127,7 +127,7 @@ export default function AdminDashboardPage() {
         </div>
       </div>
 
-      {/* Quick Stats */}
+      
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-6 mb-4 sm:mb-8">
         <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-3 sm:p-6">
           <div className="flex items-center gap-2 sm:gap-3">
@@ -202,7 +202,7 @@ export default function AdminDashboardPage() {
         </div>
       </div>
 
-      {/* Quick Actions */}
+      
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
           <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6">

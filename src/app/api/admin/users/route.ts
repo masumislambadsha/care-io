@@ -58,7 +58,7 @@ export async function PUT(req: NextRequest) {
       );
     }
 
-    // Prevent admin from suspending themselves
+    
     if (userId === session.user.id) {
       return NextResponse.json(
         { error: "You cannot change your own status" },
@@ -106,7 +106,7 @@ export async function DELETE(req: NextRequest) {
       return NextResponse.json({ error: "User ID required" }, { status: 400 });
     }
 
-    // Prevent admin from deleting themselves
+    
     if (userId === session.user.id) {
       return NextResponse.json(
         { error: "You cannot delete your own account" },
@@ -114,16 +114,16 @@ export async function DELETE(req: NextRequest) {
       );
     }
 
-    // Hard delete - permanently remove from database
-    // Delete all related records first (in order)
+    
+    
 
-    // 1. First, check what bookings exist
+    
     const { data: existingBookings } = await supabaseAdmin
       .from("bookings")
       .select("id, client_id, caregiver_id")
       .or(`client_id.eq.${userId},caregiver_id.eq.${userId}`);
 
-    // 2. Delete payments for these bookings
+    
     if (existingBookings && existingBookings.length > 0) {
       const bookingIds = existingBookings.map((b) => b.id);
       const { error: paymentsError } = await supabaseAdmin
@@ -134,7 +134,7 @@ export async function DELETE(req: NextRequest) {
       if (paymentsError) console.error("Payments error:", paymentsError);
     }
 
-    // 3. Delete reviews where user is author or target
+    
     const { error: reviewsError } = await supabaseAdmin
       .from("reviews")
       .delete()
@@ -142,7 +142,7 @@ export async function DELETE(req: NextRequest) {
 
     if (reviewsError) console.error("Reviews error:", reviewsError);
 
-    // 4. Delete ALL bookings for this user (both as client and caregiver)
+    
     const { data: deletedBookings, error: bookingsError } = await supabaseAdmin
       .from("bookings")
       .delete()
@@ -156,31 +156,31 @@ export async function DELETE(req: NextRequest) {
       );
     }
 
-    // 5. Delete addresses
+    
     const { error: addressesError } = await supabaseAdmin
       .from("addresses")
       .delete()
       .eq("user_id", userId);
 
-    // 6. Delete family members
+    
     const { error: familyError } = await supabaseAdmin
       .from("family_members")
       .delete()
       .eq("user_id", userId);
 
-    // 7. Delete caregiver profile
+    
     const { error: profileError } = await supabaseAdmin
       .from("caregiver_profiles")
       .delete()
       .eq("user_id", userId);
 
-    // 8. Delete notifications
+    
     const { error: notificationsError } = await supabaseAdmin
       .from("notifications")
       .delete()
       .eq("user_id", userId);
 
-    // 9. Finally delete the user
+    
     const { error } = await supabaseAdmin
       .from("users")
       .delete()

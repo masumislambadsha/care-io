@@ -67,7 +67,7 @@ export default function CaregiversPage() {
   const applyFilters = () => {
     let filtered = [...caregivers];
 
-    // Search filter
+    
     if (searchQuery) {
       filtered = filtered.filter(
         (c) =>
@@ -78,22 +78,22 @@ export default function CaregiversPage() {
       );
     }
 
-    // Service filter
+    
     if (filters.service !== "all") {
       filtered = filtered.filter((c) =>
         c.services_offered.includes(filters.service),
       );
     }
 
-    // Rating filter
+    
     if (filters.minRating > 0) {
       filtered = filtered.filter((c) => c.avg_rating >= filters.minRating);
     }
 
-    // Rate filter
+    
     filtered = filtered.filter((c) => c.hourly_rate <= filters.maxRate);
 
-    // Experience filter
+    
     if (filters.experience > 0) {
       filtered = filtered.filter((c) => c.experience >= filters.experience);
     }
@@ -131,7 +131,7 @@ export default function CaregiversPage() {
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
       <Navbar />
 
-      {/* Hero Section */}
+      
       <section className="bg-linear-to-br from-teal-600 to-teal-700 text-white pt-40 -mt-15 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -144,7 +144,7 @@ export default function CaregiversPage() {
               Browse our verified and experienced caregivers
             </p>
 
-            {/* Search Bar */}
+            
             <div className="max-w-2xl mx-auto">
               <div className="relative">
                 <input
@@ -163,11 +163,11 @@ export default function CaregiversPage() {
         </div>
       </section>
 
-      {/* Filters & Results */}
+      
       <section className="py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-            {/* Filters Sidebar */}
+            
             <div className="lg:col-span-1">
               <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6 sticky top-24">
                 <div className="flex items-center justify-between mb-6">
@@ -183,7 +183,7 @@ export default function CaregiversPage() {
                 </div>
 
                 <div className="space-y-6">
-                  {/* Service Filter */}
+                  
                   <div>
                     <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                       Service Type
@@ -204,7 +204,7 @@ export default function CaregiversPage() {
                     </select>
                   </div>
 
-                  {/* Rating Filter */}
+                  
                   <div>
                     <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                       Minimum Rating
@@ -230,7 +230,7 @@ export default function CaregiversPage() {
                     </div>
                   </div>
 
-                  {/* Rate Filter */}
+                  
                   <div>
                     <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                       Max Hourly Rate: ${filters.maxRate}
@@ -251,7 +251,7 @@ export default function CaregiversPage() {
                     />
                   </div>
 
-                  {/* Experience Filter */}
+                  
                   <div>
                     <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                       Min Experience: {filters.experience} years
@@ -275,7 +275,7 @@ export default function CaregiversPage() {
               </div>
             </div>
 
-            {/* Caregivers Grid */}
+            
             <div className="lg:col-span-3">
               <div className="mb-6">
                 <p className="text-slate-600 dark:text-slate-400">

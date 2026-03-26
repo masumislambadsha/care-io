@@ -25,7 +25,7 @@ export async function DELETE(req: NextRequest) {
       );
     }
 
-    // Don't allow deleting yourself
+    
     if (userId === session.user.id) {
       return NextResponse.json(
         { error: "Cannot delete your own account" },
@@ -33,7 +33,7 @@ export async function DELETE(req: NextRequest) {
       );
     }
 
-    // Delete user (cascade will handle related records)
+    
     const { error } = await supabaseAdmin
       .from("users")
       .delete()

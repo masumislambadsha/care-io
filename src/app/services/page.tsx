@@ -54,7 +54,7 @@ export default function ServicesPage() {
     }
   };
 
-  // Map service names to categories for filtering
+  
   const getCategoryFromService = (serviceName: string) => {
     const name = serviceName.toLowerCase();
     if (name.includes("baby") || name.includes("child")) return "childcare";

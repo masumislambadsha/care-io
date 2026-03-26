@@ -10,7 +10,7 @@ export async function GET() {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // Return default settings
+    
     const defaultSettings = {
       emailNotifications: true,
       smsNotifications: false,
@@ -43,7 +43,7 @@ export async function PUT(req: NextRequest) {
     const { settings } = body;
 
 
-    // Settings will be stored in localStorage on the client side
+    
     return NextResponse.json({
       message: "Settings updated successfully",
       settings,

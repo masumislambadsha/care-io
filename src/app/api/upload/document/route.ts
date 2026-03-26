@@ -8,8 +8,8 @@ export async function POST(req: NextRequest) {
     const session = await getServerSession(authOptions);
 
 
-    // Allow uploads during registration (no session required)
-    // We'll use a temporary folder and move files later if needed
+    
+    
     const userId = session?.user?.id || "temp-" + Date.now();
 
     const formData = await req.formData();
@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "No file provided" }, { status: 400 });
     }
 
-    // Validate file type - allow images and PDFs for documents
+    
     const allowedTypes = [
       "image/jpeg",
       "image/jpg",
@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Validate file size (max 10MB for documents)
+    
     if (file.size > 10 * 1024 * 1024) {
       return NextResponse.json(
         { error: "File size must be less than 10MB" },
@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Determine folder based on document type
+    
     const folder = `care-xyz/${documentType || "documents"}/${userId}`;
 
 

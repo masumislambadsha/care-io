@@ -2,7 +2,7 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const FROM_EMAIL = "Care XYZ <onboarding@resend.dev>"; // Change to your verified domain
+const FROM_EMAIL = "Care XYZ <onboarding@resend.dev>"; 
 
 export async function sendVerificationApprovedEmail(
   to: string,

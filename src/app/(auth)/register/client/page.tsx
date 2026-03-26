@@ -49,7 +49,7 @@ export default function RegisterClientPage() {
         throw new Error(result.error || "Registration failed");
       }
 
-      // Redirect to login
+      
       router.push("/login?registered=true");
     } catch (err: any) {
       setError(err.message);
@@ -60,7 +60,7 @@ export default function RegisterClientPage() {
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col">
-      {/* Navbar */}
+      
       <nav className="bg-white border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
@@ -85,7 +85,7 @@ export default function RegisterClientPage() {
         </div>
       </nav>
 
-      {/* Main Content */}
+      
       <main className="flex-grow flex items-center justify-center p-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -175,7 +175,7 @@ export default function BookingDetailPage() {
 
   return (
     <>
-      {/* Header */}
+      
       <div className="mb-4 sm:mb-8">
         <Link
           href="/my-bookings"
@@ -192,11 +192,11 @@ export default function BookingDetailPage() {
         </p>
       </div>
 
-      {/* Main Content */}
+      
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 sm:gap-6">
-        {/* Left Column - Main Details */}
+        
         <div className="lg:col-span-2 space-y-3 sm:space-y-6">
-          {/* Status Card */}
+          
           <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-3 sm:p-6">
             <div className="flex items-center justify-between mb-4 sm:mb-6">
               <span
@@ -288,7 +288,7 @@ export default function BookingDetailPage() {
             </div>
           </div>
 
-          {/* Location Card */}
+          
           <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center">
@@ -305,7 +305,7 @@ export default function BookingDetailPage() {
             </p>
           </div>
 
-          {/* Timeline */}
+          
           <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
             <h3 className="text-lg font-bold text-slate-900 mb-4">
               Booking Timeline
@@ -404,9 +404,9 @@ export default function BookingDetailPage() {
           </div>
         </div>
 
-        {/* Right Column - Summary & Actions */}
+        
         <div className="space-y-6">
-          {/* Price Summary */}
+          
           <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
             <h3 className="text-lg font-bold text-slate-900 mb-4">
               Price Summary
@@ -427,7 +427,7 @@ export default function BookingDetailPage() {
             </div>
           </div>
 
-          {/* Actions */}
+          
           <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
             <h3 className="text-lg font-bold text-slate-900 mb-4">Actions</h3>
             <div className="space-y-3">
@@ -461,7 +461,7 @@ export default function BookingDetailPage() {
             </div>
           </div>
 
-          {/* Help Card */}
+          
           <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">
             <div className="flex gap-3">
               <span className="material-icons text-blue-600">help</span>
@@ -479,7 +479,7 @@ export default function BookingDetailPage() {
         </div>
       </div>
 
-      {/* Cancel Modal */}
+      
       {showCancelModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white dark:bg-slate-800 rounded-2xl max-w-md w-full">
@@ -549,7 +549,7 @@ export default function BookingDetailPage() {
         </div>
       )}
 
-      {/* Review Modal */}
+      
       {showReviewModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white dark:bg-slate-800 rounded-2xl max-w-md w-full">

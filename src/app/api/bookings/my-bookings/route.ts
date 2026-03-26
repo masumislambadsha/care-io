@@ -15,8 +15,8 @@ export async function GET(req: NextRequest) {
     const userId = session.user.id;
 
 
-    // ALWAYS fetch bookings where this user is the CLIENT
-    // This is "My Bookings" - services I booked for myself
+    
+    
     const { data: bookings, error } = await supabaseAdmin
       .from("bookings")
       .select(
@@ -39,7 +39,7 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    // Transform the data to match the frontend format
+    
     const transformedBookings = bookings.map((booking: any) => ({
       id: booking.id,
       booking_number: booking.booking_number,
@@ -54,13 +54,13 @@ export async function GET(req: NextRequest) {
       total_amount: booking.total_amount,
       status: booking.status,
       payment_status: booking.payment_status,
-      // Address fields
+      
       division: booking.division,
       district: booking.district,
       city: booking.city,
       area: booking.area,
       address: booking.address,
-      // Full address string
+      
       full_address: [
         booking.address,
         booking.area,

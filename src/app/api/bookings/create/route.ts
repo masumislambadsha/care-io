@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
       stripeSessionId,
     } = body;
 
-    // Look up service by slug if serviceId is a slug (not a UUID)
+    
     let actualServiceId = serviceId;
     const isUUID =
       /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
@@ -57,11 +57,11 @@ export async function POST(req: NextRequest) {
       actualServiceId = service.id;
     }
 
-    // Generate booking number
+    
     const bookingNumber = `BK${Date.now()}`;
 
 
-    // Create booking in database
+    
     const { data: booking, error: bookingError } = await supabaseAdmin
       .from("bookings")
       .insert({
@@ -98,7 +98,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Create payment record
+    
     const { data: payment, error: paymentError } = await supabaseAdmin
       .from("payments")
       .insert({
@@ -116,10 +116,10 @@ export async function POST(req: NextRequest) {
 
     if (paymentError) {
       console.error("Warning: Failed to create payment record:", paymentError);
-      // Don't fail the whole booking if payment record fails
+      
     }
 
-    // Create notifications
+    
     const { error: notificationError } = await supabaseAdmin
       .from("notifications")
       .insert([
@@ -144,7 +144,7 @@ export async function POST(req: NextRequest) {
         "Warning: Failed to create notifications:",
         notificationError,
       );
-      // Don't fail the whole booking if notifications fail
+      
     }
 
 

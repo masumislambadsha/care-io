@@ -22,7 +22,7 @@ export default function DashboardLayout({
 
   useEffect(() => {
     setMounted(true);
-    // default open on desktop
+    
     if (window.innerWidth >= 1024) setIsSidebarOpen(true);
   }, []);
 
@@ -102,7 +102,7 @@ export default function DashboardLayout({
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex">
-      {/* Mobile overlay */}
+      
       {isSidebarOpen && (
         <div
           className="fixed inset-0 bg-black/40 z-30 lg:hidden"
@@ -110,7 +110,7 @@ export default function DashboardLayout({
         />
       )}
 
-      {/* Sidebar */}
+      
       <aside
         className={`fixed left-0 top-0 h-full bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 transition-all duration-300 z-40 ${
           isSidebarOpen
@@ -118,7 +118,7 @@ export default function DashboardLayout({
             : "-translate-x-full lg:translate-x-0 lg:w-20"
         }`}
       >
-        {/* Logo */}
+        
         <div className="h-16 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-4">
           {isSidebarOpen ? (
             <Link href="/" className="flex items-center gap-2">
@@ -140,7 +140,7 @@ export default function DashboardLayout({
           )}
         </div>
 
-        {/* Navigation */}
+        
         <nav className="p-4 space-y-2">
           {menuItems.map((item) => {
             const isActive = pathname === item.href;
@@ -167,7 +167,7 @@ export default function DashboardLayout({
           })}
         </nav>
 
-        {/* User Section */}
+        
         <div className="absolute bottom-0 left-0 right-0 border-t border-slate-200 dark:border-slate-800 p-4">
           <div
             className={`flex items-center gap-3 mb-3 ${
@@ -209,13 +209,13 @@ export default function DashboardLayout({
         </div>
       </aside>
 
-      {/* Main Content */}
+      
       <div
         className={`flex-1 transition-all duration-300 min-w-0 ${
           isSidebarOpen ? "lg:ml-64" : "lg:ml-20"
         }`}
       >
-        {/* Top Bar */}
+        
         <header className="h-14 sm:h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-30 flex items-center justify-between px-3 sm:px-6">
           <button
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
@@ -239,7 +239,7 @@ export default function DashboardLayout({
           </div>
         </header>
 
-        {/* Page Content */}
+        
         <main className="p-3 sm:p-6 mx-auto max-w-7xl bg-slate-50 dark:bg-slate-950 min-h-screen">
           {children}
         </main>

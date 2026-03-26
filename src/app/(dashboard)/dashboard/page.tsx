@@ -130,7 +130,7 @@ export default function DashboardPage() {
         </p>
       </div>
 
-      {/* Stats Grid */}
+      
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-6 mb-4 sm:mb-8">
         {statCards.map((card) => (
           <div
@@ -167,7 +167,7 @@ export default function DashboardPage() {
         ))}
       </div>
 
-      {/* Recent Bookings + Quick Actions */}
+      
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 sm:gap-6">
         <div className="lg:col-span-2">
           <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-3 sm:p-6">
@@ -276,7 +276,7 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* Quick Actions */}
+        
         <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-3 sm:p-6">
           <h2 className="text-sm sm:text-xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-6">
             Quick Actions
