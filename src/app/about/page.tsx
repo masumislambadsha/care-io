@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export default function AboutPage() {
   useEffect(() => {
@@ -400,49 +401,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      
-      <footer className="bg-slate-900 text-slate-400 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-teal-600 rounded-lg flex items-center justify-center">
-                <span className="material-icons text-white text-xl">
-                  health_and_safety
-                </span>
-              </div>
-              <span className="text-xl font-bold text-white">
-                Care<span className="text-teal-400">.io</span>
-              </span>
-            </div>
-            <div className="flex flex-wrap gap-6 text-sm justify-center">
-              <Link href="/" className="hover:text-white transition-colors">
-                Home
-              </Link>
-              <Link
-                href="/services"
-                className="hover:text-white transition-colors"
-              >
-                Services
-              </Link>
-              <Link
-                href="/caregivers"
-                className="hover:text-white transition-colors"
-              >
-                Caregivers
-              </Link>
-              <Link
-                href="/about"
-                className="text-white font-semibold"
-              >
-                About
-              </Link>
-            </div>
-            <p className="text-xs text-slate-500">
-              © 2024 Care.io. All rights reserved.
-            </p>
-          </div>
-        </div>
-      </footer>
+      <Footer variant="simple" />
     </div>
   );
 }

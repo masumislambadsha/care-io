@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import toast from "react-hot-toast";
 
 type Service = {
@@ -54,7 +55,7 @@ export default function ServicesPage() {
     }
   };
 
-  
+
   const getCategoryFromService = (serviceName: string) => {
     const name = serviceName.toLowerCase();
     if (name.includes("baby") || name.includes("child")) return "childcare";
@@ -276,7 +277,10 @@ export default function ServicesPage() {
           </Link>
         </div>
       </section>
-      <footer className="bg-slate-900 py-16 px-4 sm:px-6 lg:px-8">
+      <Footer />
+    </div>
+  );
+}
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
             <div>
@@ -383,7 +387,7 @@ export default function ServicesPage() {
           </div>
           <div className="border-t border-slate-800 pt-8 text-center">
             <p className="text-sm text-slate-500">
-              © 2026 Care.io Inc. All rights reserved. Providing compassionate
+              � 2026 Care.io Inc. All rights reserved. Providing compassionate
               care nationwide.
             </p>
           </div>
@@ -391,4 +395,3 @@ export default function ServicesPage() {
       </footer>
     </div>
   );
-}

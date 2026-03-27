@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -9,8 +9,8 @@ import AOS from "aos";
 import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/pagination";
-import "aos/dist/aos.css";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 type Service = {
   id: string;
@@ -125,7 +125,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900 overflow-x-hidden">
       <Navbar />
-      
+
       <section className="relative h-[480px] sm:h-[560px] md:h-[680px] overflow-hidden">
         <Swiper
           modules={[Autoplay, EffectFade, Pagination]}
@@ -190,7 +190,6 @@ export default function HomePage() {
           ))}
         </Swiper>
 
-        
         <div className="absolute bottom-0 left-0 right-0 z-20 pb-4 sm:pb-8">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -229,7 +228,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      
       <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-slate-800">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-0 mb-8 sm:mb-12">
@@ -275,7 +273,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      
       <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-900">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-8 sm:mb-12">
@@ -303,7 +300,6 @@ export default function HomePage() {
                 className="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all border border-slate-100 dark:border-slate-700"
               >
                 <div className="relative h-48 sm:h-52 md:h-60 bg-linear-to-br from-teal-100 to-blue-100">
-                  
                   <img
                     src={
                       caregiver.image ||
@@ -322,7 +318,7 @@ export default function HomePage() {
                   </div>
                   {caregiver.verification_status === "APPROVED" && (
                     <div className="absolute top-2 sm:top-3 left-2 sm:left-3 bg-teal-600 text-white px-2 sm:px-2.5 py-0.5 rounded-full text-xs font-bold">
-                      ✓ Verified
+                      ? Verified
                     </div>
                   )}
                 </div>
@@ -374,7 +370,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      
       <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-slate-800 overflow-hidden">
         <div className="max-w-7xl mx-auto text-center">
           <h2
@@ -440,7 +435,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      
       <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-900">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-10 sm:mb-14">
@@ -511,7 +505,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      
       <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-linear-to-br from-teal-600 to-teal-700 relative overflow-hidden">
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-10 sm:mb-14">
@@ -556,7 +549,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      
       <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-slate-800">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-8 sm:mb-12">
@@ -644,7 +636,6 @@ export default function HomePage() {
                     &quot;{testimonial.text}&quot;
                   </p>
                   <div className="flex items-center gap-2 sm:gap-3">
-                    
                     <img
                       src={testimonial.image}
                       alt={testimonial.name}
@@ -666,7 +657,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      
       <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-900">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
@@ -720,7 +710,6 @@ export default function HomePage() {
               className="relative"
             >
               <div className="relative rounded-3xl overflow-hidden shadow-2xl">
-                
                 <img
                   src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=800&h=600&fit=crop"
                   alt="Professional caregiver"
@@ -752,7 +741,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      
       <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-slate-800">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-8 sm:mb-12">
@@ -824,7 +812,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      
       <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-900">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
@@ -836,7 +823,6 @@ export default function HomePage() {
             >
               <div className="bg-linear-to-br from-amber-50 to-teal-50 dark:from-amber-900/20 dark:to-teal-900/20 rounded-3xl p-5 sm:p-8 md:p-10 relative overflow-hidden">
                 <div className="w-full rounded-2xl flex items-center justify-center">
-                  
                   <img
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOKf1ULoqcdo3xqKfjQywgtj2iKxOF-TJaUSAfqjJDqKafnWY1bDt7G7XDHiYSgJllU0wE1VnzgufihVStE9OReI_QzXfFugn9eW3SFgwcQK9CPQQ5yUQFiG1Oioedh4SQl7VarruPjMD50dv8FaJxlST3G377IQcGIDcc8zp95XkzZ3tzxfpLh341GlvccHpXOyq3V5iCDb8V-8ffJ9Y3VVLfEmgxa7L8M2HORBkZ9YPUb3xcISMau7eqkj88RlveAbA-N8zVmVk"
                     alt="family"
@@ -920,7 +906,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      
       <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -965,95 +950,7 @@ export default function HomePage() {
         </motion.div>
       </section>
 
-      
-      <footer className="bg-slate-900 py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 md:gap-10 mb-10 sm:mb-12">
-            <div className="col-span-2 sm:col-span-2 lg:col-span-1">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-8 h-8 bg-teal-600 rounded-lg flex items-center justify-center">
-                  <span className="material-icons text-white text-lg">
-                    health_and_safety
-                  </span>
-                </div>
-                <span className="text-base sm:text-lg md:text-xl font-bold text-white">
-                  Care.io
-                </span>
-              </div>
-              <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
-                Transforming the way families find trusted, professional care
-                for their loved ones across the globe.
-              </p>
-            </div>
-            <div>
-              <h4 className="font-bold text-white mb-3 sm:mb-4 text-xs sm:text-sm md:text-base">
-                Services
-              </h4>
-              <ul className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-slate-400">
-                {[
-                  "Senior Care",
-                  "Specialized Nursing",
-                  "Dementia Care",
-                  "Child Care",
-                ].map((s) => (
-                  <li key={s}>
-                    <Link
-                      href="#"
-                      className="hover:text-teal-400 transition-colors"
-                    >
-                      {s}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold text-white mb-3 sm:mb-4 text-xs sm:text-sm md:text-base">
-                Company
-              </h4>
-              <ul className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-slate-400">
-                {["About Us", "Careers", "Privacy Policy", "Contact"].map(
-                  (s) => (
-                    <li key={s}>
-                      <Link
-                        href="#"
-                        className="hover:text-teal-400 transition-colors"
-                      >
-                        {s}
-                      </Link>
-                    </li>
-                  ),
-                )}
-              </ul>
-            </div>
-            <div className="col-span-2 sm:col-span-1">
-              <h4 className="font-bold text-white mb-3 sm:mb-4 text-xs sm:text-sm md:text-base">
-                Newsletter
-              </h4>
-              <div className="flex gap-2">
-                <input
-                  type="email"
-                  placeholder="Your email"
-                  className="flex-1 px-2.5 sm:px-3 py-1.5 sm:py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500 text-xs sm:text-sm min-w-0"
-                />
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-3 sm:px-4 py-1.5 sm:py-2 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-lg transition-all text-xs sm:text-sm shrink-0"
-                >
-                  Join
-                </motion.button>
-              </div>
-            </div>
-          </div>
-          <div className="border-t border-slate-800 pt-6 sm:pt-8 text-center">
-            <p className="text-xs sm:text-sm text-slate-500">
-              © 2026 Care.io Inc. All rights reserved. Providing compassionate
-              care nationwide.
-            </p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
